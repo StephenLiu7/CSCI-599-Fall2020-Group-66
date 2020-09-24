@@ -33,6 +33,23 @@ public class XiaowenMonsterMovement : MonoBehaviour
     private float unpausedShootTimer;
     private float pausedShootTimer;
 
+    private float attack_remain;
+
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("entered collider");
+        if (collision.gameObject.CompareTag("player_bullet"))
+        {
+            attack_remain -= 1;
+            if (attack_remain == 0)
+            {
+                Destroy(gameObject);
+                print("died");
+            }
+        }
+    }
+
     private void Start()
     {
 
@@ -46,6 +63,8 @@ public class XiaowenMonsterMovement : MonoBehaviour
         // shooting updates
         unpausedShootTimer = UNPAUSED_SHOOTING_INTERVAL;
         pausedShootTimer = PAUSED_SHOOTING_INTERVAL;
+
+        attack_remain = 10;
 
     }
 

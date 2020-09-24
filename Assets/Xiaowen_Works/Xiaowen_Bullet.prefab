@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 27854531916161259}
   - component: {fileID: 6001612871814673797}
   - component: {fileID: -3860783326004310683}
+  - component: {fileID: -5944401392388114128}
   m_Layer: 0
   m_Name: Xiaowen_Bullet
-  m_TagString: Untagged
+  m_TagString: unpaused_bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,4 +120,16 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
+--- !u!114 &-5944401392388114128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9056585752491300300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81038bdb9c70a054ab4f1b3cbb118172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
