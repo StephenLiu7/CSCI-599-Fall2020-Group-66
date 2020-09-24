@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7059568342720314482}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: firePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7059568343352970969}
   - component: {fileID: 7059568343352970973}
   - component: {fileID: 7059568343352970972}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Xiaowen_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

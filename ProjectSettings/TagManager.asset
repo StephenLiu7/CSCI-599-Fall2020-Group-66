@@ -16,10 +16,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - MonsterBulletLayer
+  - MonsterLayer
+  - PlayerBulletLayer
+  - PlayerLayer
   - 
   - 
   - 

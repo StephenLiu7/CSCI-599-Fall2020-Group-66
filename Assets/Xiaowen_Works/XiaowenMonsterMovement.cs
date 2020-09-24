@@ -24,10 +24,10 @@ public class XiaowenMonsterMovement : MonoBehaviour
     public Rigidbody2D monster_rb;
     public Rigidbody2D player_rb;
 
-    private float PAUSED_SHOOTING_INTERVAL = 0.3f;
-    private float PAUSED_SHOOTING_FORCE = 5.0f;
-    private float UNPAUSED_SHOOTING_INTERVAL = 1.5f;
-    private float UNPAUSED_SHOOTING_FORCE = 2.0f;
+    private readonly float PAUSED_SHOOTING_INTERVAL = 0.3f;
+    private readonly float PAUSED_SHOOTING_FORCE = 5.0f;
+    private readonly float UNPAUSED_SHOOTING_INTERVAL = 1.5f;
+    private readonly float UNPAUSED_SHOOTING_FORCE = 2.0f;
     public float bullet_force;
 
     private float unpausedShootTimer;
@@ -35,13 +35,18 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
     private float attack_remain;
 
-    
+    // Layer Info
+    private readonly int DEFAULT_LAYER = 0;
+    private readonly int MONSTER_BULLET_LAYER = 8;
+    private readonly int MONSTER_LAYER = 9;
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         print("entered collider");
         if (collision.gameObject.CompareTag("player_bullet"))
         {
-            attack_remain -= 1;
+            Destroy(collision.gameObject);
+            attack_remain--;
             if (attack_remain == 0)
             {
                 Destroy(gameObject);
@@ -66,6 +71,8 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
         attack_remain = 10;
 
+        //Physics2D.IgnoreLayerCollision(MONSTER_LAYER, MONSTER_BULLET_LAYER);
+
     }
 
     // Update is called once per frame
@@ -73,14 +80,11 @@ public class XiaowenMonsterMovement : MonoBehaviour
     {
         
 
-        /*
-         * Input
-         * (abandoned code)
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        */
+        // there are two stages for this monster: moving, and standing still. Paused means standing still.
         if (! isPaused)
         {
+
+            // update movement variables and change states (moving -> static or static -> moving)
             movementTimer += Time.deltaTime;
             if (movementTimer > 7.0f)
             {
@@ -91,6 +95,7 @@ public class XiaowenMonsterMovement : MonoBehaviour
                 isPaused = true;
             }
 
+            // update shooting variable and shoot when shooting timer reaches threshold
             unpausedShootTimer -= Time.deltaTime;
             if (unpausedShootTimer < 0)
             {
@@ -101,6 +106,8 @@ public class XiaowenMonsterMovement : MonoBehaviour
         }
         else
         {
+
+            // update movement variables and change states (moving -> static or static -> moving)
             staticTimer -= Time.deltaTime;
             if (staticTimer < 0.0f)
             {
@@ -108,6 +115,7 @@ public class XiaowenMonsterMovement : MonoBehaviour
                 movement.Set(direction.x, direction.y);
             }
 
+            // update shooting variable and shoot when shooting timer reaches threshold
             pausedShootTimer -= Time.deltaTime;
             if (pausedShootTimer < 0)
             {
@@ -118,6 +126,7 @@ public class XiaowenMonsterMovement : MonoBehaviour
        
         }
 
+        // for animation usages. "Speed" paramter works as a threshold for running/idle
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
 
@@ -134,13 +143,8 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Movement 
+        // Movement of Player
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        // update the angles 
-        Vector2 cameraPos = Camera.main.transform.position;
-        Vector2 lookDir = cameraPos - rb.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         
     }
 }
