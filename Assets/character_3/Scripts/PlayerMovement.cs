@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         // ================================================================ shooting time SEPA =============================================================
         proTime = Time.fixedTime;
         FollowMouseRotate();
-        if (proTime - NextTime >= 0.5)
+        if (proTime - NextTime >= 0.2)
         {
             
             Shooting();
