@@ -22,13 +22,12 @@ public class XiaowenMonsterMovement : MonoBehaviour
     public GameObject pausedBulletPrefab;
 
     public Rigidbody2D monster_rb;
-    public Rigidbody2D player_rb;
+    private Rigidbody2D player_rb;
 
     private readonly float PAUSED_SHOOTING_INTERVAL = 0.3f;
     private readonly float PAUSED_SHOOTING_FORCE = 5.0f;
     private readonly float UNPAUSED_SHOOTING_INTERVAL = 1.5f;
     private readonly float UNPAUSED_SHOOTING_FORCE = 2.0f;
-    public float bullet_force;
 
     private float unpausedShootTimer;
     private float pausedShootTimer;
@@ -69,9 +68,9 @@ public class XiaowenMonsterMovement : MonoBehaviour
         unpausedShootTimer = UNPAUSED_SHOOTING_INTERVAL;
         pausedShootTimer = PAUSED_SHOOTING_INTERVAL;
 
-        attack_remain = 10;
+        attack_remain = 3;
 
-        //Physics2D.IgnoreLayerCollision(MONSTER_LAYER, MONSTER_BULLET_LAYER);
+        player_rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
 
     }
 
@@ -86,7 +85,7 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
             // update movement variables and change states (moving -> static or static -> moving)
             movementTimer += Time.deltaTime;
-            if (movementTimer > 7.0f)
+            if (movementTimer > 4.5f)
             {
                 movementTimer = 0.0f;
                 direction.Set(-movement.x, -movement.y);
@@ -139,6 +138,7 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
         Vector2 lookDir = player_rb.position - monster_rb.position;
         rb.AddForce(lookDir.normalized * force, ForceMode2D.Impulse);
+        Destroy(bullet, 10.0f);
     }
 
     void FixedUpdate()

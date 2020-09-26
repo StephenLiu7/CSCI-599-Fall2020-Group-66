@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
             //bullet.right = bulletDirection;
             bullet.GetComponent<Rigidbody2D>().velocity = direction * 11;
             bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-            //Destroy(bullet, 2.0f);
+            Destroy(bullet, 10.0f);
         }
     }
     // =================================================================================================================================================
