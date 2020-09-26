@@ -80,9 +80,10 @@ public class PlayerMovement : MonoBehaviour
 
         // ================================================================ shooting time SEPA =============================================================
         proTime = Time.fixedTime;
-        if (proTime - NextTime >= 0.03)
+        FollowMouseRotate();
+        if (proTime - NextTime >= 0.5)
         {
-            FollowMouseRotate();
+            
             Shooting();
             NextTime = proTime;
         }
@@ -127,9 +128,9 @@ public class PlayerMovement : MonoBehaviour
             direction.Normalize();
             GameObject bullet = Instantiate(bulletPrefabs, transform.position, Quaternion.identity);
             //bullet.right = bulletDirection;
-            bullet.GetComponent<Rigidbody2D>().velocity = direction * 4;
+            bullet.GetComponent<Rigidbody2D>().velocity = direction * 11;
             bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-            Destroy(bullet, 2.0f);
+            //Destroy(bullet, 2.0f);
         }
     }
     // =================================================================================================================================================
