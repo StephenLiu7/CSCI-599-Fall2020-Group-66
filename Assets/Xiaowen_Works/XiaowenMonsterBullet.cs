@@ -22,7 +22,11 @@ public class XiaowenMonsterBullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
 
-        
+
     }
 }
