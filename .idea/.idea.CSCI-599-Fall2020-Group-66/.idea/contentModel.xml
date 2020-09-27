@@ -5,6 +5,7 @@
     <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_CSCI-599-Fall2020-Group-66.2040602150.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="character_3" t="Include">
@@ -14,6 +15,41 @@
           </e>
         </e>
         <e p="LayerCollisionSetting.cs" t="Include" />
+        <e p="Mingyang_Works" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="Enemy" t="Include">
+              <e p="Enemy_Robot.cs" t="Include" />
+              <e p="EnemyFollow.cs" t="Include" />
+              <e p="EnemySpawner.cs" t="Include" />
+              <e p="RobotBullet.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="FX" t="Include">
+              <e p="fout.shader" t="Include" />
+              <e p="vout.shader" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="monster" t="Include">
+          <e p="tumanba" t="Include">
+            <e p="Script" t="Include">
+              <e p="Movement.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Navigation2D" t="Include">
+          <e p="Editor" t="Include">
+            <e p="Navigation2D.cs" t="Include" />
+            <e p="Triangulation.cs" t="Include" />
+          </e>
+          <e p="Plugins" t="Include">
+            <e p="NavMeshAgent2D.cs" t="Include" />
+            <e p="NavMeshObstacle2D.cs" t="Include" />
+            <e p="NavMeshPath2D.cs" t="Include" />
+            <e p="NavMeshUtils2D.cs" t="Include" />
+          </e>
+        </e>
         <e p="PausedBullet.cs" t="Include" />
         <e p="PlayerBullet.cs" t="Include" />
         <e p="Plugins" t="Include">
@@ -33,12 +69,245 @@
             <e p="Ruiqi_Enemy_Shot.cs" t="Include" />
           </e>
         </e>
+        <e p="Troll Bridge Studios" t="Include">
+          <e p="2D Starter Kit" t="Include">
+            <e p="_Scripts" t="Include">
+              <e p="AI" t="Include">
+                <e p="Movement" t="Include">
+                  <e p="Follow_Closest_Type.cs" t="Include" />
+                  <e p="Point_To_Point_Movement.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Animation" t="Include">
+                <e p="Events" t="Include">
+                  <e p="Attack_Timer.cs" t="Include" />
+                  <e p="Show_DeathCanvas.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Camera" t="Include">
+                <e p="Basic Camera" t="Include">
+                  <e p="Camera_Basic.cs" t="Include" />
+                </e>
+                <e p="Free Follow Camera" t="Include">
+                  <e p="Camera_Follow_Player.cs" t="Include" />
+                </e>
+                <e p="Slide Camera" t="Include">
+                  <e p="Camera_Static_Slide.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Characters" t="Include">
+                <e p="Abstact or Static" t="Include">
+                  <e p="Character.cs" t="Include" />
+                  <e p="Character_Manager.cs" t="Include" />
+                </e>
+                <e p="Character_Stats.cs" t="Include" />
+                <e p="Damage_OnCollision.cs" t="Include" />
+                <e p="Immunity_Time.cs" t="Include" />
+                <e p="NPC" t="Include">
+                  <e p="Animation_Direction.cs" t="Include" />
+                  <e p="NPC_Manager.cs" t="Include" />
+                </e>
+                <e p="Player" t="Include">
+                  <e p="Additions" t="Include">
+                    <e p="Bombs.cs" t="Include" />
+                    <e p="Equipment.cs" t="Include" />
+                    <e p="Key.cs" t="Include" />
+                    <e p="Money.cs" t="Include" />
+                    <e p="Update_Bombs.cs" t="Include" />
+                    <e p="Update_EquipmentSlot.cs" t="Include" />
+                    <e p="Update_Health_Icon.cs" t="Include" />
+                    <e p="Update_Keys.cs" t="Include" />
+                    <e p="Update_Money.cs" t="Include" />
+                    <e p="Weapon_Attack.cs" t="Include" />
+                  </e>
+                  <e p="Movement" t="Include">
+                    <e p="Eight_Direction_Movement.cs" t="Include" />
+                    <e p="Four_Direction_Movement.cs" t="Include" />
+                    <e p="Multi_Direction_Movement.cs" t="Include" />
+                  </e>
+                  <e p="Player_Manager.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Destroy" t="Include">
+                <e p="Destroy_Player.cs" t="Include" />
+                <e p="Destroy_Timer.cs" t="Include" />
+                <e p="Dont_Destroy_On_Scene_Load.cs" t="Include" />
+                <e p="End_Of_Animation_Destroy.cs" t="Include" />
+              </e>
+              <e p="Dialogue" t="Include">
+                <e p="Action_Key_Dialogue.cs" t="Include" />
+                <e p="Area_Dialogue.cs" t="Include" />
+                <e p="Dialogue.cs" t="Include" />
+              </e>
+              <e p="Do Not Attach" t="Include">
+                <e p="Data" t="Include">
+                  <e p="Object_Data.cs" t="Include" />
+                </e>
+                <e p="Drawers" t="Include">
+                  <e p="Chest_Key_Consume.cs" t="Include" />
+                  <e p="Currency.cs" t="Include" />
+                  <e p="Loot_Dropped.cs" t="Include" />
+                  <e p="Scene_Name_BGMusic.cs" t="Include" />
+                </e>
+                <e p="Interfaces" t="Include">
+                  <e p="Can_Attack.cs" t="Include" />
+                  <e p="Can_Take_Damage.cs" t="Include" />
+                </e>
+                <e p="Property Attribute" t="Include">
+                  <e p="ReadOnlyAttribute.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Encryption" t="Include">
+                <e p="AES_SymmetricEncryption.cs" t="Include" />
+                <e p="AsymmetricEncryption.cs" t="Include" />
+              </e>
+              <e p="Environment" t="Include">
+                <e p="Icon_Display.cs" t="Include" />
+                <e p="Teleport" t="Include">
+                  <e p="Target_Teleport.cs" t="Include" />
+                </e>
+                <e p="Terrain" t="Include">
+                  <e p="Terrain_Collision_Effect.cs" t="Include" />
+                  <e p="Terrain_Pushable.cs" t="Include" />
+                  <e p="Terrain_Sound_By_Distance.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Game Helper Managers" t="Include">
+                <e p="Grid.cs" t="Include" />
+                <e p="GUI_Helper.cs" t="Include" />
+                <e p="Helper_Manager.cs" t="Include" />
+                <e p="Setup.cs" t="Include" />
+              </e>
+              <e p="Inventory" t="Include">
+                <e p="Inventory.cs" t="Include" />
+                <e p="Inventory_Button.cs" t="Include" />
+                <e p="Item_Data.cs" t="Include" />
+                <e p="Item_Database.cs" t="Include" />
+                <e p="Item_Slot.cs" t="Include" />
+                <e p="Tooltip.cs" t="Include" />
+              </e>
+              <e p="Items" t="Include">
+                <e p="Bomb" t="Include">
+                  <e p="Bomb_Explode.cs" t="Include" />
+                  <e p="Explodable.cs" t="Include" />
+                </e>
+                <e p="Chest" t="Include">
+                  <e p="Chest.cs" t="Include" />
+                </e>
+                <e p="Item_GameObject.cs" t="Include" />
+              </e>
+              <e p="Layers" t="Include">
+                <e p="Change_Layers.cs" t="Include" />
+                <e p="Change_SortingLayers.cs" t="Include" />
+                <e p="Update_OrderInLayer_Moving.cs" t="Include" />
+                <e p="Update_OrderInLayer_NotMoving.cs" t="Include" />
+              </e>
+              <e p="Loot" t="Include">
+                <e p="Loot.cs" t="Include" />
+              </e>
+              <e p="Music And Sounds" t="Include">
+                <e p="Change_Music.cs" t="Include" />
+                <e p="Play_SoundOnActivation.cs" t="Include" />
+                <e p="Sound_Manager.cs" t="Include" />
+              </e>
+              <e p="Options" t="Include">
+                <e p="Display_Settings.cs" t="Include" />
+                <e p="Options_Manager.cs" t="Include" />
+              </e>
+              <e p="Other" t="Include">
+                <e p="Move_GameObject.cs" t="Include" />
+              </e>
+              <e p="Scene Change" t="Include">
+                <e p="Scene_Change.cs" t="Include" />
+                <e p="Scene_Change_Button.cs" t="Include" />
+                <e p="Scene_Change_Instant.cs" t="Include" />
+              </e>
+              <e p="Scenes" t="Include">
+                <e p="Scene_Locations.cs" t="Include" />
+              </e>
+              <e p="States" t="Include">
+                <e p="SetActive_Enter_Collision.cs" t="Include" />
+                <e p="SetActive_Exit_Collision.cs" t="Include" />
+                <e p="State_Manager.cs" t="Include" />
+                <e p="State_Transform.cs" t="Include" />
+              </e>
+              <e p="UI" t="Include">
+                <e p="Continue_Game.cs" t="Include" />
+                <e p="Quit_Game.cs" t="Include" />
+                <e p="Start_Game.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Documentation" t="Include">
+              <e p="Documentation Link.txt" t="Include" />
+            </e>
+            <e p="Fonts" t="Include">
+              <e p="Kottke Silkscreen License.txt" t="Include" />
+            </e>
+          </e>
+          <e p="Editor" t="Include">
+            <e p="Action_Key_Dialogue_Editor.cs" t="Include" />
+            <e p="Animation_Direction_Editor.cs" t="Include" />
+            <e p="Area_Dialogue_Editor.cs" t="Include" />
+            <e p="Camera_Basic_Editor.cs" t="Include" />
+            <e p="Camera_Follow_Player_Editor.cs" t="Include" />
+            <e p="Camera_Static_Slide_Editor.cs" t="Include" />
+            <e p="Change_Layers_Editor.cs" t="Include" />
+            <e p="Change_Music_Editor.cs" t="Include" />
+            <e p="Change_SortingLayers_Editor.cs" t="Include" />
+            <e p="Character_Stats_Editor.cs" t="Include" />
+            <e p="Chest_Editor.cs" t="Include" />
+            <e p="Chest_Key_Consume_Drawer.cs" t="Include" />
+            <e p="Currency_Drawer.cs" t="Include" />
+            <e p="Damage_OnCollision_Editor.cs" t="Include" />
+            <e p="Icon_Display_Editor.cs" t="Include" />
+            <e p="Immunity_Time_Editor.cs" t="Include" />
+            <e p="Key_Editor.cs" t="Include" />
+            <e p="Loot_Dropped_Drawer.cs" t="Include" />
+            <e p="Loot_Editor.cs" t="Include" />
+            <e p="Money_Editor.cs" t="Include" />
+            <e p="NPC_Manager_Editor.cs" t="Include" />
+            <e p="Options_Manager_Editor.cs" t="Include" />
+            <e p="Player_Manager_Editor.cs" t="Include" />
+            <e p="ReadOnlyDrawer.cs" t="Include" />
+            <e p="Scene_Change_Editor.cs" t="Include" />
+            <e p="Scene_Locations_Editor.cs" t="Include" />
+            <e p="Scene_Name_BGMusic_Drawer.cs" t="Include" />
+            <e p="SetActive_Enter_Collision_Editor.cs" t="Include" />
+            <e p="SetActive_Exit_Collision_Editor.cs" t="Include" />
+            <e p="Sound_Manager_Editor.cs" t="Include" />
+            <e p="Target_Teleport_Editor.cs" t="Include" />
+            <e p="Terrain_Pushable_Editor.cs" t="Include" />
+            <e p="Terrain_Sound_By_Distance_Editor.cs" t="Include" />
+          </e>
+        </e>
+        <e p="uMMORPG" t="Include">
+          <e p="Sprites" t="Include">
+            <e p="(Public Domain) 496 pixel art icons for medieval fantasy RPG" t="Include">
+              <e p="496 pixel art icons for medieval fantasy RPG - License.txt" t="Include" />
+            </e>
+            <e p="(Public Domain) Zelda-like Tilesets and Sprites" t="Include">
+              <e p="Zelda-like Tilesets and Sprites - License.txt" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="UnpausedBullet.cs" t="Include" />
+        <e p="Weiyi_Works" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="Monster_Spawer.cs" t="Include" />
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="FX" t="Include">
+              <e p="fout.shader" t="Include" />
+              <e p="vout.shader" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Xiaowen_Works" t="Include">
           <e p="XiaowenMonsterBullet.cs" t="Include" />
           <e p="XiaowenMonsterMovement.cs" t="Include" />
           <e p="XiaowenMonsterShooting.cs" t="Include" />
         </e>
+        <e p="XiaowenMonsterSpawn.cs" t="Include" />
       </e>
       <e p="CSCI-599-Fall2020-Group-66.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class Ruiqi_Enemy : MonoBehaviour
     
     public GameObject projectile;
     private Transform player;
+
+    private float life_remain = 5;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -43,6 +47,24 @@ public class Ruiqi_Enemy : MonoBehaviour
         }
         else {
             timeBtwShots -= Time.deltaTime;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("player_bullet"))
+        {
+            Destroy(other.gameObject);
+            life_remain--;
+            if (life_remain == 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+        
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
     }
 }
