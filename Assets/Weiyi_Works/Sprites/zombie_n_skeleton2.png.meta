@@ -1,0 +1,1112 @@
+fileFormatVersion: 2
+guid: 8db71788ca4894b659b9da9ebee536b8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6530423419934207551
+    second: zombie_n_skeleton2_0
+  - first:
+      213: -4617475368665073608
+    second: zombie_n_skeleton2_1
+  - first:
+      213: 2140889717217651020
+    second: zombie_n_skeleton2_2
+  - first:
+      213: -4997985390969171361
+    second: zombie_n_skeleton2_3
+  - first:
+      213: 7442593744372173546
+    second: zombie_n_skeleton2_4
+  - first:
+      213: -2698864871382459126
+    second: zombie_n_skeleton2_5
+  - first:
+      213: -1847240781696492131
+    second: zombie_n_skeleton2_6
+  - first:
+      213: 2407624347972148547
+    second: zombie_n_skeleton2_7
+  - first:
+      213: -6691156085469918102
+    second: zombie_n_skeleton2_8
+  - first:
+      213: 1891568608174822170
+    second: zombie_n_skeleton2_9
+  - first:
+      213: 6375123862911179881
+    second: zombie_n_skeleton2_10
+  - first:
+      213: -2458841839549293371
+    second: zombie_n_skeleton2_11
+  - first:
+      213: 1439617218668805574
+    second: zombie_n_skeleton2_12
+  - first:
+      213: -746559338418956191
+    second: zombie_n_skeleton2_13
+  - first:
+      213: 5709798510868878322
+    second: zombie_n_skeleton2_14
+  - first:
+      213: 1538332568268765762
+    second: zombie_n_skeleton2_15
+  - first:
+      213: 7846814692755681913
+    second: zombie_n_skeleton2_16
+  - first:
+      213: -4866600243054929698
+    second: zombie_n_skeleton2_17
+  - first:
+      213: 7867892376366209200
+    second: zombie_n_skeleton2_18
+  - first:
+      213: -5509320310397700554
+    second: zombie_n_skeleton2_19
+  - first:
+      213: 9045975222575368885
+    second: zombie_n_skeleton2_20
+  - first:
+      213: 7630218711022435412
+    second: zombie_n_skeleton2_21
+  - first:
+      213: 3901046703556977668
+    second: zombie_n_skeleton2_22
+  - first:
+      213: 6014665281936076968
+    second: zombie_n_skeleton2_23
+  - first:
+      213: 2806982171846202126
+    second: zombie_n_skeleton2_24
+  - first:
+      213: 8709428058366471821
+    second: zombie_n_skeleton2_25
+  - first:
+      213: 6768088162428379857
+    second: zombie_n_skeleton2_26
+  - first:
+      213: -4214060707849055495
+    second: zombie_n_skeleton2_27
+  - first:
+      213: -4107382570987685701
+    second: zombie_n_skeleton2_28
+  - first:
+      213: -6743781152978836292
+    second: zombie_n_skeleton2_29
+  - first:
+      213: -2256827919704704976
+    second: zombie_n_skeleton2_30
+  - first:
+      213: 2515575400268218477
+    second: zombie_n_skeleton2_31
+  - first:
+      213: -1999453406462056581
+    second: zombie_n_skeleton2_32
+  - first:
+      213: -3818723396376879491
+    second: zombie_n_skeleton2_33
+  - first:
+      213: -2482608539782244446
+    second: zombie_n_skeleton2_34
+  - first:
+      213: -1871000990238396332
+    second: zombie_n_skeleton2_35
+  - first:
+      213: 2621417384661274388
+    second: zombie_n_skeleton2_0
+  - first:
+      213: -5532611727851179922
+    second: zombie_n_skeleton2_1
+  - first:
+      213: -6377610578856686303
+    second: zombie_n_skeleton2_2
+  - first:
+      213: 8649775077686370219
+    second: zombie_n_skeleton2_3
+  - first:
+      213: 4233468854842480754
+    second: zombie_n_skeleton2_4
+  - first:
+      213: -2895724595943581843
+    second: zombie_n_skeleton2_5
+  - first:
+      213: -4518232159264408886
+    second: zombie_n_skeleton2_6
+  - first:
+      213: -8219456777874948230
+    second: zombie_n_skeleton2_7
+  - first:
+      213: -1660551405587298598
+    second: zombie_n_skeleton2_8
+  - first:
+      213: -4453230347107413514
+    second: zombie_n_skeleton2_9
+  - first:
+      213: 5062315992539705079
+    second: zombie_n_skeleton2_10
+  - first:
+      213: 1844652506865492577
+    second: zombie_n_skeleton2_11
+  - first:
+      213: -8854963841276899570
+    second: zombie_n_skeleton2_12
+  - first:
+      213: -6789656269993849046
+    second: zombie_n_skeleton2_13
+  - first:
+      213: -1583891008395832337
+    second: zombie_n_skeleton2_14
+  - first:
+      213: -4393208834440453993
+    second: zombie_n_skeleton2_15
+  - first:
+      213: -2091402286120124868
+    second: zombie_n_skeleton2_16
+  - first:
+      213: -516429472196033
+    second: zombie_n_skeleton2_17
+  - first:
+      213: 2487090497479703391
+    second: zombie_n_skeleton2_18
+  - first:
+      213: 1456445970941831016
+    second: zombie_n_skeleton2_19
+  - first:
+      213: 9209081461330754726
+    second: zombie_n_skeleton2_20
+  - first:
+      213: 2143552824448129812
+    second: zombie_n_skeleton2_21
+  - first:
+      213: 9131769328864927905
+    second: zombie_n_skeleton2_22
+  - first:
+      213: -2510926845259723447
+    second: zombie_n_skeleton2_23
+  - first:
+      213: 2396579008770690520
+    second: zombie_n_skeleton2_24
+  - first:
+      213: -6567641601902804654
+    second: zombie_n_skeleton2_25
+  - first:
+      213: -5608437688066698745
+    second: zombie_n_skeleton2_26
+  - first:
+      213: -8096710670226686066
+    second: zombie_n_skeleton2_27
+  - first:
+      213: -1457854876892330201
+    second: zombie_n_skeleton2_28
+  - first:
+      213: -4669488556694153014
+    second: zombie_n_skeleton2_29
+  - first:
+      213: 4994804739625233504
+    second: zombie_n_skeleton2_30
+  - first:
+      213: -1567444356654821704
+    second: zombie_n_skeleton2_31
+  - first:
+      213: -386651065073073107
+    second: zombie_n_skeleton2_32
+  - first:
+      213: -1204938883689808995
+    second: zombie_n_skeleton2_33
+  - first:
+      213: 3512570331956867954
+    second: zombie_n_skeleton2_34
+  - first:
+      213: 4204216370738895781
+    second: zombie_n_skeleton2_35
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 192
+        width: 30
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41fc4c4f835216420800000000000000
+      internalID: 2621417384661274388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 193
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e60354152f63833b0800000000000000
+      internalID: -5532611727851179922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_2
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 192
+        width: 29
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12d4973f7fc2e77a0800000000000000
+      internalID: -6377610578856686303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_3
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 192
+        width: 29
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bafd58cca9c2a0870800000000000000
+      internalID: 8649775077686370219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_4
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 193
+        width: 30
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 278d09c5e7d40ca30800000000000000
+      internalID: 4233468854842480754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d67db6b72d150d7d0800000000000000
+      internalID: -2895724595943581843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_6
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 192
+        width: 29
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aca7c4e2ac30c41c0800000000000000
+      internalID: -4518232159264408886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_7
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 192
+        width: 30
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7f361ceb9f9eed80800000000000000
+      internalID: -8219456777874948230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad681ba6b4984f8e0800000000000000
+      internalID: -1660551405587298598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_9
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 128
+        width: 24
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f15ca1f792f232c0800000000000000
+      internalID: -4453230347107413514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_10
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 129
+        width: 24
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7feab1ce295f04640800000000000000
+      internalID: 5062315992539705079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_11
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 129
+        width: 24
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16260cd7ea5899910800000000000000
+      internalID: 1844652506865492577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_12
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 129
+        width: 22
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0f03cd4d49dc1580800000000000000
+      internalID: -8854963841276899570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_13
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 129
+        width: 18
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2f4308789b46c1a0800000000000000
+      internalID: -6789656269993849046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_14
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 129
+        width: 22
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe391a90583e40ae0800000000000000
+      internalID: -1583891008395832337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_15
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 128
+        width: 23
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 790a11f57df2803c0800000000000000
+      internalID: -4393208834440453993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_16
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 128
+        width: 20
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3ebe5593b8d9f2e0800000000000000
+      internalID: -2091402286120124868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_17
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 128
+        width: 22
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3a12c46f4a2efff0800000000000000
+      internalID: -516429472196033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_18
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 64
+        width: 24
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5bf68a51abe38220800000000000000
+      internalID: 2487090497479703391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_19
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 65
+        width: 24
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 867698cd4e5563410800000000000000
+      internalID: 1456445970941831016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_20
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 65
+        width: 24
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ac314a1cca3dcf70800000000000000
+      internalID: 9209081461330754726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_21
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 65
+        width: 22
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41b1482dfed6fbd10800000000000000
+      internalID: 2143552824448129812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_22
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 65
+        width: 18
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a02dc982df8abe70800000000000000
+      internalID: 9131769328864927905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_23
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 65
+        width: 22
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94d4d437655672dd0800000000000000
+      internalID: -2510926845259723447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_24
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 64
+        width: 25
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dd4fed29eb524120800000000000000
+      internalID: 2396579008770690520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_25
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 64
+        width: 21
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 251818a82cc0bd4a0800000000000000
+      internalID: -6567641601902804654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_26
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 64
+        width: 24
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7021fd133a3da22b0800000000000000
+      internalID: -5608437688066698745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_27
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8ff50c2b84b2af80800000000000000
+      internalID: -8096710670226686066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_28
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72703c8a6b8a4cbe0800000000000000
+      internalID: -1457854876892330201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_29
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 0
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac85e7fc5e4a23fb0800000000000000
+      internalID: -4669488556694153014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_30
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 0
+        width: 29
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06cacc3727c115540800000000000000
+      internalID: 4994804739625233504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_31
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 1
+        width: 30
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be066c89a15f3ae0800000000000000
+      internalID: -1567444356654821704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_32
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 0
+        width: 29
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d240b46a7e652aaf0800000000000000
+      internalID: -386651065073073107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_33
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 0
+        width: 29
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9bfc952872374fe0800000000000000
+      internalID: -1204938883689808995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_34
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 0
+        width: 30
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2737dd44b182fb030800000000000000
+      internalID: 3512570331956867954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_n_skeleton2_35
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 0
+        width: 29
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ab16c8a380685a30800000000000000
+      internalID: 4204216370738895781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
