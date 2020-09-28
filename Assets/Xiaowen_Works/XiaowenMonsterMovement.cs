@@ -24,9 +24,9 @@ public class XiaowenMonsterMovement : MonoBehaviour
     public Rigidbody2D monster_rb;
     private Rigidbody2D player_rb;
 
-    private readonly float PAUSED_SHOOTING_INTERVAL = 0.3f;
-    private readonly float PAUSED_SHOOTING_FORCE = 5.0f;
-    private readonly float UNPAUSED_SHOOTING_INTERVAL = 1.5f;
+    private readonly float PAUSED_SHOOTING_INTERVAL = 0.8f;
+    private readonly float PAUSED_SHOOTING_FORCE = 9.0f;
+    private readonly float UNPAUSED_SHOOTING_INTERVAL = 2.5f;
     private readonly float UNPAUSED_SHOOTING_FORCE = 2.0f;
 
     private float unpausedShootTimer;
@@ -85,12 +85,12 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
             // update movement variables and change states (moving -> static or static -> moving)
             movementTimer += Time.deltaTime;
-            if (movementTimer > 4.5f)
+            if (movementTimer > 7.5f)
             {
                 movementTimer = 0.0f;
                 direction.Set(-movement.x, -movement.y);
                 movement.Set(0.0f, 0.0f);
-                staticTimer = 3.0f;
+                staticTimer = 4.0f;
                 isPaused = true;
             }
 

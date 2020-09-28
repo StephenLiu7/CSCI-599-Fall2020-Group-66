@@ -21,7 +21,7 @@ public class XiaowenMonsterSpawn : MonoBehaviour
         spawn_timer -= Time.deltaTime;
         if (spawn_timer < 0)
         {
-            spawn_timer = 3.0f;
+            spawn_timer = 7.0f;
             Vector2 randomPos = player_rb.position + new Vector2(Random.value, Random.value).normalized*3;
             Instantiate(xiaowenMonsterPrefab, randomPos, Quaternion.identity);
         }
