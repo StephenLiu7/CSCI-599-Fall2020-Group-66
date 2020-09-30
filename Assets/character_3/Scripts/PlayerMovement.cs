@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     //============================================= initial Gun & shooting part  =======================================================================
     private Transform handgun;
+    public Transform missile_gun;
     public GameObject bulletPrefabs;
     public float proTime = 0.0f;
     public float NextTime = 0.0f;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         handgun = transform.Find("handgun");
+        missile_gun = handgun = GameObject.Find("missile_gun").transform;
     }
 
     void Update()
