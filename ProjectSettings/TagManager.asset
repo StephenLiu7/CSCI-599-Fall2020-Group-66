@@ -8,6 +8,7 @@ TagManager:
   - unpaused_bullet
   - paused_bullet
   - player_missile
+  - missile_gun
   layers:
   - Default
   - TransparentFX
