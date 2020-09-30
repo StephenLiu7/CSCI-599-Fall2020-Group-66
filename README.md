@@ -1,6 +1,7 @@
 # CSCI-599-Fall2020-Group-66
-Pull 步骤：
-1. 下载下来  
-2. 解压直接用unity打开该文件夹
-3. 界面左下角Scenes ==> 双击SampleScene 
-4. 点击左上角player 就可以跑了 enjoy 
+
+Note:
+  武器更新：
+  测试版本 目前右键换装武器   
+  怪兽组可以分别添加player_missile 
+  设置一个不同的血量
