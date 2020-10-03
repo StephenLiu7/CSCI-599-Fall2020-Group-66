@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     //Vector2 moveDirec;
     //Vector2 lastMoveDirect;
     float facing = 1.0f; // -1 left, 1 right;
+    public int maxHealth = 100;
+    public int currentHealth;
+    public HealthBar healthBar;
     // =================================================================================================================================================
 
     //============================================= initial Gun & shooting part  =======================================================================
@@ -35,8 +38,18 @@ public class PlayerMovement : MonoBehaviour
     public float proTime = 0.0f;
     public float NextTime = 0.0f;
     bool LOR = false;       // initial facing right
+
+    void Start()
+    {
+        currentHealth = maxHealth; // set initial health
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
+
     // Update is called once per frame
     // =================================================================================================================================================
+
+
 
     private void Awake()
     {
@@ -61,6 +74,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
+        // *********test for health bar ********
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            currentHealth -= 20;
+            healthBar.SetHealth(currentHealth);
+        }
+
+        //****************************************
+
         // =====================================================Character & shooting script =================================================================
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -190,6 +214,46 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     // =================================================================================================================================================
+
+    //==========================================Health Bar Functions=======================================================================================
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if(facing == 1.0f)
+        {
+            animator.SetTrigger("Hurt_R");
+        }
+
+        else if (facing == -1.0f)
+        {
+            animator.SetTrigger("Hurt_L");
+        }
+    }
+
+
+    //====================================================================================================================================================
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("weapon"))
+        {
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("unpaused_bullet"))
+        {
+            TakeDamage(10);
+            healthBar.SetHealth(currentHealth);
+        }
+        
+
+
+    }
+
+
+
+
 
 
 }
