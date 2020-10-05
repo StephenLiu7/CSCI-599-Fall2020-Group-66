@@ -132,40 +132,43 @@ public class PlayerMovement : MonoBehaviour
         // =================================================================================================================================================
 
         // ================================================================ shooting time SEPA =============================================================
-        proTime = Time.fixedTime;
-        FollowMouseRotate();
         
-        // test model for switch weapon
-        if (Input.GetMouseButtonDown(1))
+        if (player_dead == false)           // player need alive
         {
-            if(cur_bullet == missile)
+            proTime = Time.fixedTime;
+            FollowMouseRotate();
+            if (Input.GetMouseButtonDown(1))
             {
-                wait_time = 0.5;
-                missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
-                handgun.gameObject.GetComponent<Renderer>().enabled = true;
-                cur_bullet = handgun_bullet;
-                cur_gun = handgun;
-                //cur_gun = Instantiate(handgun, transform.position, Quaternion.identity);
-                //Destroy(missile_gun.gameObject);
+                if (cur_bullet == missile)
+                {
+                    wait_time = 0.5;
+                    missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
+                    handgun.gameObject.GetComponent<Renderer>().enabled = true;
+                    cur_bullet = handgun_bullet;
+                    cur_gun = handgun;
+                    //cur_gun = Instantiate(handgun, transform.position, Quaternion.identity);
+                    //Destroy(missile_gun.gameObject);
+                }
+                else
+                {
+                    wait_time = 1.2;
+                    missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
+                    handgun.gameObject.GetComponent<Renderer>().enabled = false;
+                    cur_bullet = missile;
+                    cur_gun = missile_gun;
+                    //cur_gun = Instantiate(missile_gun, transform.position, Quaternion.identity);
+                    //Destroy(handgun.gameObject);
+                }
             }
-            else
+            Debug.Log(wait_time);
+            if (proTime - NextTime >= wait_time)
             {
-                wait_time = 1.2;
-                missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
-                handgun.gameObject.GetComponent<Renderer>().enabled = false;
-                cur_bullet = missile;
-                cur_gun = missile_gun;
-                //cur_gun = Instantiate(missile_gun, transform.position, Quaternion.identity);
-                //Destroy(handgun.gameObject);
+
+                Shooting();
+                NextTime = proTime;
             }
         }
-        Debug.Log(wait_time);
-        if (proTime - NextTime >= wait_time)
-        {
-            
-            Shooting();
-            NextTime = proTime;
-        }
+        
         // =================================================================================================================================================
     }
 
