@@ -11,6 +11,8 @@ TagManager:
   - missile_gun
   - handgun
   - weapon
+  - enemy_1
+  - enemy_bullet_1
   layers:
   - Default
   - TransparentFX

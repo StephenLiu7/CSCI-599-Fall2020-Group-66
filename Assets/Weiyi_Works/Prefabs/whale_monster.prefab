@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8033290648453377647}
   m_Layer: 0
   m_Name: whale_monster
-  m_TagString: Untagged
+  m_TagString: enemy_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

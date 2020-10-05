@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
+    bool player_dead;
     // =================================================================================================================================================
 
     //============================================= initial Gun & shooting part  =======================================================================
@@ -43,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         currentHealth = maxHealth; // set initial health
         healthBar.SetMaxHealth(maxHealth);
+        player_dead = false;
     }
 
 
@@ -171,7 +173,11 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         //rb.MovePosition(rb.position + movement + moveSpeed * Time.fixedDeltaTime );
-        transform.position = transform.position + movement * moveSpeed * Time.deltaTime;
+        if(player_dead == false)
+        {
+            transform.position = transform.position + movement * moveSpeed * Time.deltaTime;
+        }
+        
     }
     // =================================================================================================================================================
 
@@ -218,17 +224,41 @@ public class PlayerMovement : MonoBehaviour
     //==========================================Health Bar Functions=======================================================================================
     void TakeDamage(int damage)
     {
-        currentHealth -= damage;
 
-        if(facing == 1.0f)
+        if (player_dead == false)
         {
-            animator.SetTrigger("Hurt_R");
+            currentHealth -= damage;
+            if (facing == 1.0f)
+            {
+                if (currentHealth <= 0)
+                {
+                    animator.SetBool("Dead_R", true);
+                    player_dead = true;
+                }
+                else
+                {
+                    animator.SetTrigger("Hurt_R");
+                }
+
+
+            }
+
+            else if (facing == -1.0f)
+            {
+                if (currentHealth <= 0)
+                {
+                    animator.SetBool("Dead_L", true);
+                    player_dead = true;
+                }
+                else
+                {
+                    animator.SetTrigger("Hurt_L");
+                }
+
+            }
         }
 
-        else if (facing == -1.0f)
-        {
-            animator.SetTrigger("Hurt_L");
-        }
+        
     }
 
 
@@ -241,7 +271,8 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (other.gameObject.CompareTag("unpaused_bullet"))
+        if (other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("paused_bullet") 
+         || other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("enemy_1") || other.gameObject.CompareTag("enemy_bullet_1"))
         {
             TakeDamage(10);
             healthBar.SetHealth(currentHealth);

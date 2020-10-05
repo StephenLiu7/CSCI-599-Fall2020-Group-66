@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3621511554108893359}
   m_Layer: 0
   m_Name: Ruiqi_Enemy
-  m_TagString: Untagged
+  m_TagString: enemy_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

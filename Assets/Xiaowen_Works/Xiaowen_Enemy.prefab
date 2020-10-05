@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4366275950749299940}
   m_Layer: 9
   m_Name: Xiaowen_Enemy
-  m_TagString: Untagged
+  m_TagString: enemy_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
