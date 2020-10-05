@@ -61,10 +61,5 @@ public class Ruiqi_Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
-        else
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        }
     }
 }
