@@ -21,25 +21,77 @@ public class Movement : MonoBehaviour
     public Rigidbody2D monster_rb;
     public Rigidbody2D player_rb;
 
-    private float attack_remain = 20;
     private float attack_range = 20;
 
     // Layer Info
-    private readonly int DEFAULT_LAYER = 0;
-    private readonly int MONSTER_LAYER = 9;
+    //private readonly int DEFAULT_LAYER = 0;
+    //private readonly int MONSTER_LAYER = 9;
+
+    // health info
+    public int maxHealth = 20;
+    public int currentHealth;
+    public Health healthControl;
+
+    // ability info
+    private bool revive = true;
+    private int revive_amount = 0;
+    private bool reviving = false;
+    private int jump = 5;
+
+    // ability function
+    private void Revive()
+    {
+        isPaused = true;
+        animator.Play("tumanba_revive");
+        revive = false;
+        reviving = true;
+    }
+
+    private void Reviving()
+    {
+        if (currentHealth < maxHealth/5*3)
+        {
+            revive_amount++;
+            if (revive_amount / 10 == 1)
+            {
+                currentHealth++;
+                revive_amount = 0;
+            }
+            healthControl.SetHealth(currentHealth);
+        }
+        else{
+            moveSpeed = moveSpeed * 5;
+            reviving = false;
+        }
+    }
    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("entered collider: "+collision.gameObject.tag);
+        //print("entered collider: "+collision.gameObject.tag);
+        if (reviving){
+            Destroy(collision.gameObject);
+            return;
+        }
         if (collision.gameObject.CompareTag("player_bullet"))
         {
             Destroy(collision.gameObject);
-            attack_remain--;
-            if (attack_remain == 0)
+            TakeDamage(1);
+            if (currentHealth == 0)
             {
-                live = false;
-                animator.Play("dead");
-                Destroy(gameObject, 1f);
+                if (revive)
+                {
+                    Revive();
+                }
+                else
+                {
+                    live = false;
+                    animator.Play("dead");
+                    Destroy(gameObject, 1f);
+                }
+            }
+            else if(!attack)
+            {
+                animator.Play("tumanba_hit");
             }
         }
         else if(collision.gameObject.CompareTag("Player"))
@@ -53,11 +105,20 @@ public class Movement : MonoBehaviour
         }
     }
 
+    // damage control
+    private void TakeDamage(int damge) {
+        currentHealth -= damge;
+        healthControl.SetHealth(currentHealth);
+    }
+
+    // initialization
     private void Start()
     {
         live = true;
-        attack_remain = 20;
         animator = gameObject.GetComponent<Animator>();
+
+        currentHealth = maxHealth;
+        healthControl.SetMaxHealth(maxHealth);
 
         // calculate initial direction
         float x_diff = player_rb.position.x-monster_rb.position.x;
@@ -77,6 +138,10 @@ public class Movement : MonoBehaviour
     void Update()
     {
         if (!live) {
+            return;
+        }
+        if (reviving) {
+            Reviving();
             return;
         }
         float x_diff = player_rb.position.x-monster_rb.position.x;
@@ -118,6 +183,7 @@ public class Movement : MonoBehaviour
         }    
     }
 
+    // direction fixed
     void Flip (){
          lookleft = !lookleft;
          Vector3 charscale = transform.localScale;
