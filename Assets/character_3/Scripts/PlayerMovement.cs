@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Initial parameter
     /// </summary>
-    
+    public UI_Control ui_control;
     //============================================= Character part  ===================================================================================
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
@@ -33,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform missile;
     public Transform handgun_bullet;
 
+    public bool got_missile_gun; 
+    
+
+
     double wait_time = 0.4;
 
 
@@ -45,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         currentHealth = maxHealth; // set initial health
         healthBar.SetMaxHealth(maxHealth);
         player_dead = false;
+        got_missile_gun = false;
     }
 
     //==============================================items===================================================================================================\
@@ -150,8 +155,9 @@ public class PlayerMovement : MonoBehaviour
         {
             proTime = Time.fixedTime;
             FollowMouseRotate();
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && got_missile_gun == true)
             {
+                ui_control.switch_weapon_icon();
                 if (cur_bullet == missile)
                 {
                     wait_time = 0.5;
@@ -172,6 +178,7 @@ public class PlayerMovement : MonoBehaviour
                     //cur_gun = Instantiate(missile_gun, transform.position, Quaternion.identity);
                     //Destroy(handgun.gameObject);
                 }
+                
             }
             Debug.Log(wait_time);
             if (proTime - NextTime >= wait_time)
@@ -282,9 +289,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("weapon"))
+        if (other.gameObject.CompareTag("missile_gun"))
         {
             Destroy(other.gameObject);
+            got_missile_gun = true;
+            ui_control.get_new_weapon(1);
         }
 
         if (other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("paused_bullet") 
