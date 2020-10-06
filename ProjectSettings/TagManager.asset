@@ -13,6 +13,7 @@ TagManager:
   - weapon
   - enemy_1
   - enemy_bullet_1
+  - item_hp
   layers:
   - Default
   - TransparentFX

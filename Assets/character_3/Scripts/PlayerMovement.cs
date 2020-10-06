@@ -47,6 +47,11 @@ public class PlayerMovement : MonoBehaviour
         player_dead = false;
     }
 
+    //==============================================items===================================================================================================\
+    public int hpAmount = 1;
+
+
+
 
     // Update is called once per frame
     // =================================================================================================================================================
@@ -83,6 +88,14 @@ public class PlayerMovement : MonoBehaviour
         {
             currentHealth -= 20;
             healthBar.SetHealth(currentHealth);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if(hpAmount < 5)
+            {
+                hpAmount += 1;
+            }
         }
 
         //****************************************
@@ -280,7 +293,15 @@ public class PlayerMovement : MonoBehaviour
             TakeDamage(10);
             healthBar.SetHealth(currentHealth);
         }
-        
+
+        if (other.gameObject.CompareTag("item_hp"))
+        {
+            if(hpAmount < 5)
+            {
+                hpAmount += 1;
+            }
+            Destroy(other.gameObject);
+        }
 
 
     }
