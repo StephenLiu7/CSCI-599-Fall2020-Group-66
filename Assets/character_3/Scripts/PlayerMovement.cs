@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public bool got_missile_gun;
 
     double wait_time = 0.4;
+    float lastClickTime;
     public float proTime = 0.0f;
     public float NextTime = 0.0f;
     /*struct gun
@@ -56,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     */
 
     int[] bullet_array = new int[] { 100, 5, 15 };
-
+    
     bool LOR = false;       // initial facing right
 
     void Start()
@@ -153,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (player_dead == false)           // player need alive
         {
-            proTime = Time.fixedTime;
+            //proTime = Time.fixedTime;
             FollowMouseRotate();
           
             if (Input.GetMouseButtonDown(1))
@@ -161,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
                 ui_control.switch_weapon_icon();
                 if (cur_bullet == handgun_bullet)
                 {
-                    wait_time = 0.6;
+                    wait_time = 2.3;
                     missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
                     handgun.gameObject.GetComponent<Renderer>().enabled = false;
                     cur_bullet = missile;
@@ -169,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (cur_bullet == missile)
                 {
-                    wait_time = 1.6;
+                    wait_time = 1.2;
                     missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
                     sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
                     cur_bullet = sniper;
@@ -177,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    wait_time = 2.7;
+                    wait_time = 0.7;
                     sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
                     handgun.gameObject.GetComponent<Renderer>().enabled = true;
                     cur_bullet = handgun_bullet;
@@ -186,11 +187,22 @@ public class PlayerMovement : MonoBehaviour
 
             }
             //Debug.Log(wait_time);
-            if (proTime - NextTime >= wait_time)
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+            {
+                if (Time.time - lastClickTime >= wait_time || Time.time == lastClickTime)
+                {
+                    Shooting();
+                    lastClickTime = Time.time;
+                }
+                
+            }
+
+
+            /*if (proTime - NextTime >= wait_time)
             {
                 Shooting();
                 NextTime = proTime;
-            }
+            }*/
         }
         
         // =================================================================================================================================================
@@ -228,21 +240,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Shooting()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
-        {
-            Vector3 bulletDirection = Input.mousePosition;
-            Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
-            Vector3 direction = bulletDirection - obj;
-            direction.Normalize();
-            Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
+        //if (Input.GetMouseButtonDown(0)) //|| Input.GetMouseButton(0))
+        //{
+        Vector3 bulletDirection = Input.mousePosition;
+        Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
+        Vector3 direction = bulletDirection - obj;
+        direction.Normalize();
+        Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
            
-            if (cur_bullet == missile)
-            { bullet.GetComponent<Rigidbody2D>().velocity = direction * 8; }
-            else if (cur_bullet == handgun_bullet) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 5; }
-            else if (cur_bullet == sniper) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 16; }
-            bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-            Destroy(bullet.gameObject, 10.0f);
-        }
+        if (cur_bullet == missile)
+        { bullet.GetComponent<Rigidbody2D>().velocity = direction * 8; }
+        else if (cur_bullet == handgun_bullet) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 5; }
+        else if (cur_bullet == sniper) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 16; }
+        bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        Destroy(bullet.gameObject, 10.0f);
+        //}
     }
     // =================================================================================================================================================
 
