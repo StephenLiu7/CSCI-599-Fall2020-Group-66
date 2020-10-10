@@ -14,6 +14,8 @@ TagManager:
   - enemy_1
   - enemy_bullet_1
   - item_hp
+  - player_sniper
+  - sniper_gun
   layers:
   - Default
   - TransparentFX

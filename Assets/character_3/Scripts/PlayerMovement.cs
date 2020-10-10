@@ -24,24 +24,39 @@ public class PlayerMovement : MonoBehaviour
 
     //============================================= initial Gun & shooting part  =======================================================================
     public Transform handgun;
-    //public Transform player;
-    public Transform cur_gun;
-
     public Transform missile_gun;
-    //public GameObject bulletPrefabs;
+    public Transform sniper_gun;
+
+    public Transform cur_gun;
     public Transform cur_bullet;
+
     public Transform missile;
     public Transform handgun_bullet;
+    public Transform sniper;
 
-    public bool got_missile_gun; 
-    
-
+    public bool got_missile_gun;
 
     double wait_time = 0.4;
-
-
     public float proTime = 0.0f;
     public float NextTime = 0.0f;
+    /*struct gun
+    {
+        int bullet;
+        string name;
+        double split_time;
+        double speed;
+    };
+    
+    gun temp = new gun { 100, "handgun", 0.5, 11 };
+    gun[] gun_array = new gun[] { temp, temp };
+
+    Armory = [gun(100, handgun, handgun_bullet, "handgun", 0.5, 11), gun(100, handgun, handgun_bullet, "handgun", 0.5, 11), gun(100, handgun, handgun_bullet, "handgun", 0.5, 11)];
+    Armory[0] = gun(int 100 , handgun,handgun_bullet,string "handgun", double 0.5,double 11);
+    Armory[0] = gun(100,handgun,handgun_bullet,"handgun",0.5,11);
+    */
+
+    int[] bullet_array = new int[] { 100, 5, 15 };
+
     bool LOR = false;       // initial facing right
 
     void Start()
@@ -65,23 +80,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        //missile.gameObject.setActive(false);
         missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
-        // set in the Unity those are backup code
-        //Destroy(missile_gun.gameObject);
-        //player = transform.Find("Player");
-        //player = transform.Find("Player");
-        //handgun = transform.Find("handgun");
-
-        //handgun = GameObject.Find("handgun").transform;
-        //missile_gun = handgun = GameObject.Find("missile_gun").transform;
-        //cur_gun = handgun;
-
-        //missile = GameObject.Find("player_missle").transform;
-        //handgun_bullet = handgun = GameObject.Find("player_bullet").transform;
-        //cur_bullet = handgun_bullet;
-        //handgun = transform.Find("handgun");
-        //missile_gun = handgun = GameObject.Find("missile_gun").transform;
+        sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
     }
 
     void Update()
@@ -155,35 +155,39 @@ public class PlayerMovement : MonoBehaviour
         {
             proTime = Time.fixedTime;
             FollowMouseRotate();
-            if (Input.GetMouseButtonDown(1) && got_missile_gun == true)
+          
+            if (Input.GetMouseButtonDown(1))
             {
                 ui_control.switch_weapon_icon();
-                if (cur_bullet == missile)
+                if (cur_bullet == handgun_bullet)
                 {
-                    wait_time = 0.5;
-                    missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
-                    handgun.gameObject.GetComponent<Renderer>().enabled = true;
-                    cur_bullet = handgun_bullet;
-                    cur_gun = handgun;
-                    //cur_gun = Instantiate(handgun, transform.position, Quaternion.identity);
-                    //Destroy(missile_gun.gameObject);
-                }
-                else
-                {
-                    wait_time = 1.2;
+                    wait_time = 0.6;
                     missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
                     handgun.gameObject.GetComponent<Renderer>().enabled = false;
                     cur_bullet = missile;
                     cur_gun = missile_gun;
-                    //cur_gun = Instantiate(missile_gun, transform.position, Quaternion.identity);
-                    //Destroy(handgun.gameObject);
                 }
-                
+                else if (cur_bullet == missile)
+                {
+                    wait_time = 1.6;
+                    missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
+                    sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
+                    cur_bullet = sniper;
+                    cur_gun = sniper_gun;
+                }
+                else
+                {
+                    wait_time = 2.7;
+                    sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
+                    handgun.gameObject.GetComponent<Renderer>().enabled = true;
+                    cur_bullet = handgun_bullet;
+                    cur_gun = handgun;
+                }
+
             }
-            Debug.Log(wait_time);
+            //Debug.Log(wait_time);
             if (proTime - NextTime >= wait_time)
             {
-
                 Shooting();
                 NextTime = proTime;
             }
@@ -209,19 +213,17 @@ public class PlayerMovement : MonoBehaviour
     private void FollowMouseRotate()
     {
         Vector3 mouse = Input.mousePosition;
-        //Debug.Log(mouse);
+       
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
         Vector3 direction = obj - mouse;
         if (LOR == true)
         { direction = obj - mouse; }
         else { direction = mouse - obj; }
         direction.z = 0f;
-        //Debug.Log(direction);
+        
         direction = direction.normalized;
         cur_gun.right = direction;
-        //  Debug.Log(player.GetAxis("aimHor"));
-
-        //transform.right = direction;         if rotate with Player together
+        
     }
 
     private void Shooting()
@@ -233,11 +235,11 @@ public class PlayerMovement : MonoBehaviour
             Vector3 direction = bulletDirection - obj;
             direction.Normalize();
             Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
-            //bullet.right = bulletDirection;
-            if (bullet == missile)
-            { bullet.GetComponent<Rigidbody2D>().velocity = direction * 11; }
-            else { bullet.GetComponent<Rigidbody2D>().velocity = direction * 5; }
-            //bullet.GetComponent<Rigidbody2D>().velocity = direction * 11;
+           
+            if (cur_bullet == missile)
+            { bullet.GetComponent<Rigidbody2D>().velocity = direction * 8; }
+            else if (cur_bullet == handgun_bullet) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 5; }
+            else if (cur_bullet == sniper) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 16; }
             bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             Destroy(bullet.gameObject, 10.0f);
         }
