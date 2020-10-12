@@ -32,18 +32,16 @@ public class XiaowenMonsterMovement : MonoBehaviour
     private float unpausedShootTimer;
     private float pausedShootTimer;
 
-    private int attack_remain;
+    private float attack_remain;
 
     // Layer Info
     private readonly int DEFAULT_LAYER = 0;
     private readonly int MONSTER_BULLET_LAYER = 8;
     private readonly int MONSTER_LAYER = 9;
-
-    // Health Bar
-    public HealthbarBehavior Healthbar;
-    private int MAX_HITS;
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        print("entered collider");
         if (collision.gameObject.CompareTag("player_bullet"))
         {
             Destroy(collision.gameObject);
@@ -51,9 +49,9 @@ public class XiaowenMonsterMovement : MonoBehaviour
             if (attack_remain == 0)
             {
                 Destroy(gameObject);
+                print("died");
             }
         }
-        Healthbar.SetHealth(attack_remain, MAX_HITS);
     }
 
     private void Start()
@@ -70,10 +68,9 @@ public class XiaowenMonsterMovement : MonoBehaviour
         unpausedShootTimer = UNPAUSED_SHOOTING_INTERVAL;
         pausedShootTimer = PAUSED_SHOOTING_INTERVAL;
 
-        attack_remain = 4;
-        MAX_HITS = 4;
+        attack_remain = 3;
+
         player_rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
-        Healthbar.SetHealth(attack_remain, MAX_HITS);
 
     }
 
