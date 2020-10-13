@@ -117,30 +117,16 @@ public class PlayerMovement : MonoBehaviour
         }
         moveDirec = new Vector2(movement.x, movement.y).normalized;
         */
-        Vector3 theScale = cur_gun.localScale;
+        //Vector3 theScale = cur_gun.localScale;
          
         if(movement.x > 0.001f)
         {
-            if(facing == -1.0f)     // we have a flip
-            {
-                LOR = false;
-                theScale.x *= -1;
-                cur_gun.localScale = theScale;
-                Vector2 diff = new Vector2(0.25f, 0);
-                cur_gun.Translate(diff,Space.World);        // space world == absolute axis    Didn't change with object rotate
-            }
+            
             facing = 1.0f;
         }
         else if(movement.x < -0.001f)
         {
-            if (facing == 1.0f)     // we have a flip
-            {
-                LOR = true;
-                theScale.x *= -1;
-                cur_gun.localScale = theScale;
-                Vector2 diff = new Vector2(-0.25f, 0);
-                cur_gun.Translate(diff, Space.World);
-            }
+            
             facing = -1.0f;
         }
       
@@ -228,9 +214,38 @@ public class PlayerMovement : MonoBehaviour
        
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
         Vector3 direction = obj - mouse;
-        if (LOR == true)
+        Vector3 theScale = cur_gun.localScale;
+        if (facing == 1.0f)     // we have a flip
+        {
+            Debug.Log(theScale);
+            if (theScale.x < 0)
+            { 
+                theScale.x *= -1 ;
+                Vector2 diff = new Vector2(0.25f, 0);
+                cur_gun.Translate(diff, Space.World);
+            }
+            cur_gun.localScale = theScale;
+           
+            direction = mouse - obj;
+        }
+        else if (facing == -1.0f)     // we have a flip
+        {
+            Debug.Log(theScale);
+            if (theScale.x > 0)
+            { 
+                theScale.x *= -1 ;
+                Vector2 diff = new Vector2(-0.25f, 0);
+                cur_gun.Translate(diff, Space.World);
+            }
+            cur_gun.localScale = theScale;
+            direction = obj - mouse;
+                    // space world == absolute axis    Didn't change with object rotate
+        }
+
+
+        /*if (LOR == true)
         { direction = obj - mouse; }
-        else { direction = mouse - obj; }
+        else { direction = mouse - obj; }*/
         direction.z = 0f;
         
         direction = direction.normalized;
@@ -250,8 +265,10 @@ public class PlayerMovement : MonoBehaviour
            
         if (cur_bullet == missile)
         { bullet.GetComponent<Rigidbody2D>().velocity = direction * 8; }
-        else if (cur_bullet == handgun_bullet) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 5; }
-        else if (cur_bullet == sniper) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 16; }
+        else if (cur_bullet == handgun_bullet) 
+        { bullet.GetComponent<Rigidbody2D>().velocity = direction * 5; }
+        else if (cur_bullet == sniper) 
+        { bullet.GetComponent<Rigidbody2D>().velocity = direction * 16; }
         bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
         Destroy(bullet.gameObject, 10.0f);
         //}
