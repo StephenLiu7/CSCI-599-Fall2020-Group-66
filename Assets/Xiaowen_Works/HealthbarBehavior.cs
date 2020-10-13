@@ -20,13 +20,28 @@ public class HealthbarBehavior : MonoBehaviour
         dict.Add(4.0f, Color.green);
     }
 
+    Color getColor(float health)
+    {
+        if (health >= 2.5f)
+        {
+            return Color.green;
+        }
+        else if (health >= 1.5f)
+        {
+            return Color.yellow;
+        }
+        else
+        {
+            return Color.red;
+        }
+    }
     public void SetHealth(float health, float maxHealth)
     {
         Slider.gameObject.SetActive(health < maxHealth);
         Slider.value = health;
         Slider.maxValue = maxHealth;
 
-        Slider.fillRect.GetComponentInChildren<Image>().color = dict[health];/*Color.Lerp(Low, High, Slider.normalizedValue);*/
+        Slider.fillRect.GetComponentInChildren<Image>().color = getColor(health);/*Color.Lerp(Low, High, Slider.normalizedValue);*/
         print(health + " " + maxHealth);
     }
     // Update is called once per frame

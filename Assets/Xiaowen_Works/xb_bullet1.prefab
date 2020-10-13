@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 9120967056982907533}
   - component: {fileID: 9120967056982907522}
   - component: {fileID: 9120967056982907523}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: xb_bullet1
-  m_TagString: Untagged
+  m_TagString: paused_bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
