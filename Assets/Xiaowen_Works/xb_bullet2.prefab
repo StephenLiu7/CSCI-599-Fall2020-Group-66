@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5675374892067392984}
   - component: {fileID: 5675374892067392985}
   - component: {fileID: 5675374892067392990}
+  - component: {fileID: 7151308686020185109}
   m_Layer: 8
   m_Name: xb_bullet2
   m_TagString: paused_bullet
@@ -150,3 +151,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7151308686020185109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675374892067392991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6991df7a141dfec4c9e049be94e3ac5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

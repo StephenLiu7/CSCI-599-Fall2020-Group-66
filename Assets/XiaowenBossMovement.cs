@@ -19,13 +19,15 @@ public class XiaowenBossMovement : MonoBehaviour
     private float stage2ShootingTimer = 1.0f;
 
     private Rigidbody2D player_rb;
+    private GameObject player;
     void Start()
     {
         gameStage = Stage.ONE;
         maxHealth = 10;
         currHealth = 10;
 
-        player_rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        player = GameObject.FindWithTag("Player");
+        player_rb = player.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -47,6 +49,31 @@ public class XiaowenBossMovement : MonoBehaviour
             {
                 stage2ShootingTimer = 1.0f;
                 Shoot(stage2Bullet, 7.0f);
+            }
+        }
+
+        // now, let us check rotations
+
+        if (player.transform.position.x > gameObject.transform.position.x)
+        {
+            if (gameObject.transform.eulerAngles.y != 0)
+            {
+                gameObject.transform.eulerAngles = new Vector3(
+                gameObject.transform.eulerAngles.x,
+                0.0f,
+                gameObject.transform.eulerAngles.z);
+                
+            }
+        }
+        else
+        {
+            if (gameObject.transform.eulerAngles.y != 180.0f)
+            {
+                gameObject.transform.eulerAngles = new Vector3(
+                gameObject.transform.eulerAngles.x,
+                180.0f,
+                gameObject.transform.eulerAngles.z);
+
             }
         }
     }
@@ -83,6 +110,10 @@ public class XiaowenBossMovement : MonoBehaviour
         Vector2 lookDir = (target - GetComponent<Rigidbody2D>().position).normalized;
         
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        if (player.transform.position.x < gameObject.transform.position.x)
+        {
+            angle += 180.0f;
+        }
 
         rb.rotation = angle;
 
@@ -90,5 +121,7 @@ public class XiaowenBossMovement : MonoBehaviour
         rb.AddForce(lookDir * force, ForceMode2D.Impulse);
 
         print("Arrived here");
+
+        Destroy(bullet, 10.0f);
     }
 }
