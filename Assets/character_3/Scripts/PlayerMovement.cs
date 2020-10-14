@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform sniper;
 
     public bool got_missile_gun;
-
+    public bool got_sniper_gun;
     double wait_time = 0.4;
     float lastClickTime;
     public float proTime = 0.0f;
@@ -56,9 +56,10 @@ public class PlayerMovement : MonoBehaviour
     Armory[0] = gun(100,handgun,handgun_bullet,"handgun",0.5,11);
     */
 
-    int[] bullet_array = new int[] { 100, 5, 15 };
-    
-    bool LOR = false;       // initial facing right
+    int[] bullet_array = new int[] { 100, 6, 15 };      // handgun , missile , sniper
+    string secondary_weapon = "";
+
+    //bool LOR = false;       // initial facing right
 
     void Start()
     {
@@ -146,29 +147,31 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 ui_control.switch_weapon_icon();
-                if (cur_bullet == handgun_bullet)
+                if (cur_bullet != handgun_bullet)
+                {
+                    wait_time = 0.7;
+                    if (secondary_weapon == "sniper")
+                    { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
+                    else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
+                    handgun.gameObject.GetComponent<Renderer>().enabled = true;
+                    cur_bullet = handgun_bullet;
+                    cur_gun = handgun;
+                }
+                else if (secondary_weapon == "sniper")
+                {
+                    wait_time = 1.2;
+                    handgun.gameObject.GetComponent<Renderer>().enabled = false;
+                    sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
+                    cur_bullet = sniper;
+                    cur_gun = sniper_gun;
+                }
+                else if (secondary_weapon == "missile")
                 {
                     wait_time = 2.3;
                     missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
                     handgun.gameObject.GetComponent<Renderer>().enabled = false;
                     cur_bullet = missile;
                     cur_gun = missile_gun;
-                }
-                else if (cur_bullet == missile)
-                {
-                    wait_time = 1.2;
-                    missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
-                    sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
-                    cur_bullet = sniper;
-                    cur_gun = sniper_gun;
-                }
-                else
-                {
-                    wait_time = 0.7;
-                    sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
-                    handgun.gameObject.GetComponent<Renderer>().enabled = true;
-                    cur_bullet = handgun_bullet;
-                    cur_gun = handgun;
                 }
 
             }
@@ -261,16 +264,34 @@ public class PlayerMovement : MonoBehaviour
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
         Vector3 direction = bulletDirection - obj;
         direction.Normalize();
-        Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
-           
-        if (cur_bullet == missile)
-        { bullet.GetComponent<Rigidbody2D>().velocity = direction * 8; }
-        else if (cur_bullet == handgun_bullet) 
-        { bullet.GetComponent<Rigidbody2D>().velocity = direction * 5; }
-        else if (cur_bullet == sniper) 
-        { bullet.GetComponent<Rigidbody2D>().velocity = direction * 16; }
-        bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-        Destroy(bullet.gameObject, 10.0f);
+        
+        int speed = 0;
+        bool Shoot_or_not = false;
+        if (cur_bullet == missile && bullet_array[1] > 0)
+        { 
+            speed = 9;
+            Shoot_or_not = true;
+            bullet_array[1] -= 1;
+        }
+        else if (cur_bullet == handgun_bullet && bullet_array[0] > 0) 
+        { 
+            speed = 6;
+            bullet_array[0] -= 1;
+            Shoot_or_not = true;
+        }
+        else if (cur_bullet == sniper && bullet_array[2] > 0) 
+        { 
+            speed = 15;
+            bullet_array[2] -= 1;
+            Shoot_or_not = true;
+        }
+        if (Shoot_or_not == true)
+        {
+            Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
+            bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            Destroy(bullet.gameObject, 10.0f);
+        }
         //}
     }
     // =================================================================================================================================================
@@ -325,6 +346,16 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             got_missile_gun = true;
             ui_control.get_new_weapon(1);
+            secondary_weapon = "missile";
+            bullet_array[1] = 6;
+        }
+        if (other.gameObject.CompareTag("sniper_gun"))
+        {
+            Destroy(other.gameObject);
+            //got_sniper_gun = true;
+            //ui_control.get_new_weapon(1);
+            secondary_weapon = "sniper";
+            bullet_array[2] = 15;
         }
 
         if (other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("paused_bullet") 
