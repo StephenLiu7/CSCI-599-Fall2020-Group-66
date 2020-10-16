@@ -293,6 +293,7 @@ public class PlayerMovement : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
             bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             Destroy(bullet.gameObject, 10.0f);
+            ana_bullet_counting += 1;
         }
         //}
     }
@@ -340,9 +341,11 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(player_dead);
             GameObject g = GameObject.Find("Main Camera");
             int number = g.GetComponent<AnalyticsAPI>().BossMonsterHitCount;
-            Debug.Log(number);
-            float acc = number / ana_bullet_counting;
-            Debug.Log(acc);
+            //Debug.Log(number);
+            //print(ana_bullet_counting);
+            
+            double acc = (number / ana_bullet_counting) * 100;
+            //Debug.Log(acc);
             if (reported == false)
             {
                 reported = true;
