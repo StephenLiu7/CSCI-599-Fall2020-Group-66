@@ -341,7 +341,7 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(player_dead);
             GameObject g = GameObject.Find("Main Camera");
             int number = g.GetComponent<AnalyticsAPI>().BossMonsterHitCount;
-            //Debug.Log(number);
+            Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
             //print(ana_bullet_counting);
             
             double acc = (number / ana_bullet_counting) * 100;
