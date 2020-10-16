@@ -86,14 +86,14 @@ public class XiaowenBossMovement : MonoBehaviour
             Destroy(collision.gameObject);
             healthReduction = 1;
             GameObject g = GameObject.Find("Main Camera");
-            g.GetComponent<AnalyticsAPI>().BossMonsterHitCount++;
+            g.GetComponent<AnalyticsAPI>().incrementBossMonsterHitCounter();
             print(g.GetComponent<AnalyticsAPI>().BossMonsterHitCount);
         }else if (collision.gameObject.CompareTag("player_missile"))
         {
             Destroy(collision.gameObject);
             healthReduction = 2;
             GameObject g = GameObject.Find("Main Camera");
-            g.GetComponent<AnalyticsAPI>().BossMonsterHitCount++;
+            g.GetComponent<AnalyticsAPI>().incrementBossMonsterHitCounter();
             print(g.GetComponent<AnalyticsAPI>().BossMonsterHitCount);
         }
 
