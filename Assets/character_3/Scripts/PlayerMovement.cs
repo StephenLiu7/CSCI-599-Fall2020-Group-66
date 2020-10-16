@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -57,8 +58,9 @@ public class PlayerMovement : MonoBehaviour
 
     public int[] bullet_array = new int[] { 300, 6, 15 };      // handgun , missile , sniper
     string secondary_weapon = "";
-
+    int ana_bullet_counting = 0;
     //bool LOR = false;       // initial facing right
+    bool reported = false;
 
     void Start()
     {
@@ -332,8 +334,28 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
+        if (player_dead == true)
+        {
+            //Debug.Log(ana_bullet_counting);
+            //Debug.Log(player_dead);
+            GameObject g = GameObject.Find("Main Camera");
+            int number = g.GetComponent<AnalyticsAPI>().BossMonsterHitCount;
+            Debug.Log(number);
+            float acc = number / ana_bullet_counting;
+            Debug.Log(acc);
+            if (reported == false)
+            {
+                reported = true;
+                Analytics.CustomEvent("gameOver", new Dictionary<string, object>
+                {
+                    { "total bullets", ana_bullet_counting },
+                    { "shooting accuracy", acc}
 
-        
+                });
+            }
+
+        }
+
     }
 
 
