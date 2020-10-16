@@ -21,17 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5ee21651-04c8-4656-826e-5261fad67fa9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Mingyang_Works/Sprites/Enemy1.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Enemy.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Enemy_Shot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Enemy_Shot.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Ruiqi_Enemy.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Ruiqi_Enemy.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Weiyi_Works/Prefabs/Weiyi_Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weiyi_Works/Prefabs/Weiyi_Enemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Weiyi_Works/Prefabs/whale_monster.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Weiyi_Works/Prefabs/whale_monster.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy_Shot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy_Shot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,14 +37,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file:///Applications/Unity/Hub/Editor/2019.4.2f1/Unity.app/Contents/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Slider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy_Shot.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy_Shot.cs" />
+        <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy_Health.cs" />
         <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy_Shot.cs" />
       </list>
     </option>
   </component>
@@ -96,6 +92,9 @@
       <updated>1601013008866</updated>
       <workItem from="1601013015475" duration="3271000" />
       <workItem from="1601185527295" duration="1477000" />
+      <workItem from="1602806482770" duration="4421000" />
+      <workItem from="1602812203742" duration="41000" />
+      <workItem from="1602812283726" duration="6657000" />
     </task>
     <servers />
   </component>
@@ -120,10 +119,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="237" y="23" width="754" height="977" key="dock-window-1" timestamp="1601186270145">
+    <state x="0" y="23" width="754" height="977" key="dock-window-1" timestamp="1602817716502">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state x="237" y="23" width="754" height="977" key="dock-window-1/-1080.-475.1080.1897/0.23.1920.977@-1080.-475.1080.1897" timestamp="1601186270145" />
+    <state x="0" y="23" width="754" height="977" key="dock-window-1/-1080.-475.1080.1897/0.23.1920.977@-1080.-475.1080.1897" timestamp="1602817716502" />
     <state x="53" y="23" width="754" height="977" key="dock-window-2" timestamp="1601187030768">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
