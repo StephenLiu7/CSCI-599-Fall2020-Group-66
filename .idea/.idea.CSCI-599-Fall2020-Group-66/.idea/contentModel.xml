@@ -72,6 +72,9 @@
             <e p="Ruiqi_Enemy.cs" t="Include" />
             <e p="Ruiqi_Enemy_Health.cs" t="Include" />
             <e p="Ruiqi_Enemy_Shot.cs" t="Include" />
+            <e p="Ruiqi_Hornet.cs" t="Include" />
+            <e p="Ruiqi_Hornet_Bullet.cs" t="Include" />
+            <e p="Ruiqi_Hornet_Health.cs" t="Include" />
           </e>
         </e>
         <e p="Troll Bridge Studios" t="Include">
