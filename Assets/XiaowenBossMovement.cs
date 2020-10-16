@@ -85,6 +85,15 @@ public class XiaowenBossMovement : MonoBehaviour
         {
             Destroy(collision.gameObject);
             healthReduction = 1;
+            GameObject g = GameObject.Find("Main Camera");
+            g.GetComponent<AnalyticsAPI>().BossMonsterHitCount++;
+            print(g.GetComponent<AnalyticsAPI>().BossMonsterHitCount);
+        }else if (collision.gameObject.CompareTag("player_missile"))
+        {
+            Destroy(collision.gameObject);
+            healthReduction = 2;
+            GetComponent<AnalyticsAPI>().BossMonsterHitCount++;
+            print(GetComponent<AnalyticsAPI>().BossMonsterHitCount);
         }
 
         currHealth -= healthReduction;
@@ -112,7 +121,7 @@ public class XiaowenBossMovement : MonoBehaviour
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         if (player.transform.position.x < gameObject.transform.position.x)
         {
-            angle += 180.0f;
+            
         }
 
         rb.rotation = angle;
