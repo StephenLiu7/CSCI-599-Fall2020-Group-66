@@ -52,6 +52,10 @@ public class XiaowenMonsterMovement : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+
+            GameObject g = GameObject.Find("Main Camera");
+            g.GetComponent<AnalyticsAPI>().BossMonsterHitCount++;
+            print(g.GetComponent<AnalyticsAPI>().BossMonsterHitCount);
         }
         Healthbar.SetHealth(attack_remain, MAX_HITS);
     }

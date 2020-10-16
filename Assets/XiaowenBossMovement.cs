@@ -92,8 +92,9 @@ public class XiaowenBossMovement : MonoBehaviour
         {
             Destroy(collision.gameObject);
             healthReduction = 2;
-            GetComponent<AnalyticsAPI>().BossMonsterHitCount++;
-            print(GetComponent<AnalyticsAPI>().BossMonsterHitCount);
+            GameObject g = GameObject.Find("Main Camera");
+            g.GetComponent<AnalyticsAPI>().BossMonsterHitCount++;
+            print(g.GetComponent<AnalyticsAPI>().BossMonsterHitCount);
         }
 
         currHealth -= healthReduction;
