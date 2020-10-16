@@ -345,14 +345,15 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(other.gameObject);
             
-            if (cur_gun == sniper_gun)
-            {
-                wait_time = 2.3;
-                sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
-                missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
-                cur_gun = missile_gun;
-                cur_bullet = missile;
-            }
+            //if (cur_gun == sniper_gun)
+            //{
+            wait_time = 2.3;
+            sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
+            handgun.gameObject.GetComponent<Renderer>().enabled = false;
+            missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
+            cur_gun = missile_gun;
+            cur_bullet = missile;
+            //}
             secondary_weapon = "missile";
             ui_control.get_new_weapon(1);
             bullet_array[1] = 6;
@@ -361,14 +362,15 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(other.gameObject);
             
-            if (cur_gun == missile_gun)
-            {
-                wait_time = 1.2;
-                sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
-                missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
-                cur_gun = sniper_gun;
-                cur_bullet = sniper;
-            }
+            //if (cur_gun == missile_gun)
+            //{
+            wait_time = 1.2;
+            handgun.gameObject.GetComponent<Renderer>().enabled = false;
+            sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
+            missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
+            cur_gun = sniper_gun;
+            cur_bullet = sniper;
+            //}
             secondary_weapon = "sniper";
             ui_control.get_new_weapon(2);
             bullet_array[2] = 15;
