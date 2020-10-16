@@ -34,8 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform handgun_bullet;
     public Transform sniper;
 
-    public bool got_missile_gun;
-    public bool got_sniper_gun;
+    
     double wait_time = 0.4;
     float lastClickTime;
     public float proTime = 0.0f;
@@ -56,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     Armory[0] = gun(100,handgun,handgun_bullet,"handgun",0.5,11);
     */
 
-    int[] bullet_array = new int[] { 100, 6, 15 };      // handgun , missile , sniper
+    public int[] bullet_array = new int[] { 300, 6, 15 };      // handgun , missile , sniper
     string secondary_weapon = "";
 
     //bool LOR = false;       // initial facing right
@@ -66,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
         currentHealth = maxHealth; // set initial health
         healthBar.SetMaxHealth(maxHealth);
         player_dead = false;
-        got_missile_gun = false;
+
+        secondary_weapon = "";
     }
 
     //==============================================items===================================================================================================\
@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
             //proTime = Time.fixedTime;
             FollowMouseRotate();
           
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && secondary_weapon.Length > 0)
             {
                 ui_control.switch_weapon_icon();
                 if (cur_bullet != handgun_bullet)
@@ -276,7 +276,7 @@ public class PlayerMovement : MonoBehaviour
         else if (cur_bullet == handgun_bullet && bullet_array[0] > 0) 
         { 
             speed = 6;
-            bullet_array[0] -= 1;
+            bullet_array[0] -= 1;  
             Shoot_or_not = true;
         }
         else if (cur_bullet == sniper && bullet_array[2] > 0) 
@@ -344,8 +344,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("missile_gun"))
         {
             Destroy(other.gameObject);
-            got_missile_gun = true;
-            ui_control.get_new_weapon(1);
+            
             if (cur_gun == sniper_gun)
             {
                 wait_time = 2.3;
@@ -355,13 +354,13 @@ public class PlayerMovement : MonoBehaviour
                 cur_bullet = missile;
             }
             secondary_weapon = "missile";
+            ui_control.get_new_weapon(1);
             bullet_array[1] = 6;
         }
         if (other.gameObject.CompareTag("sniper_gun"))
         {
             Destroy(other.gameObject);
-            //got_sniper_gun = true;
-            //ui_control.get_new_weapon(1);
+            
             if (cur_gun == missile_gun)
             {
                 wait_time = 1.2;
@@ -371,7 +370,7 @@ public class PlayerMovement : MonoBehaviour
                 cur_bullet = sniper;
             }
             secondary_weapon = "sniper";
-            
+            ui_control.get_new_weapon(2);
             bullet_array[2] = 15;
         }
 

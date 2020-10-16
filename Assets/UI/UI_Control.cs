@@ -14,18 +14,26 @@ public class UI_Control : MonoBehaviour
     public float cooldown1 = 5;
     bool isCooldown = false;
     public KeyCode ability1;
-    public Text ab_counter1;
+    public Text hp_counter;
     //=====================================================
 
     //==================switch weapon=====================
    
-    public Image[] weapons;
-    bool[] got_weapons;
+    public Image[] weapons; //UI weapon image array
+    bool[] got_weapons; // weapon have now
     int sec_weapon; //second hand weapon
+    public Text num_bullets;
+    private string infinity = "\u221e";
+    int cur_weapon;
     //======================================================
     // Start is called before the first frame update
+
+    
     void Start()
     {
+        cur_weapon = 0;
+        hp_counter.text = "1";
+        num_bullets.text = infinity;
         abilityImage1.fillAmount = 1;
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerMovement>();
@@ -43,7 +51,7 @@ public class UI_Control : MonoBehaviour
     {
 
         Ability_1();
-        
+        update_bullets();
 
     }
 
@@ -71,8 +79,8 @@ public class UI_Control : MonoBehaviour
                 isCooldown = false;
             }
         }
-        
-        ab_counter1.text = playerScript.hpAmount.ToString();
+
+        hp_counter.text = playerScript.hpAmount.ToString();
     }
 
     public void get_new_weapon(int new_weapon)
@@ -86,11 +94,13 @@ public class UI_Control : MonoBehaviour
         }
         got_weapons[new_weapon] = true;
         sec_weapon = new_weapon;
-        if (weapons[0].enabled == false)
-        {
-            weapons[new_weapon].enabled = true;
-        }
+        cur_weapon = new_weapon;
         
+        weapons[new_weapon].enabled = true;
+        weapons[0].enabled = false;
+        update_bullets();
+
+
     }
 
     public void switch_weapon_icon()
@@ -99,11 +109,23 @@ public class UI_Control : MonoBehaviour
         {
             weapons[sec_weapon].enabled = false;
             weapons[0].enabled = true;
+            cur_weapon = 0;
+            update_bullets();
         }
         else
         {
             weapons[sec_weapon].enabled = true;
             weapons[0].enabled = false;
+            cur_weapon = sec_weapon;
+            update_bullets();
         }
+    }
+
+
+     void update_bullets()
+    {
+     num_bullets.text = playerScript.bullet_array[cur_weapon].ToString();
+        
+        
     }
 }

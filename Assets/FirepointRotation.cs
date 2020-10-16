@@ -10,7 +10,7 @@ public class FirepointRotation : MonoBehaviour
 
     void Start()
     {
-        GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        player_rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
