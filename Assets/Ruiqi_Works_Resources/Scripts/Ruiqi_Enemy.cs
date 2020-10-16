@@ -5,17 +5,24 @@ using UnityEngine;
 
 public class Ruiqi_Enemy : MonoBehaviour
 {
+    // Movement Related Variables
     public float speed = 2.0f;
     public float stoppingDistance;
     public float retreatDistance;
+    public float maxFollowDistance;
     
+    //
     private float timeBtwShots;
     public float startTimeBtwShots;
     
-    public GameObject projectile;
+    public GameObject bullet;
     private Transform player;
+    public float attackRange = 7.0f;
 
-    private float life_remain = 5;
+    // Health Bar Related Variables
+    public int maxLife = 5;
+    private int lifeRemain = 5;
+    public Ruiqi_Enemy_Health Healthbar;
     
     
     // Start is called before the first frame update
@@ -23,12 +30,14 @@ public class Ruiqi_Enemy : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         timeBtwShots = startTimeBtwShots;
+        Healthbar.SetMaxHealth(maxLife);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.position) > stoppingDistance) {
+        if (Vector2.Distance(transform.position, player.position) > stoppingDistance 
+        && Vector2.Distance(transform.position, player.position) <= maxFollowDistance) {
 
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
@@ -41,22 +50,24 @@ public class Ruiqi_Enemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
         }
         
-        if (timeBtwShots <= 0) {
-            Instantiate(projectile, transform.position, Quaternion.identity);
+        // Shoot
+        if (timeBtwShots <= 0 && Vector2.Distance(transform.position, player.position) <= attackRange) {
+            Instantiate(bullet, transform.position, Quaternion.identity);
             timeBtwShots = startTimeBtwShots;
         }
         else {
             timeBtwShots -= Time.deltaTime;
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
+    
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.CompareTag("player_bullet"))
+        if (collision.gameObject.CompareTag("player_bullet"))
         {
-            Destroy(other.gameObject);
-            life_remain--;
-            if (life_remain == 0)
+            Destroy(collision.gameObject);
+            lifeRemain--;
+            Healthbar.SetHealth(lifeRemain);
+            if (lifeRemain == 0)
             {
                 Destroy(gameObject);
             }

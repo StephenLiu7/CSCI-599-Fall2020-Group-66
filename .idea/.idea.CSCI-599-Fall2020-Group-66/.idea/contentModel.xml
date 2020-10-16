@@ -8,12 +8,15 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AnalyticsAPI.cs" t="Include" />
         <e p="character_3" t="Include">
           <e p="Scripts" t="Include">
             <e p="PlayerMovement.cs" t="Include" />
             <e p="PlayerWeapon.cs" t="Include" />
           </e>
         </e>
+        <e p="FirepointRotation.cs" t="Include" />
+        <e p="HealthBar.cs" t="Include" />
         <e p="LayerCollisionSetting.cs" t="Include" />
         <e p="Mingyang_Works" t="Include">
           <e p="Scripts" t="Include">
@@ -34,6 +37,7 @@
         <e p="monster" t="Include">
           <e p="tumanba" t="Include">
             <e p="Script" t="Include">
+              <e p="Health.cs" t="Include" />
               <e p="Movement.cs" t="Include" />
             </e>
           </e>
@@ -66,6 +70,7 @@
           <e p="Notes.txt" t="Include" />
           <e p="Scripts" t="Include">
             <e p="Ruiqi_Enemy.cs" t="Include" />
+            <e p="Ruiqi_Enemy_Health.cs" t="Include" />
             <e p="Ruiqi_Enemy_Shot.cs" t="Include" />
           </e>
         </e>
@@ -280,6 +285,9 @@
             <e p="Terrain_Sound_By_Distance_Editor.cs" t="Include" />
           </e>
         </e>
+        <e p="UI" t="Include">
+          <e p="UI_Control.cs" t="Include" />
+        </e>
         <e p="uMMORPG" t="Include">
           <e p="Sprites" t="Include">
             <e p="(Public Domain) 496 pixel art icons for medieval fantasy RPG" t="Include">
@@ -303,10 +311,16 @@
           </e>
         </e>
         <e p="Xiaowen_Works" t="Include">
+          <e p="BossBullet.cs" t="Include" />
+          <e p="Dragon Warrior Files" t="Include">
+            <e p="Read Me.txt" t="Include" />
+          </e>
+          <e p="HealthbarBehavior.cs" t="Include" />
           <e p="XiaowenMonsterBullet.cs" t="Include" />
           <e p="XiaowenMonsterMovement.cs" t="Include" />
           <e p="XiaowenMonsterShooting.cs" t="Include" />
         </e>
+        <e p="XiaowenBossMovement.cs" t="Include" />
         <e p="XiaowenMonsterSpawn.cs" t="Include" />
       </e>
       <e p="CSCI-599-Fall2020-Group-66.sln" t="IncludeFlat" />
