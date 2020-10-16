@@ -9,4 +9,5 @@ Note:
   
   怪兽组可以分别添加player_missile 和 player_bullet  
   设置一个不同的血量  
-  boss掉落 在地图上生成一个有box collidar2D的object即可  
+  boss掉落 在地图上生成一个有box collidar2D的object即可 
+  亦或者按照讨论掉金币 
