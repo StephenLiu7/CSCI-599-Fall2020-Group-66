@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Ruiqi_Hornet : MonoBehaviour
 {
@@ -11,10 +9,8 @@ public class Ruiqi_Hornet : MonoBehaviour
     public float stoppingDistance;
     public float retreatDistance;
     public float maxFollowDistance;
-    private bool leftward = true;
-    private Vector2 dir;
     
-    // Shooting Related Variables
+    //
     private float timeBtwShots;
     public float startTimeBtwShots;
     
@@ -39,24 +35,10 @@ public class Ruiqi_Hornet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var plyPosition = player.position;
-        var horPosition = transform.position;
-        var xDiff = plyPosition.x - horPosition.x;
-        var yDiff = plyPosition.y - horPosition.y;
-        var dis = (float) Math.Sqrt(xDiff * xDiff + yDiff * yDiff);
-        dir = new Vector2(xDiff/dis, yDiff/dis);
-        // Monster move
-        if (Vector2.Distance(horPosition, plyPosition) > stoppingDistance 
-        && Vector2.Distance(horPosition, plyPosition) <= maxFollowDistance) {
+        if (Vector2.Distance(transform.position, player.position) > stoppingDistance 
+        && Vector2.Distance(transform.position, player.position) <= maxFollowDistance) {
+
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-            if (dir.x < 0 && !leftward)
-            {
-                Flip();
-            }
-            else if (dir.x > 0 && leftward)
-            {
-                Flip();
-            }
         }
         else if (Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance) {
 
@@ -65,16 +47,8 @@ public class Ruiqi_Hornet : MonoBehaviour
         else if (Vector2.Distance(transform.position, player.position) < retreatDistance) {
 
             transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
-            if (dir.x < 0 && !leftward)
-            {
-                Flip();
-            }
-            else if (dir.x > 0 && leftward)
-            {
-                Flip();
-            }
         }
-
+        
         // Shoot
         if (timeBtwShots <= 0 && Vector2.Distance(transform.position, player.position) <= attackRange) {
             Instantiate(bullet, transform.position, Quaternion.identity);
@@ -97,16 +71,5 @@ public class Ruiqi_Hornet : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
-
-    
-    // Change Direction in UI when the monster changes its direction
-    private void Flip()
-    {
-        leftward = !leftward;
-        var transform1 = transform;
-        Vector3 charscale = transform1.localScale;
-        charscale.x *= -1;
-        transform1.localScale = charscale;
     }
 }
