@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     */
 
     public int[] bullet_array = new int[] { 300, 6, 15 };      // handgun , missile , sniper
+    public int[] weapon_using_time = new int[] { 0, 0, 0 };
     string secondary_weapon = "";
     int ana_bullet_counting = 0;
     //bool LOR = false;       // initial facing right
@@ -274,18 +275,21 @@ public class PlayerMovement : MonoBehaviour
             speed = 9;
             Shoot_or_not = true;
             bullet_array[1] -= 1;
+            weapon_using_time[1] += 1;
         }
         else if (cur_bullet == handgun_bullet && bullet_array[0] > 0) 
         { 
             speed = 6;
             bullet_array[0] -= 1;  
             Shoot_or_not = true;
+            weapon_using_time[0] += 1;
         }
         else if (cur_bullet == sniper && bullet_array[2] > 0) 
         { 
             speed = 15;
             bullet_array[2] -= 1;
             Shoot_or_not = true;
+            weapon_using_time[2] += 1;
         }
         if (Shoot_or_not == true)
         {
@@ -337,17 +341,20 @@ public class PlayerMovement : MonoBehaviour
         }
         if (player_dead == true)
         {
-            //Debug.Log(ana_bullet_counting);
-            //Debug.Log(player_dead);
+           
             GameObject g = GameObject.Find("Main Camera");
             int number = AnalyticsAPI.BossMonsterHitCount_static;
-            //Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
-            //print(ana_bullet_counting);
-
+           
             if (ana_bullet_counting > 0)
             { acc = (AnalyticsAPI.BossMonsterHitCount_static * 100) / ana_bullet_counting ;  }
+            string most_use = "";
+
+            if (weapon_using_time[0] >= weapon_using_time[1] && weapon_using_time[0] >= weapon_using_time[2])
+            { most_use = "handgun"; }
+            else if (weapon_using_time[1] >= weapon_using_time[2])
+            { most_use = "RPG"; }
+            else { most_use = "Sniper"; }
             
-            //Debug.Log(acc);
             if (reported == false)
             {
                 reported = true;
@@ -356,8 +363,9 @@ public class PlayerMovement : MonoBehaviour
                     { "total bullets", ana_bullet_counting },
                     { "shooting accuracy", acc},
                     { "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
-                    { "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static }
-                
+                    { "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
+                    { "most use weapon",  most_use}
+
                 });
             }
 
