@@ -26,6 +26,8 @@ public class EnemyFollow : MonoBehaviour
         if (collision.gameObject.CompareTag("player_bullet"))
         {
             Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
             health_remain--;
             if (health_remain == 0)
             {
