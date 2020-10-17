@@ -213,3 +213,5 @@ MonoBehaviour:
   stage2Bullet: {fileID: 9120967056982907520, guid: 7472e50915b087b4eb35d7afe1d11f2f,
     type: 3}
   animator: {fileID: 7827237898759470824}
+  xiaowen_pill: {fileID: 1859666132695134453, guid: 0840971648e0e814686681e35f0e4546,
+    type: 3}

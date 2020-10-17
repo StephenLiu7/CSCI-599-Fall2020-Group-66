@@ -20,6 +20,8 @@ public class XiaowenBossMovement : MonoBehaviour
 
     private Rigidbody2D player_rb;
     private GameObject player;
+
+    public GameObject xiaowen_pill;
     void Start()
     {
         gameStage = Stage.ONE;
@@ -105,8 +107,11 @@ public class XiaowenBossMovement : MonoBehaviour
 
         if (currHealth <= 0)
         {
+            Vector2 spawnPos = gameObject.transform.position;
             Destroy(gameObject);
             AnalyticsAPI.BossMonsterDeadCount++;
+            Instantiate(xiaowen_pill, spawnPos, Quaternion.identity);
+            
         }else if (currHealth <= 5)
         {
             gameStage = Stage.TWO;
