@@ -23,5 +23,6 @@ public class AnalyticsAPI : MonoBehaviour
     public void incrementBossMonsterHitCounter()
     {
         BossMonsterHitCount++;
+        //BossMonsterHitCount_static++;
     }
 }

@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform handgun_bullet;
     public Transform sniper;
 
-    
+    float acc = 0;
     double wait_time = 0.4;
     float lastClickTime;
     public float proTime = 0.0f;
@@ -341,10 +341,12 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(player_dead);
             GameObject g = GameObject.Find("Main Camera");
             int number = g.GetComponent<AnalyticsAPI>().BossMonsterHitCount;
-            Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
+            //Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
             //print(ana_bullet_counting);
             
-            double acc = (number / ana_bullet_counting) * 100;
+            if (ana_bullet_counting > 0)
+            { acc = (AnalyticsAPI.BossMonsterHitCount_static * 100) / ana_bullet_counting ;  }
+            
             //Debug.Log(acc);
             if (reported == false)
             {
