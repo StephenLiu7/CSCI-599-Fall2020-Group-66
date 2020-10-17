@@ -106,6 +106,7 @@ public class XiaowenBossMovement : MonoBehaviour
         if (currHealth <= 0)
         {
             Destroy(gameObject);
+            AnalyticsAPI.BossMonsterDeadCount++;
         }else if (currHealth <= 5)
         {
             gameStage = Stage.TWO;

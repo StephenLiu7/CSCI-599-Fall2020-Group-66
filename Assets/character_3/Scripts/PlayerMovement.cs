@@ -340,10 +340,10 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(ana_bullet_counting);
             //Debug.Log(player_dead);
             GameObject g = GameObject.Find("Main Camera");
-            int number = g.GetComponent<AnalyticsAPI>().BossMonsterHitCount;
+            int number = AnalyticsAPI.BossMonsterHitCount_static;
             //Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
             //print(ana_bullet_counting);
-            
+
             if (ana_bullet_counting > 0)
             { acc = (AnalyticsAPI.BossMonsterHitCount_static * 100) / ana_bullet_counting ;  }
             
@@ -354,8 +354,10 @@ public class PlayerMovement : MonoBehaviour
                 Analytics.CustomEvent("gameOver", new Dictionary<string, object>
                 {
                     { "total bullets", ana_bullet_counting },
-                    { "shooting accuracy", acc}
-
+                    { "shooting accuracy", acc},
+                    { "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
+                    { "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static }
+                
                 });
             }
 
