@@ -27,6 +27,7 @@ public class eater : MonoBehaviour
             {
                 pm.currentHealth = pm.maxHealth;
             }
+            pm.healthBar.SetHealth(pm.currentHealth);
 
         }
 
