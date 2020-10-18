@@ -51,7 +51,13 @@ public class XiaowenMonsterMovement : MonoBehaviour
             if (attack_remain == 0)
             {
                 Destroy(gameObject);
+                AnalyticsAPI.BossMonsterDeadCount++;
             }
+            /*
+            GameObject g = GameObject.Find("Main Camera");
+            g.GetComponent<AnalyticsAPI>().incrementBossMonsterHitCounter();
+            print(g.GetComponent<AnalyticsAPI>().BossMonsterHitCount);*/
+            AnalyticsAPI.BossMonsterHitCount_static++;
         }
         Healthbar.SetHealth(attack_remain, MAX_HITS);
     }

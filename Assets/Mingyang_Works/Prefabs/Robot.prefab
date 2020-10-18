@@ -155,10 +155,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.2
-  health_remain: 10
   bulletPos1: {fileID: 42549106398747895}
   bulletPos2: {fileID: 42549106664940892}
   bullet: {fileID: 4077836242058196803, guid: bfc83a2ef95c9a1438636313619c174e, type: 3}
+  maxHealth: 20
+  currentHealth: 0
+  healthControl: {fileID: 0}
 --- !u!1 &42549106398747894
 GameObject:
   m_ObjectHideFlags: 0

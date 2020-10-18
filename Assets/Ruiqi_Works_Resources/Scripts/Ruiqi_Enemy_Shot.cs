@@ -1,36 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Ruiqi_Enemy_Shot : MonoBehaviour
 {
     public float speed;
 
+    private Rigidbody2D rb;
     private Transform player;
-    private Vector2 target;
+    private Vector2 moveDirection;
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
-        target = new Vector2(player.position.x, player.position.y);
+        moveDirection = (player.position - transform.position).normalized * speed;
+        rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
     }
+    
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        if (transform.position.x == target.x && transform.position.y == target.y) {
-            DestroyProjectTile();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
         }
-    }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            DestroyProjectTile();
+        else
+        {
+            Destroy(gameObject);
         }
-    }
-
-    void DestroyProjectTile() {
-        Destroy(gameObject);
     }
 }

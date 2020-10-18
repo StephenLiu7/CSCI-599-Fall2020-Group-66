@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -34,8 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform handgun_bullet;
     public Transform sniper;
 
-    public bool got_missile_gun;
-
+    float acc = 0;
     double wait_time = 0.4;
     float lastClickTime;
     public float proTime = 0.0f;
@@ -56,16 +56,20 @@ public class PlayerMovement : MonoBehaviour
     Armory[0] = gun(100,handgun,handgun_bullet,"handgun",0.5,11);
     */
 
-    int[] bullet_array = new int[] { 100, 5, 15 };
-    
-    bool LOR = false;       // initial facing right
+    public int[] bullet_array = new int[] { 300, 6, 15 };      // handgun , missile , sniper
+    public int[] weapon_using_time = new int[] { 0, 0, 0 };
+    string secondary_weapon = "";
+    int ana_bullet_counting = 0;
+    //bool LOR = false;       // initial facing right
+    bool reported = false;
 
     void Start()
     {
         currentHealth = maxHealth; // set initial health
         healthBar.SetMaxHealth(maxHealth);
         player_dead = false;
-        got_missile_gun = false;
+
+        secondary_weapon = "";
     }
 
     //==============================================items===================================================================================================\
@@ -117,30 +121,16 @@ public class PlayerMovement : MonoBehaviour
         }
         moveDirec = new Vector2(movement.x, movement.y).normalized;
         */
-        Vector3 theScale = cur_gun.localScale;
+        //Vector3 theScale = cur_gun.localScale;
          
         if(movement.x > 0.001f)
         {
-            if(facing == -1.0f)     // we have a flip
-            {
-                LOR = false;
-                theScale.x *= -1;
-                cur_gun.localScale = theScale;
-                Vector2 diff = new Vector2(0.25f, 0);
-                cur_gun.Translate(diff,Space.World);        // space world == absolute axis    Didn't change with object rotate
-            }
+            
             facing = 1.0f;
         }
         else if(movement.x < -0.001f)
         {
-            if (facing == 1.0f)     // we have a flip
-            {
-                LOR = true;
-                theScale.x *= -1;
-                cur_gun.localScale = theScale;
-                Vector2 diff = new Vector2(-0.25f, 0);
-                cur_gun.Translate(diff, Space.World);
-            }
+            
             facing = -1.0f;
         }
       
@@ -157,32 +147,34 @@ public class PlayerMovement : MonoBehaviour
             //proTime = Time.fixedTime;
             FollowMouseRotate();
           
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && secondary_weapon.Length > 0)
             {
                 ui_control.switch_weapon_icon();
-                if (cur_bullet == handgun_bullet)
+                if (cur_bullet != handgun_bullet)
+                {
+                    wait_time = 0.7;
+                    if (secondary_weapon == "sniper")
+                    { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
+                    else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
+                    handgun.gameObject.GetComponent<Renderer>().enabled = true;
+                    cur_bullet = handgun_bullet;
+                    cur_gun = handgun;
+                }
+                else if (secondary_weapon == "sniper")
+                {
+                    wait_time = 1.2;
+                    handgun.gameObject.GetComponent<Renderer>().enabled = false;
+                    sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
+                    cur_bullet = sniper;
+                    cur_gun = sniper_gun;
+                }
+                else if (secondary_weapon == "missile")
                 {
                     wait_time = 2.3;
                     missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
                     handgun.gameObject.GetComponent<Renderer>().enabled = false;
                     cur_bullet = missile;
                     cur_gun = missile_gun;
-                }
-                else if (cur_bullet == missile)
-                {
-                    wait_time = 1.2;
-                    missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
-                    sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
-                    cur_bullet = sniper;
-                    cur_gun = sniper_gun;
-                }
-                else
-                {
-                    wait_time = 0.7;
-                    sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
-                    handgun.gameObject.GetComponent<Renderer>().enabled = true;
-                    cur_bullet = handgun_bullet;
-                    cur_gun = handgun;
                 }
 
             }
@@ -228,9 +220,38 @@ public class PlayerMovement : MonoBehaviour
        
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
         Vector3 direction = obj - mouse;
-        if (LOR == true)
+        Vector3 theScale = cur_gun.localScale;
+        if (facing == 1.0f)     // we have a flip
+        {
+            Debug.Log(theScale);
+            if (theScale.x < 0)
+            { 
+                theScale.x *= -1 ;
+                Vector2 diff = new Vector2(0.25f, 0);
+                cur_gun.Translate(diff, Space.World);
+            }
+            cur_gun.localScale = theScale;
+           
+            direction = mouse - obj;
+        }
+        else if (facing == -1.0f)     // we have a flip
+        {
+            Debug.Log(theScale);
+            if (theScale.x > 0)
+            { 
+                theScale.x *= -1 ;
+                Vector2 diff = new Vector2(-0.25f, 0);
+                cur_gun.Translate(diff, Space.World);
+            }
+            cur_gun.localScale = theScale;
+            direction = obj - mouse;
+                    // space world == absolute axis    Didn't change with object rotate
+        }
+
+
+        /*if (LOR == true)
         { direction = obj - mouse; }
-        else { direction = mouse - obj; }
+        else { direction = mouse - obj; }*/
         direction.z = 0f;
         
         direction = direction.normalized;
@@ -246,14 +267,38 @@ public class PlayerMovement : MonoBehaviour
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
         Vector3 direction = bulletDirection - obj;
         direction.Normalize();
-        Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
-           
-        if (cur_bullet == missile)
-        { bullet.GetComponent<Rigidbody2D>().velocity = direction * 8; }
-        else if (cur_bullet == handgun_bullet) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 5; }
-        else if (cur_bullet == sniper) { bullet.GetComponent<Rigidbody2D>().velocity = direction * 16; }
-        bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-        Destroy(bullet.gameObject, 10.0f);
+        
+        int speed = 0;
+        bool Shoot_or_not = false;
+        if (cur_bullet == missile && bullet_array[1] > 0)
+        { 
+            speed = 9;
+            Shoot_or_not = true;
+            bullet_array[1] -= 1;
+            weapon_using_time[1] += 1;
+        }
+        else if (cur_bullet == handgun_bullet && bullet_array[0] > 0) 
+        { 
+            speed = 6;
+            bullet_array[0] -= 1;  
+            Shoot_or_not = true;
+            weapon_using_time[0] += 1;
+        }
+        else if (cur_bullet == sniper && bullet_array[2] > 0) 
+        { 
+            speed = 15;
+            bullet_array[2] -= 1;
+            Shoot_or_not = true;
+            weapon_using_time[2] += 1;
+        }
+        if (Shoot_or_not == true)
+        {
+            Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
+            bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            Destroy(bullet.gameObject, 10.0f);
+            ana_bullet_counting += 1;
+        }
         //}
     }
     // =================================================================================================================================================
@@ -294,8 +339,38 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
+        if (player_dead == true)
+        {
+           
+            GameObject g = GameObject.Find("Main Camera");
+            int number = AnalyticsAPI.BossMonsterHitCount_static;
+           
+            if (ana_bullet_counting > 0)
+            { acc = (AnalyticsAPI.BossMonsterHitCount_static * 100) / ana_bullet_counting ;  }
+            string most_use = "";
 
-        
+            if (weapon_using_time[0] >= weapon_using_time[1] && weapon_using_time[0] >= weapon_using_time[2])
+            { most_use = "handgun"; }
+            else if (weapon_using_time[1] >= weapon_using_time[2])
+            { most_use = "RPG"; }
+            else { most_use = "Sniper"; }
+            
+            if (reported == false)
+            {
+                reported = true;
+                Analytics.CustomEvent("gameOver", new Dictionary<string, object>
+                {
+                    { "total bullets", ana_bullet_counting },
+                    { "shooting accuracy", acc},
+                    { "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
+                    { "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
+                    { "most use weapon",  most_use}
+
+                });
+            }
+
+        }
+
     }
 
 
@@ -306,8 +381,36 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("missile_gun"))
         {
             Destroy(other.gameObject);
-            got_missile_gun = true;
+            
+            //if (cur_gun == sniper_gun)
+            //{
+            wait_time = 2.3;
+            sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
+            handgun.gameObject.GetComponent<Renderer>().enabled = false;
+            missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
+            cur_gun = missile_gun;
+            cur_bullet = missile;
+            //}
+            secondary_weapon = "missile";
             ui_control.get_new_weapon(1);
+            bullet_array[1] = 6;
+        }
+        if (other.gameObject.CompareTag("sniper_gun"))
+        {
+            Destroy(other.gameObject);
+            
+            //if (cur_gun == missile_gun)
+            //{
+            wait_time = 1.2;
+            handgun.gameObject.GetComponent<Renderer>().enabled = false;
+            sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
+            missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
+            cur_gun = sniper_gun;
+            cur_bullet = sniper;
+            //}
+            secondary_weapon = "sniper";
+            ui_control.get_new_weapon(2);
+            bullet_array[2] = 15;
         }
 
         if (other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("paused_bullet") 
