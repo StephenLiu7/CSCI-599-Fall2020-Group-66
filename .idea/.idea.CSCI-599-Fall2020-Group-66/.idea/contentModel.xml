@@ -15,17 +15,21 @@
             <e p="PlayerWeapon.cs" t="Include" />
           </e>
         </e>
+        <e p="eater.cs" t="Include" />
         <e p="FirepointRotation.cs" t="Include" />
         <e p="HealthBar.cs" t="Include" />
         <e p="LayerCollisionSetting.cs" t="Include" />
         <e p="Mingyang_Works" t="Include">
           <e p="Scripts" t="Include">
+            <e p="BossMove.cs" t="Include" />
             <e p="Enemy" t="Include">
               <e p="Enemy_Robot.cs" t="Include" />
               <e p="EnemyFollow.cs" t="Include" />
               <e p="EnemySpawner.cs" t="Include" />
               <e p="RobotBullet.cs" t="Include" />
             </e>
+            <e p="EnemyMove.cs" t="Include" />
+            <e p="GhostMove.cs" t="Include" />
           </e>
           <e p="Sprites" t="Include">
             <e p="FX" t="Include">
