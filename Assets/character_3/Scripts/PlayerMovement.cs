@@ -341,7 +341,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (player_dead == true)
         {
-           
+         
+            
             GameObject g = GameObject.Find("Main Camera");
             int number = AnalyticsAPI.BossMonsterHitCount_static;
            
@@ -358,14 +359,15 @@ public class PlayerMovement : MonoBehaviour
             if (reported == false)
             {
                 reported = true;
+                float times = Time.fixedTime;
                 Analytics.CustomEvent("gameOver", new Dictionary<string, object>
                 {
                     { "total bullets", ana_bullet_counting },
                     { "shooting accuracy", acc},
                     { "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
                     { "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
-                    { "most use weapon",  most_use}
-
+                    { "most use weapon",  most_use},
+                    { "Survival Time", times }
                 });
             }
 
