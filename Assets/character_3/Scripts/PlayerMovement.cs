@@ -358,20 +358,35 @@ public class PlayerMovement : MonoBehaviour
             
             if (reported == false)
             {
-                
                 reported = true;
                 float times = Time.fixedTime;
-                print("see see hitcount:: " + AnalyticsAPI.BossMonsterHitCount_static);
-                AnalyticsResult res = Analytics.CustomEvent("gameOver", new Dictionary<string, object>
+                Analytics.CustomEvent("char", new Dictionary<string, object>
+                {
+                    //{ "total bullets", ana_bullet_counting },
+                    //{ "shooting accuracy", acc},
+                    //{ "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
+                    //{ "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
+                    //{ "most use weapon",  most_use},
+                    { "Survival Time", times }
+                });
+                Analytics.CustomEvent("weapon", new Dictionary<string, object>
                 {
                     { "total bullets", ana_bullet_counting },
                     { "shooting accuracy", acc},
+                    //{ "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
+                    //{ "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
+                    { "most use weapon",  most_use},
+                    //{ "Survival Time", times }
+                });
+                Analytics.CustomEvent("monster", new Dictionary<string, object>
+                {
+                    //{ "total bullets", ana_bullet_counting },
+                    //{ "shooting accuracy", acc},
                     { "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
                     { "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
-                    { "most use weapon",  most_use},
-                    { "Survival Time", times }
+                    //{ "most use weapon",  most_use},
+                    //{ "Survival Time", times }
                 });
-                print("CHECKING ANALYTICS EVENT: "+res);
             }
 
         }
