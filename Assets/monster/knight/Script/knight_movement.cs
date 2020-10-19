@@ -25,7 +25,7 @@ public class knight_movement : MonoBehaviour
     public Rigidbody2D monster_rb;
     public Rigidbody2D player_rb;
 
-    private float attack_range = 20;
+    private float attack_range = 40;
 
     // Layer Info
     //private readonly int DEFAULT_LAYER = 0;
