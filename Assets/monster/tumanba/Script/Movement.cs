@@ -67,14 +67,14 @@ public class Movement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //print("entered collider: "+collision.gameObject.tag);
-        if (collision.gameObject.CompareTag("player_bullet") || collision.gameObject.CompareTag("player_missle") || collision.gameObject.CompareTag("player_sniper"))
+        if (collision.gameObject.CompareTag("player_bullet") || collision.gameObject.CompareTag("player_missile") || collision.gameObject.CompareTag("player_sniper"))
         {
             AnalyticsAPI.BossMonsterHitCount_static++;
             Destroy(collision.gameObject);
             if (reviving){
                 return;
             }
-            if(collision.gameObject.CompareTag("player_missle"))
+            if(collision.gameObject.CompareTag("player_missile"))
             {
                 TakeDamage(2);
             }
@@ -156,7 +156,7 @@ public class Movement : MonoBehaviour
         float x_diff = player_rb.position.x-monster_rb.position.x;
         float y_diff = player_rb.position.y-monster_rb.position.y;
         float distance = (float)Math.Sqrt(x_diff * x_diff + y_diff * y_diff);
-        if(attack && attack_time < 100){
+        if(attack && attack_time < 10){
             attack_time++;
             return;
         }
