@@ -36,7 +36,6 @@ public class Movement : MonoBehaviour
     private bool revive = true;
     private int revive_amount = 0;
     private bool reviving = false;
-    private int jump = 5;
 
     // ability function
     private void Revive()
@@ -60,7 +59,7 @@ public class Movement : MonoBehaviour
             healthControl.SetHealth(currentHealth);
         }
         else{
-            moveSpeed = moveSpeed * 5;
+            moveSpeed = moveSpeed * 3;
             reviving = false;
         }
     }
@@ -68,15 +67,26 @@ public class Movement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //print("entered collider: "+collision.gameObject.tag);
-        if (reviving){
-            Destroy(collision.gameObject);
-            return;
-        }
-        if (collision.gameObject.CompareTag("player_bullet"))
+        if (collision.gameObject.CompareTag("player_bullet") || collision.gameObject.CompareTag("player_missle") || collision.gameObject.CompareTag("player_sniper"))
         {
+            AnalyticsAPI.BossMonsterHitCount_static++;
             Destroy(collision.gameObject);
-            TakeDamage(1);
-            if (currentHealth == 0)
+            if (reviving){
+                return;
+            }
+            if(collision.gameObject.CompareTag("player_missle"))
+            {
+                TakeDamage(2);
+            }
+            else if(collision.gameObject.CompareTag("player_sniper"))
+            {
+                TakeDamage(4);
+            }
+            else
+            {
+                TakeDamage(1);
+            }
+            if (currentHealth < 0)
             {
                 if (revive)
                 {
@@ -86,6 +96,7 @@ public class Movement : MonoBehaviour
                 {
                     live = false;
                     animator.Play("dead");
+                    AnalyticsAPI.BossMonsterDeadCount++;
                     Destroy(gameObject, 1f);
                 }
             }
@@ -98,9 +109,7 @@ public class Movement : MonoBehaviour
         {
             isPaused = true;
             attack = true;
-            //animator.Play("idle");
             animator.Play("tumanba_attack");
-            //attack = false;
             
         }
     }
