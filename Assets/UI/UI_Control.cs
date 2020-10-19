@@ -57,7 +57,7 @@ public class UI_Control : MonoBehaviour
 
     void Ability_1()
     {
-        if (Input.GetKey(ability1) && isCooldown == false && playerScript.hpAmount >= 1)
+        if (Input.GetKey(ability1) && isCooldown == false && playerScript.hpAmount >= 1 && playerScript.player_dead == false)
         {
             isCooldown = true;
             abilityImage1.fillAmount = 0;
