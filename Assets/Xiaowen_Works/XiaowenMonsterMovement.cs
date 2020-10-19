@@ -58,6 +58,25 @@ public class XiaowenMonsterMovement : MonoBehaviour
             g.GetComponent<AnalyticsAPI>().incrementBossMonsterHitCounter();
             print(g.GetComponent<AnalyticsAPI>().BossMonsterHitCount);*/
             AnalyticsAPI.BossMonsterHitCount_static++;
+        }else if (collision.gameObject.CompareTag("player_missile"))
+        {
+            Destroy(collision.gameObject);
+            attack_remain-=2;
+            if (attack_remain == 0)
+            {
+                Destroy(gameObject);
+                AnalyticsAPI.BossMonsterDeadCount++;
+            }
+        }
+        else if (collision.gameObject.CompareTag("player_sniper"))
+        {
+            Destroy(collision.gameObject);
+            attack_remain -= 4;
+            if (attack_remain == 0)
+            {
+                Destroy(gameObject);
+                AnalyticsAPI.BossMonsterDeadCount++;
+            }
         }
         Healthbar.SetHealth(attack_remain, MAX_HITS);
     }

@@ -66,9 +66,11 @@ public class Ruiqi_Hornet : MonoBehaviour
             Destroy(collision.gameObject);
             lifeRemain--;
             Healthbar.SetHealth(lifeRemain);
+            AnalyticsAPI.BossMonsterHitCount_static++;
             if (lifeRemain == 0)
             {
                 Destroy(gameObject);
+                AnalyticsAPI.BossMonsterDeadCount++;
             }
         }
     }
