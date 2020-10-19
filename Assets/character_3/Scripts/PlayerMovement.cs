@@ -358,9 +358,11 @@ public class PlayerMovement : MonoBehaviour
             
             if (reported == false)
             {
+                
                 reported = true;
                 float times = Time.fixedTime;
-                Analytics.CustomEvent("gameOver", new Dictionary<string, object>
+                print("see see hitcount:: " + AnalyticsAPI.BossMonsterHitCount_static);
+                AnalyticsResult res = Analytics.CustomEvent("gameOver", new Dictionary<string, object>
                 {
                     { "total bullets", ana_bullet_counting },
                     { "shooting accuracy", acc},
@@ -369,6 +371,7 @@ public class PlayerMovement : MonoBehaviour
                     { "most use weapon",  most_use},
                     { "Survival Time", times }
                 });
+                print("CHECKING ANALYTICS EVENT: "+res);
             }
 
         }
