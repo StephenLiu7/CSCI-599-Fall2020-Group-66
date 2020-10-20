@@ -22,11 +22,14 @@
     <list default="true" id="5ee21651-04c8-4656-826e-5261fad67fa9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Hornet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Hornet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Hornet_Bullet.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Hornet_Bullet.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Hornet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Hornet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/package_potions_512x.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +102,7 @@
       <workItem from="1602812203742" duration="41000" />
       <workItem from="1602812283726" duration="6657000" />
       <workItem from="1602835361286" duration="1326000" />
-      <workItem from="1603001889526" duration="916000" />
+      <workItem from="1603001889526" duration="3976000" />
     </task>
     <servers />
   </component>

@@ -39,6 +39,12 @@
           </e>
         </e>
         <e p="monster" t="Include">
+          <e p="knight" t="Include">
+            <e p="Script" t="Include">
+              <e p="knight_health.cs" t="Include" />
+              <e p="knight_movement.cs" t="Include" />
+            </e>
+          </e>
           <e p="tumanba" t="Include">
             <e p="Script" t="Include">
               <e p="Health.cs" t="Include" />

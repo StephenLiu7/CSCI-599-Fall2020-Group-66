@@ -10,8 +10,10 @@ public class Ruiqi_Enemy : MonoBehaviour
     public float stoppingDistance;
     public float retreatDistance;
     public float maxFollowDistance;
+    private bool leftward = true;
+    private Vector2 dir;
     
-    //
+    // Shooting Related Variables
     private float timeBtwShots;
     public float startTimeBtwShots;
     
@@ -36,10 +38,25 @@ public class Ruiqi_Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+     
+        var plyPosition = player.position;
+        var horPosition = transform.position;
+        var xDiff = plyPosition.x - horPosition.x;
+        var yDiff = plyPosition.y - horPosition.y;
+        var dis = (float) Math.Sqrt(xDiff * xDiff + yDiff * yDiff);
+        dir = new Vector2(xDiff/dis, yDiff/dis);
         if (Vector2.Distance(transform.position, player.position) > stoppingDistance 
         && Vector2.Distance(transform.position, player.position) <= maxFollowDistance) {
 
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            if (dir.x < 0 && !leftward)
+            {
+                Flip();
+            }
+            else if (dir.x > 0 && leftward)
+            {
+                Flip();
+            }
         }
         else if (Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance) {
 
@@ -48,6 +65,14 @@ public class Ruiqi_Enemy : MonoBehaviour
         else if (Vector2.Distance(transform.position, player.position) < retreatDistance) {
 
             transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+            if (dir.x < 0 && !leftward)
+            {
+                Flip();
+            }
+            else if (dir.x > 0 && leftward)
+            {
+                Flip();
+            }
         }
         
         // Shoot
@@ -74,5 +99,39 @@ public class Ruiqi_Enemy : MonoBehaviour
                 AnalyticsAPI.BossMonsterDeadCount++;
             }
         }
+        else if (collision.gameObject.CompareTag("player_missile"))
+        {
+            Destroy(collision.gameObject);
+            lifeRemain -= 2;
+            Healthbar.SetHealth(lifeRemain);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            if (lifeRemain <= 0)
+            {
+                Destroy(gameObject);
+                AnalyticsAPI.BossMonsterDeadCount++;
+            }
+        }
+        else if (collision.gameObject.CompareTag("player_sniper"))
+        {
+            Destroy(collision.gameObject);
+            lifeRemain -= 3;
+            Healthbar.SetHealth(lifeRemain);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            if (lifeRemain <= 0)
+            {
+                Destroy(gameObject);
+                AnalyticsAPI.BossMonsterDeadCount++;
+            }
+        }
+    }
+    
+    // Change Direction in UI when the monster changes its direction
+    private void Flip()
+    {
+        leftward = !leftward;
+        var transform1 = transform;
+        Vector3 charscale = transform1.localScale;
+        charscale.x *= -1;
+        transform1.localScale = charscale;
     }
 }
