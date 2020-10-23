@@ -172,6 +172,7 @@ MonoBehaviour:
   maxHealth: 5
   currentHealth: 0
   healthControl: {fileID: 5486104270660954757}
+  drop: {fileID: 8437343980750381085, guid: 68f09c381697ddf4ab9f685bb625ed7e, type: 3}
 --- !u!1001 &8495336096169154397
 PrefabInstance:
   m_ObjectHideFlags: 0
