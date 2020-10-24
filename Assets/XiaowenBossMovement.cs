@@ -9,8 +9,8 @@ public class XiaowenBossMovement : MonoBehaviour
     enum Stage { ONE, TWO }
 
     private Stage gameStage;
-    private int maxHealth;
-    private int currHealth;
+    public int maxHealth;
+    public int currHealth;
     public Transform firePoint;
     public GameObject stage1Bullet;
     public GameObject stage2Bullet;
@@ -109,7 +109,7 @@ public class XiaowenBossMovement : MonoBehaviour
             AnalyticsAPI.BossMonsterDeadCount++;
             Instantiate(xiaowen_pill, spawnPos, Quaternion.identity);
             
-        }else if (currHealth <= 5)
+        }else if (currHealth <= maxHealth / 2)
         {
             gameStage = Stage.TWO;
             animator.SetFloat("Speed", 1.0f);

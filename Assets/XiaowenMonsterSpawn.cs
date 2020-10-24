@@ -9,9 +9,12 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     private float spawn_timer;
     private Rigidbody2D player_rb;
     public GameObject xiaowenMonsterPrefab;
-
+    public GameObject xiaowenBossPrefab;
     private (float, float) xRange = (50.1f, 155.7f);
     private (float, float) yRange = (-42.1f, 42.6f);
+
+    private int MonsterKilledCount = 0;
+    private int BossMaxHealth = 10;
     void Start()
     {
         spawn_timer = 0.0f;
@@ -33,5 +36,15 @@ public class XiaowenMonsterSpawn : MonoBehaviour
             Vector2 randomPos = player_rb.position + new Vector2(Random.value, Random.value).normalized*3;
             Instantiate(xiaowenMonsterPrefab, randomPos, Quaternion.identity);
         }
+    }
+
+    public void spawnBoss()
+    {
+        BossMaxHealth += 2;
+        Rigidbody2D prb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        Vector2 randomPos = prb.position - new Vector2(Random.value, Random.value).normalized * 6;
+        GameObject g = Instantiate(xiaowenBossPrefab, randomPos, Quaternion.identity);
+        g.GetComponent<XiaowenBossMovement>().maxHealth = BossMaxHealth;
+        g.GetComponent<XiaowenBossMovement>().currHealth = BossMaxHealth;
     }
 }
