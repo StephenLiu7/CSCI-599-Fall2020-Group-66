@@ -10,6 +10,7 @@ public class LayerCollisionSetting : MonoBehaviour
     private readonly int MONSTER_LAYER = 9;
     private readonly int PLAYER_BULLET_LAYER = 10;
     private readonly int PLAYER_LAYER = 11;
+    private readonly int ITEM_LAYER = 12;
     private readonly int MAP_LAYER = 20;
     // Start is called before the first frame update
     void Start()
@@ -21,5 +22,8 @@ public class LayerCollisionSetting : MonoBehaviour
         Physics2D.IgnoreLayerCollision(PLAYER_BULLET_LAYER, MONSTER_BULLET_LAYER);
         Physics2D.IgnoreLayerCollision(MAP_LAYER, PLAYER_BULLET_LAYER);
         Physics2D.IgnoreLayerCollision(MAP_LAYER, MONSTER_BULLET_LAYER);
+        Physics2D.IgnoreLayerCollision(ITEM_LAYER, MONSTER_BULLET_LAYER);
+        Physics2D.IgnoreLayerCollision(ITEM_LAYER, MONSTER_LAYER);
+        Physics2D.IgnoreLayerCollision(ITEM_LAYER, PLAYER_BULLET_LAYER);
     }
 }
