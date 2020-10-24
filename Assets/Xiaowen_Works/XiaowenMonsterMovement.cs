@@ -161,6 +161,12 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
     void Shoot(GameObject bulletPrefab, float force)
     {
+        float monsterX = gameObject.transform.position.x;
+        float monsterY = gameObject.transform.position.y;
+        if (! MonsterUtil.IsCloseToPlayer(monsterX, monsterY))
+        {
+            return;
+        }
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
