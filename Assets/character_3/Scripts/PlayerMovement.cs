@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     /// Initial parameter
     /// </summary>
     public UI_Control ui_control;
+    public static float survivalTimes;
     //============================================= Character part  ===================================================================================
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
     public bool player_dead;
+
+   
     // =================================================================================================================================================
 
     //============================================= initial Gun & shooting part  =======================================================================
@@ -70,6 +73,8 @@ public class PlayerMovement : MonoBehaviour
         player_dead = false;
 
         secondary_weapon = "";
+        InvokeRepeating("circleDamage", 0.0f, 2.0f);
+        survivalTimes = 0;
     }
 
     //==============================================items===================================================================================================\
@@ -91,13 +96,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        
+       
         // *********test for health bar ********
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentHealth -= 20;
             healthBar.SetHealth(currentHealth);
+            if(currentHealth < 0)
+            {
+                player_dead = true;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -346,7 +355,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (player_dead == true)
         {
-         
+
             
             GameObject g = GameObject.Find("Main Camera");
             int number = AnalyticsAPI.BossMonsterHitCount_static;
@@ -372,7 +381,7 @@ public class PlayerMovement : MonoBehaviour
                     //{ "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
                     //{ "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
                     //{ "most use weapon",  most_use},
-                    { "Survival Time", times }
+                    { "Survival Time", survivalTimes }
                 });
                 Analytics.CustomEvent("weapon", new Dictionary<string, object>
                 {
@@ -399,7 +408,44 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    private void circleDamage()
+    {
+        if (DamageCircle.IsOutsideCircle_Static(GameObject.Find("Player").transform.position))
+        {
+            currentHealth -= 10;
+            healthBar.SetHealth(currentHealth);
+            if (facing == 1.0f)
+            {
+                if (currentHealth <= 0)
+                {
+                    animator.SetBool("Dead_R", true);
+                    player_dead = true;
+                }
+                else
+                {
+                    animator.SetTrigger("Hurt_R");
+                }
 
+
+            }
+
+            else if (facing == -1.0f)
+            {
+                if (currentHealth <= 0)
+                {
+                    animator.SetBool("Dead_L", true);
+                    player_dead = true;
+                }
+                else
+                {
+                    animator.SetTrigger("Hurt_L");
+                }
+
+            }
+
+        }
+        
+    }
 
 
 

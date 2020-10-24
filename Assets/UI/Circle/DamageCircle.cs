@@ -132,4 +132,7 @@ public class DamageCircle : MonoBehaviour {
     public static bool IsOutsideCircle_Static(Vector3 position) {
         return instance.IsOutsideCircle(position);
     }
+
+
+
 }
