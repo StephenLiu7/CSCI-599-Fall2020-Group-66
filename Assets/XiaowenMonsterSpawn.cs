@@ -13,17 +13,24 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     private (float, float) xRange = (50.1f, 155.7f);
     private (float, float) yRange = (-42.1f, 42.6f);
 
-    private int MonsterKilledCount = 0;
+    public int MonsterKilledCount = 0;
     private int BossMaxHealth = 10;
     void Start()
     {
         spawn_timer = 0.0f;
         player_rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        float playerX = player_rb.position.x;
+        float playerY = player_rb.position.y;
+        bool isInRange = (playerX < xRange.Item2 && playerX > xRange.Item1) && (playerY < yRange.Item2 && playerY > yRange.Item1);
+        if(isInRange){
+            spawnBoss();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentHealth++;
         float playerX = player_rb.position.x;
         float playerY = player_rb.position.y;
 
