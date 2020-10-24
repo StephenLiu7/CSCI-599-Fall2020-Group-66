@@ -17,7 +17,7 @@ public class XiaowenBossMovement : MonoBehaviour
     public Animator animator;
     private float stage1ShootingTimer = 5.0f;
     private float stage2ShootingTimer = 1.0f;
-
+    private bool changedStatus = false;
     private Rigidbody2D player_rb;
     private GameObject player;
 
@@ -111,10 +111,12 @@ public class XiaowenBossMovement : MonoBehaviour
             AnalyticsAPI.BossMonsterDeadCount++;
             Instantiate(xiaowen_pill, spawnPos, Quaternion.identity);
             
-        }else if (currHealth <= maxHealth / 2)
+        }else if (currHealth <= maxHealth / 2 && !changedStatus)
         {
+            changedStatus = true;
             gameStage = Stage.TWO;
             animator.SetFloat("Speed", 1.0f);
+            gameObject.transform.localScale += new Vector3(1, 1, 0);
         }
 
     }
