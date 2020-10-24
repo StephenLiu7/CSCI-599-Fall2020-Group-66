@@ -30,7 +30,7 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentHealth++;
+        //GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentHealth++;
         float playerX = player_rb.position.x;
         float playerY = player_rb.position.y;
 

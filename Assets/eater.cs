@@ -22,7 +22,8 @@ public class eater : MonoBehaviour
         {
             Destroy(gameObject);
             PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
-            pm.currentHealth += 40;
+            pm.maxHealth += 5;
+            pm.currentHealth += 45;
             if (pm.currentHealth > pm.maxHealth)
             {
                 pm.currentHealth = pm.maxHealth;
