@@ -24,9 +24,11 @@ public class XiaowenBossMovement : MonoBehaviour
     public GameObject xiaowen_pill;
     void Start()
     {
+        GameObject cam = GameObject.Find("Main Camera");
+        XiaowenMonsterSpawn mu = cam.GetComponent<XiaowenMonsterSpawn>();
         gameStage = Stage.ONE;
-        maxHealth = 10;
-        currHealth = 10;
+        maxHealth = mu.BossMaxHealth;
+        currHealth = mu.BossMaxHealth;
 
         player = GameObject.FindWithTag("Player");
         player_rb = player.GetComponent<Rigidbody2D>();
