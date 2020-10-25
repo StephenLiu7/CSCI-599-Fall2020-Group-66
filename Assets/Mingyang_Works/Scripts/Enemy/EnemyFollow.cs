@@ -9,6 +9,7 @@ public class EnemyFollow : MonoBehaviour
     public float speed;
     private Transform playerPos;
     public float health_remain;
+    public GameObject drop;
     void Start()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
@@ -31,7 +32,45 @@ public class EnemyFollow : MonoBehaviour
             health_remain--;
             if (health_remain == 0)
             {
+                AnalyticsAPI.BossMonsterDeadCount++;
                 Destroy(gameObject);
+                Vector2 spawnPos = gameObject.transform.position;
+
+                if (UnityEngine.Random.Range(0, 4) > 2)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
+                print("died");
+            }
+        }else if (collision.gameObject.CompareTag("player_missile"))
+        {
+            Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
+            health_remain-=3;
+            if (health_remain <= 0)
+            {
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject);
+                Vector2 spawnPos = gameObject.transform.position;
+
+                if (UnityEngine.Random.Range(0, 4) > 2)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
+                print("died");
+            }
+        }
+        else if (collision.gameObject.CompareTag("player_sniper"))
+        {
+            Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
+            health_remain-=4;
+            if (health_remain <= 0)
+            {
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject);
+                Vector2 spawnPos = gameObject.transform.position;
+
+                if (UnityEngine.Random.Range(0, 4) > 2)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
                 print("died");
             }
         }

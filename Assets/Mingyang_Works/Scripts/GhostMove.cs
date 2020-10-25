@@ -35,6 +35,7 @@ public class GhostMove : MonoBehaviour
     // ability info
 
     private int jump = 5;
+    public GameObject drop;
 
     // ability function
 
@@ -49,18 +50,70 @@ public class GhostMove : MonoBehaviour
         {
             Destroy(collision.gameObject);
             AnalyticsAPI.BossMonsterHitCount_static++;
-            Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
+            print(AnalyticsAPI.BossMonsterHitCount_static);
             TakeDamage(1);
-            if (currentHealth == 0)
+            if (currentHealth <= 0)
             {
 
-                    live = false;
-                    animator.Play("GhostDeath");
-                    Destroy(gameObject, 1f);
+                live = false;
+                animator.Play("GhostDeath");
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject, 0.2f);
+                Vector2 spawnPos = gameObject.transform.position;
+
+                if (UnityEngine.Random.Range(0, 4) >= 0)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
+
             }
             else if (!attack)
             {
+            }
+        }
+        else if (collision.gameObject.CompareTag("player_missile"))
+        {
+            Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            print(AnalyticsAPI.BossMonsterHitCount_static);
+            TakeDamage(3);
+            if (currentHealth <= 0)
+            {
 
+                live = false;
+                animator.Play("GhostDeath");
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject, 0.2f);
+                Vector2 spawnPos = gameObject.transform.position;
+
+                if (UnityEngine.Random.Range(0, 4) >= 0)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
+
+
+            }
+            else if (!attack)
+            {
+            }
+        }
+        else if (collision.gameObject.CompareTag("player_sniper"))
+        {
+            Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            print(AnalyticsAPI.BossMonsterHitCount_static);
+            TakeDamage(4);
+            if (currentHealth <= 0)
+            {
+
+                live = false;
+                animator.Play("GhostDeath");
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject, 0.2f);
+                Vector2 spawnPos = gameObject.transform.position;
+
+                if (UnityEngine.Random.Range(0, 4) >= 0)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
+
+            }
+            else if (!attack)
+            {
             }
         }
         else if (collision.gameObject.CompareTag("Player"))

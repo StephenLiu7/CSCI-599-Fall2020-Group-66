@@ -40,6 +40,8 @@ public class EnemyMove : MonoBehaviour
 
     private Transform playerPos;
 
+    public GameObject drop;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -51,26 +53,72 @@ public class EnemyMove : MonoBehaviour
             AnalyticsAPI.BossMonsterHitCount_static++;
             print(AnalyticsAPI.BossMonsterHitCount_static);
             TakeDamage(1);
-            if (currentHealth == 0)
+            if (currentHealth <= 0)
             {
 
                     live = false;
                     animator.Play("dead");
-                    Destroy(gameObject, 1f);
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject);
+                Vector2 spawnPos = gameObject.transform.position;
+
+                if (UnityEngine.Random.Range(0, 4) > 2)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
 
             }
             else if(!attack)
             {
             }
-        }
-        else if(collision.gameObject.CompareTag("Player"))
+        }else if (collision.gameObject.CompareTag("player_missile"))
         {
-            isPaused = true;
-            attack = true;
-            //animator.Play("idle");
-            //attack = false;
-            
+            Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            print(AnalyticsAPI.BossMonsterHitCount_static);
+            TakeDamage(3);
+            if (currentHealth <= 0)
+            {
+
+                live = false;
+                animator.Play("dead");
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject);
+                Vector2 spawnPos = gameObject.transform.position;
+
+                if (UnityEngine.Random.Range(0, 4) > 2)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
+
+            }
+            else if (!attack)
+            {
+            }
         }
+        else if (collision.gameObject.CompareTag("player_sniper"))
+        {
+            Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            print(AnalyticsAPI.BossMonsterHitCount_static);
+            TakeDamage(4);
+            if (currentHealth <= 0)
+            {
+
+                live = false;
+
+
+
+                
+                animator.Play("dead");
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject);
+                Vector2 spawnPos = gameObject.transform.position;
+                if(UnityEngine.Random.Range(0, 4) > 2)
+                    Instantiate(drop, spawnPos, Quaternion.identity);
+
+            }
+            else if (!attack)
+            {
+            }
+        }
+        
     }
 
     // damage control
