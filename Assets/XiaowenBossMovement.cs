@@ -22,6 +22,7 @@ public class XiaowenBossMovement : MonoBehaviour
     private GameObject player;
 
     public GameObject xiaowen_pill;
+    public GameObject bulletadder;
     void Start()
     {
         GameObject cam = GameObject.Find("Main Camera");
@@ -110,6 +111,7 @@ public class XiaowenBossMovement : MonoBehaviour
             Destroy(gameObject);
             AnalyticsAPI.BossMonsterDeadCount++;
             Instantiate(xiaowen_pill, spawnPos, Quaternion.identity);
+            Instantiate(bulletadder, spawnPos + new Vector2(0.1f, 0.1f), Quaternion.identity);
             
         }else if (currHealth <= maxHealth / 2 && !changedStatus)
         {

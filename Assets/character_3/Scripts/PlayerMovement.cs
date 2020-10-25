@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     public int[] bullet_array = new int[] { 300, 6, 15 };      // handgun , missile , sniper
     public int[] weapon_using_time = new int[] { 0, 0, 0 };
-    string secondary_weapon = "";
+    public string secondary_weapon = "";
     int ana_bullet_counting = 0;
     //bool LOR = false;       // initial facing right
     bool reported = false;
