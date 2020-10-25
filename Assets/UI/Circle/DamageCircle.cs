@@ -12,7 +12,8 @@
 
 using UnityEngine;
 
-public class DamageCircle : MonoBehaviour {
+public class DamageCircle : MonoBehaviour
+{
 
     private static DamageCircle instance;
 
@@ -34,11 +35,15 @@ public class DamageCircle : MonoBehaviour {
     private Vector3 targetCirclePosition;
     bool last_circle = false;
 
+    public float initialCircleSize;
+    public float initialTargetCircleSize;
+    private int circle_stage = 0;
 
-    private void Awake() {
+    private void Awake()
+    {
         instance = this;
 
-        circleShrinkSpeed = 5f;
+        circleShrinkSpeed = 10f;
 
         circleTransform = transform.Find("circle");
         topTransform = transform.Find("top");
@@ -46,55 +51,89 @@ public class DamageCircle : MonoBehaviour {
         leftTransform = transform.Find("left");
         rightTransform = transform.Find("right");
 
-        SetCircleSize(new Vector3(0, 0), new Vector3(50, 50));
+        SetCircleSize(new Vector3(0, 0), new Vector3(initialCircleSize, initialCircleSize));
 
-        SetTargetCircle(new Vector3(0, 0), new Vector3(45, 45), 5f);
+        SetTargetCircle(new Vector3(0, 0), new Vector3(initialTargetCircleSize, initialTargetCircleSize), 2f);
     }
 
-    private void Update() {
+    private void Update()
+    {
         shrinkTimer -= Time.deltaTime;
 
-        if (shrinkTimer < 0 && last_circle == false) {
+
+
+
+
+
+
+        if (shrinkTimer < 0 && last_circle == false)
+        {
             Vector3 sizeChangeVector = (targetCircleSize - circleSize).normalized;
             Vector3 newCircleSize = circleSize + sizeChangeVector * Time.deltaTime * circleShrinkSpeed;
 
             Vector3 circleMoveDir = (targetCirclePosition - circlePosition).normalized;
             Vector3 newCirclePosition = circlePosition + circleMoveDir * Time.deltaTime * circleShrinkSpeed;
-            if(newCircleSize.x <= 10f)
+
+
+            if (newCircleSize.x <= 20f)
             {
-                newCircleSize = new Vector3(10f, 10f);
+                newCircleSize = new Vector3(20f, 20f);
                 newCirclePosition = targetCirclePosition;
                 last_circle = true;
             }
+
+
+
             SetCircleSize(newCirclePosition, newCircleSize);
 
             float distanceTestAmount = .1f;
-            if (Vector3.Distance(newCircleSize, targetCircleSize) < distanceTestAmount && Vector3.Distance(newCirclePosition, targetCirclePosition) < distanceTestAmount) {
+            if (Vector3.Distance(newCircleSize, targetCircleSize) < distanceTestAmount && Vector3.Distance(newCirclePosition, targetCirclePosition) < distanceTestAmount)
+            {
                 GenerateTargetCircle();
             }
         }
+
+
+
+
     }
 
-    private void GenerateTargetCircle() {
-        float shrinkSizeAmount = Random.Range(1f, 5f);
-        Vector3 generatedTargetCircleSize = circleSize - new Vector3(shrinkSizeAmount, shrinkSizeAmount) * 2f;
+    private void GenerateTargetCircle()
+    {
+        //float shrinkSizeAmount = Random.Range(10f, 50f);
+        //float shrinkSizeAmount = 190f;\
+        Vector3 generatedTargetCircleSize = targetCircleSize;
+        if (circle_stage == 0)
+        {
+            generatedTargetCircleSize = new Vector3(60f, 60f);//circleSize - new Vector3(shrinkSizeAmount, shrinkSizeAmount) * 2f;
+            circle_stage = 1;
+        }
+        else if (circle_stage == 1)
+        {
+            generatedTargetCircleSize = new Vector3(20f, 20f);
+        }
+
 
         // Set a minimum size
+        /*
         if (generatedTargetCircleSize.x < 10f)
         {
             generatedTargetCircleSize = Vector3.one * 10f;
             shrinkSizeAmount = (circleSize.x - 10f) / 2f;
         }
+        */
 
-        Vector3 generatedTargetCirclePosition = circlePosition + 
-            new Vector3(Random.Range(-shrinkSizeAmount, shrinkSizeAmount), Random.Range(-shrinkSizeAmount, shrinkSizeAmount));
+        Vector3 generatedTargetCirclePosition = new Vector3(0, 0);
 
-        float shrinkTime = Random.Range(1f, 5f);
+        //circlePosition +  new Vector3(Random.Range(-shrinkSizeAmount, shrinkSizeAmount), Random.Range(-shrinkSizeAmount, shrinkSizeAmount));
+
+        float shrinkTime = 5f; //Random.Range(10f, 20f);
 
         SetTargetCircle(generatedTargetCirclePosition, generatedTargetCircleSize, shrinkTime);
     }
 
-    private void SetCircleSize(Vector3 position, Vector3 size) {
+    private void SetCircleSize(Vector3 position, Vector3 size)
+    {
         circlePosition = position;
         circleSize = size;
 
@@ -104,7 +143,7 @@ public class DamageCircle : MonoBehaviour {
 
         topTransform.localScale = new Vector3(500, 500);
         topTransform.localPosition = new Vector3(0, topTransform.localScale.y * .5f + size.y * .5f);
-        
+
         bottomTransform.localScale = new Vector3(500, 500);
         bottomTransform.localPosition = new Vector3(0, -topTransform.localScale.y * .5f - size.y * .5f);
 
@@ -115,21 +154,24 @@ public class DamageCircle : MonoBehaviour {
         rightTransform.localPosition = new Vector3(+leftTransform.localScale.x * .5f + size.x * .5f, 0f);
     }
 
-    private void SetTargetCircle(Vector3 position, Vector3 size, float shrinkTimer) {
+    private void SetTargetCircle(Vector3 position, Vector3 size, float shrinkTimer)
+    {
         this.shrinkTimer = shrinkTimer;
 
         targetCircleTransform.position = position;
         targetCircleTransform.localScale = size;
-        
+
         targetCirclePosition = position;
         targetCircleSize = size;
     }
 
-    private bool IsOutsideCircle(Vector3 position) {
+    private bool IsOutsideCircle(Vector3 position)
+    {
         return Vector3.Distance(position, circlePosition) > circleSize.x * .5f;
     }
 
-    public static bool IsOutsideCircle_Static(Vector3 position) {
+    public static bool IsOutsideCircle_Static(Vector3 position)
+    {
         return instance.IsOutsideCircle(position);
     }
 

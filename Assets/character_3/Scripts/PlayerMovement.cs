@@ -113,11 +113,16 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // ********* Joystick ********
+
+
         player_moves.x = player_joystick.Horizontal;
         player_moves.y = player_joystick.Vertical;
 
+
+
         weapon_moves.x = weapon_joystick.Horizontal;
         weapon_moves.y = weapon_joystick.Vertical;
+
 
         // *********test for health bar ********
 
@@ -142,9 +147,14 @@ public class PlayerMovement : MonoBehaviour
         //****************************************
 
         // =====================================================Character & shooting script =================================================================
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        movement.z = 0.0f;
+
+        if (player_moves.magnitude <= 0)
+        {
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+            movement.z = 0.0f;
+        }
+       
         /*
         if((movement.x ==0 && movement.y == 0) && moveDirec.x != 0 || moveDirec.y !=0)
         {
@@ -154,18 +164,25 @@ public class PlayerMovement : MonoBehaviour
         */
         //Vector3 theScale = cur_gun.localScale;
 
-        if (movement.x > 0.001f)
+        if (movement.x > 0.001f || player_moves.x > 0.001f)
         {
             facing = 1.0f;
         }
-        else if (movement.x < -0.001f)
+        else if (movement.x < -0.001f || player_moves.x < -0.001f)
         {
             facing = -1.0f;
         }
 
         animator.SetFloat("Horizontal", facing);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Magnitude", movement.magnitude);
+        animator.SetFloat("Vertical", player_moves.y);
+        animator.SetFloat("Magnitude", player_moves.magnitude);
+        if (player_moves.magnitude <= 0)
+        {
+            animator.SetFloat("Vertical", movement.y);
+            animator.SetFloat("Magnitude", movement.magnitude);
+
+        }
+        
         animator.SetFloat("LastHori", facing);
         // =================================================================================================================================================
 
@@ -261,7 +278,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position = transform.position + movement * moveSpeed * Time.deltaTime;
         }
 
-        rb.MovePosition(rb.position + player_moves * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + player_moves * speed * Time.deltaTime);
 
     }
     // =================================================================================================================================================
