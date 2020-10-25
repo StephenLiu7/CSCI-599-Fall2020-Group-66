@@ -5,7 +5,7 @@ using System;
 
 public class knight_movement : MonoBehaviour
 {
-    public float moveSpeed = .2f;
+    public float moveSpeed = 1.8f;
     private bool slide = false;
     private float slideSpeed = 3f;
     private bool jump = false;
@@ -18,6 +18,7 @@ public class knight_movement : MonoBehaviour
     private int attack_time = 0;
 
     // below are movement-related variables
+    private bool attacking;
     private bool isPaused;
     private Vector2 direction;
     Vector2 movement;
@@ -25,7 +26,8 @@ public class knight_movement : MonoBehaviour
     public Rigidbody2D monster_rb;
     public Rigidbody2D player_rb;
 
-    private float attack_range = 40;
+    private float attack_range = 16.73f;
+    private bool out_bound = false;
 
     // Layer Info
     //private readonly int DEFAULT_LAYER = 0;
@@ -116,7 +118,6 @@ public class knight_movement : MonoBehaviour
             isPaused = true;
             attack = true;
             animator.Play("Attack");
-            
         }
     }
 
@@ -129,6 +130,7 @@ public class knight_movement : MonoBehaviour
     // initialization
     private void Start()
     {
+        player_rb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         live = true;
         animator = gameObject.GetComponent<Animator>();
 
@@ -149,6 +151,17 @@ public class knight_movement : MonoBehaviour
         }
     }
 
+    private bool Range_Check()
+    {
+        float x = player_rb.position.x;
+        float y = player_rb.position.y;
+        if(x > -44 && y > -45)
+        {
+            return false;
+        }
+        return true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -162,16 +175,35 @@ public class knight_movement : MonoBehaviour
         float x_diff = player_rb.position.x-monster_rb.position.x;
         float y_diff = player_rb.position.y-monster_rb.position.y;
         float distance = (float)Math.Sqrt(x_diff * x_diff + y_diff * y_diff);
-        if(attack && attack_time < 20){
+        direction = new Vector2(x_diff / distance, y_diff / distance);
+        movement = direction;
+
+        // check if out of region
+        if (out_bound)
+        {
+            isPaused = true;
+            animator.Play("Idle");
+            return;
+        }
+
+        if(distance < 1.7 && !attacking) // distance < 1.7
+        {
+            attacking = true;
+            isPaused = true;
+            attack = true;
+            animator.Play("Attack");
+        }
+        if(attack && attack_time < 15){
             attack_time++;
             return;
         }
         else{
+            attacking = false;
             attack = false;
             attack_time = 0;
         }
 
-        if(distance < attack_range) {
+        if(distance < attack_range && !attacking) {
             isPaused = false;
             animator.Play("Run");
             direction = new Vector2(x_diff / distance, y_diff / distance);
@@ -192,6 +224,13 @@ public class knight_movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector2 next_position = monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+        if(next_position.x > -44 || next_position.y > -50)
+        {
+            out_bound = true;
+            return;
+        }
+        out_bound = false;
         // Movement of Player
         if(slide && live){
             monster_rb.MovePosition(monster_rb.position + movement * slideSpeed * Time.fixedDeltaTime);

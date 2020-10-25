@@ -5,7 +5,7 @@ using System;
 
 public class Movement : MonoBehaviour
 {
-    public float moveSpeed = .2f;
+    public float moveSpeed = 2f;
 
     public Animator animator;
     private bool live;
@@ -14,14 +14,16 @@ public class Movement : MonoBehaviour
     private int attack_time = 0;
 
     // below are movement-related variables
+    private bool attacking;
     private bool isPaused;
     private Vector2 direction;
     Vector2 movement;
 
     public Rigidbody2D monster_rb;
-    public Rigidbody2D player_rb;
+    public Rigidbody2D player_rb;//= GameObject.Find("Player").GetComponent<Rigidbody2D>();
 
-    private float attack_range = 20;
+    private float attack_range = 16.73f;
+    private bool out_bound = false;
 
     // Layer Info
     //private readonly int DEFAULT_LAYER = 0;
@@ -110,7 +112,6 @@ public class Movement : MonoBehaviour
             isPaused = true;
             attack = true;
             animator.Play("tumanba_attack");
-            
         }
     }
 
@@ -123,6 +124,7 @@ public class Movement : MonoBehaviour
     // initialization
     private void Start()
     {
+        player_rb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         live = true;
         animator = gameObject.GetComponent<Animator>();
 
@@ -153,19 +155,40 @@ public class Movement : MonoBehaviour
             Reviving();
             return;
         }
+        
         float x_diff = player_rb.position.x-monster_rb.position.x;
         float y_diff = player_rb.position.y-monster_rb.position.y;
         float distance = (float)Math.Sqrt(x_diff * x_diff + y_diff * y_diff);
-        if(attack && attack_time < 10){
+        print("Manba: "+out_bound+", isPasued: "+monster_rb.position.x +", "+monster_rb.position.y);
+        direction = new Vector2(x_diff / distance, y_diff / distance);
+        movement = direction;
+        
+        // check if out of region
+        if (out_bound)
+        {
+            isPaused = true;
+            animator.Play("tumanba_idle");
+            return;
+        }
+
+        if(distance < 1.2 && !attacking)
+        {
+            attacking = true;
+            isPaused = true;
+            attack = true;
+            animator.Play("tumanba_attack");
+        }
+        if(attack && attack_time < 50){
             attack_time++;
             return;
         }
         else{
+            attacking = false;
             attack = false;
             attack_time = 0;
         }
 
-        if(distance < attack_range) {
+        if(distance < attack_range && !attacking) {
             isPaused = false;
             animator.Play("tumanba_run");
             direction = new Vector2(x_diff / distance, y_diff / distance);
@@ -186,7 +209,20 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector2 next_position = monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+        print("Manba predict: "+next_position.x +", "+next_position.y);
+        if(next_position.x > -44 || next_position.y > -48)
+        {
+            out_bound = true;
+            return;
+        }
         // Movement of Player
+        if(out_bound)
+        {
+            isPaused = false;
+        }
+        out_bound = false;
+        print("SHIIIT");
         if(live && !isPaused){
             monster_rb.MovePosition(monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         }    

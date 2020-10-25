@@ -134,6 +134,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7366407593760890121, guid: 6c45ea25bbbd60241a2a64a362beae56,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7366407593760890122, guid: 6c45ea25bbbd60241a2a64a362beae56,
         type: 3}
       propertyPath: m_Name
@@ -394,6 +399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tumanba
+      objectReference: {fileID: 0}
+    - target: {fileID: 3217073973651065609, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3217073973651065612, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
         type: 3}

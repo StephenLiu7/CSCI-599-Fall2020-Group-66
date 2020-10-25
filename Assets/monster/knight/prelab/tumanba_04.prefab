@@ -1,15 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1183542084245701900
+--- !u!1001 &3912303371642914790
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 993327284888852549, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 993327284891432545, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 993327284891432548, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
         type: 3}
       propertyPath: m_SortingOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 993327284918191222, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 993327286258477588, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 993327286258477589, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
@@ -25,7 +45,17 @@ PrefabInstance:
     - target: {fileID: 3217073973651065608, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
         type: 3}
       propertyPath: m_Name
-      value: tumanba Variant
+      value: tumanba
+      objectReference: {fileID: 0}
+    - target: {fileID: 3217073973651065608, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_TagString
+      value: enemy_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3217073973651065608, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3217073973651065612, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
         type: 3}
@@ -99,13 +129,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3217073973651065650, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
         type: 3}
-      propertyPath: moveSpeed
-      value: 2
+      propertyPath: player_rb
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3217073973651065650, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
         type: 3}
-      propertyPath: player_rb
-      value: 
+      propertyPath: moveSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5d27a0f04e8ad7f3b4862caa54ea20d, type: 3}
