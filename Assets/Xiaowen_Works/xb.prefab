@@ -217,3 +217,5 @@ MonoBehaviour:
   animator: {fileID: 7827237898759470824}
   xiaowen_pill: {fileID: 1859666132695134453, guid: 0840971648e0e814686681e35f0e4546,
     type: 3}
+  bulletadder: {fileID: 2677423866203958561, guid: 3f779253bcaf7434eb4d9d428d0f80ae,
+    type: 3}
