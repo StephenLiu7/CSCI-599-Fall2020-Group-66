@@ -42,41 +42,41 @@ public class XiaowenMonsterMovement : MonoBehaviour
     // Health Bar
     public HealthbarBehavior Healthbar;
     private int MAX_HITS;
+
+    private void potentialBoss()
+    {
+        GameObject cam = GameObject.Find("Main Camera");
+        XiaowenMonsterSpawn mu = cam.GetComponent<XiaowenMonsterSpawn>();
+        mu.MonsterKilledCount++;
+        if (mu.MonsterKilledCount >= 4)
+        {
+            mu.MonsterKilledCount = 0;
+            mu.spawnBoss();
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("player_bullet"))
         {
             Destroy(collision.gameObject);
             attack_remain--;
-            if (attack_remain == 0)
-            {
-                Destroy(gameObject);
-                AnalyticsAPI.BossMonsterDeadCount++;
-            }
-            /*
-            GameObject g = GameObject.Find("Main Camera");
-            g.GetComponent<AnalyticsAPI>().incrementBossMonsterHitCounter();
-            print(g.GetComponent<AnalyticsAPI>().BossMonsterHitCount);*/
             AnalyticsAPI.BossMonsterHitCount_static++;
         }else if (collision.gameObject.CompareTag("player_missile"))
         {
             Destroy(collision.gameObject);
             attack_remain-=2;
-            if (attack_remain == 0)
-            {
-                Destroy(gameObject);
-                AnalyticsAPI.BossMonsterDeadCount++;
-            }
         }
         else if (collision.gameObject.CompareTag("player_sniper"))
         {
             Destroy(collision.gameObject);
             attack_remain -= 4;
-            if (attack_remain == 0)
-            {
-                Destroy(gameObject);
-                AnalyticsAPI.BossMonsterDeadCount++;
-            }
+        }
+
+        if (attack_remain <= 0)
+        {
+            Destroy(gameObject);
+            AnalyticsAPI.BossMonsterDeadCount++;
+            potentialBoss();
         }
         Healthbar.SetHealth(attack_remain, MAX_HITS);
     }
@@ -161,6 +161,12 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
     void Shoot(GameObject bulletPrefab, float force)
     {
+        float monsterX = gameObject.transform.position.x;
+        float monsterY = gameObject.transform.position.y;
+        if (! MonsterUtil.IsCloseToPlayer(monsterX, monsterY))
+        {
+            return;
+        }
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 

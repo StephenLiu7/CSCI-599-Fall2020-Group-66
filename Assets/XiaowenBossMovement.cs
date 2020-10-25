@@ -9,24 +9,26 @@ public class XiaowenBossMovement : MonoBehaviour
     enum Stage { ONE, TWO }
 
     private Stage gameStage;
-    private int maxHealth;
-    private int currHealth;
+    public int maxHealth;
+    public int currHealth;
     public Transform firePoint;
     public GameObject stage1Bullet;
     public GameObject stage2Bullet;
     public Animator animator;
     private float stage1ShootingTimer = 5.0f;
     private float stage2ShootingTimer = 1.0f;
-
+    private bool changedStatus = false;
     private Rigidbody2D player_rb;
     private GameObject player;
 
     public GameObject xiaowen_pill;
     void Start()
     {
+        GameObject cam = GameObject.Find("Main Camera");
+        XiaowenMonsterSpawn mu = cam.GetComponent<XiaowenMonsterSpawn>();
         gameStage = Stage.ONE;
-        maxHealth = 10;
-        currHealth = 10;
+        maxHealth = mu.BossMaxHealth;
+        currHealth = mu.BossMaxHealth;
 
         player = GameObject.FindWithTag("Player");
         player_rb = player.GetComponent<Rigidbody2D>();
@@ -109,16 +111,25 @@ public class XiaowenBossMovement : MonoBehaviour
             AnalyticsAPI.BossMonsterDeadCount++;
             Instantiate(xiaowen_pill, spawnPos, Quaternion.identity);
             
-        }else if (currHealth <= 5)
+        }else if (currHealth <= maxHealth / 2 && !changedStatus)
         {
+            changedStatus = true;
             gameStage = Stage.TWO;
             animator.SetFloat("Speed", 1.0f);
+            gameObject.transform.localScale += new Vector3(1, 1, 0);
         }
 
     }
 
     private void Shoot(GameObject bulletPrefab, float force)
     {
+
+        float monsterX = gameObject.transform.position.x;
+        float monsterY = gameObject.transform.position.y;
+        if (!MonsterUtil.IsCloseToPlayer(monsterX, monsterY))
+        {
+            return;
+        }
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 

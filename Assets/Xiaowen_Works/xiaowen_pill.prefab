@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7132776789428600817}
   - component: {fileID: 2120084444048003650}
   - component: {fileID: 3611442131674136505}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: xiaowen_pill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

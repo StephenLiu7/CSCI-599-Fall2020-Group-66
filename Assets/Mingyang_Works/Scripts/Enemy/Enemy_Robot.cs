@@ -10,7 +10,7 @@ public class Enemy_Robot : MonoBehaviour
     private Transform playerPos;
     private Rigidbody2D rb;
     public float speed = .3f;
-    public float health_remain;
+    public float health_remain = 6;
 
     public Transform bulletPos1, bulletPos2;
     public GameObject bullet;
@@ -33,7 +33,7 @@ public class Enemy_Robot : MonoBehaviour
     }
     void Update()
     {
-        if (Vector2.Distance(transform.position, playerPos.position) > 5f)
+        if (Vector2.Distance(transform.position, playerPos.position) > 7f)
         {
             transform.position = Vector2.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
             isInRange = false;
@@ -55,15 +55,40 @@ public class Enemy_Robot : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("entered collider");
         if (collision.gameObject.CompareTag("player_bullet"))
         {
             Destroy(collision.gameObject);
             AnalyticsAPI.BossMonsterHitCount_static++;
             Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
             health_remain--;
-            if (health_remain == 0)
+            if (health_remain <= 0)
             {
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject);
+                print("died");
+            }
+        }else if (collision.gameObject.CompareTag("player_missile"))
+        {
+            Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
+            health_remain -= 4;
+            if (health_remain <= 0)
+            {
+                AnalyticsAPI.BossMonsterDeadCount++;
+                Destroy(gameObject);
+                print("died");
+            }
+        }
+        else if (collision.gameObject.CompareTag("player_sniper"))
+        {
+            Destroy(collision.gameObject);
+            AnalyticsAPI.BossMonsterHitCount_static++;
+            Debug.Log(AnalyticsAPI.BossMonsterHitCount_static);
+            health_remain -= 3;
+            if (health_remain <= 0)
+            {
+                AnalyticsAPI.BossMonsterDeadCount++;
                 Destroy(gameObject);
                 print("died");
             }
@@ -79,9 +104,7 @@ public class Enemy_Robot : MonoBehaviour
         if (isInRange)
             Instantiate(bullet, bulletPos1.position, transform.rotation);
             yield return new WaitForSeconds(0.3f);
-        if (isInRange)
-            Instantiate(bullet, bulletPos2.position, transform.rotation);
-            yield return new WaitForSeconds(0.3f);
+
         
             StartCoroutine(Shoot());
             yield return new WaitForSeconds(0.3f);
