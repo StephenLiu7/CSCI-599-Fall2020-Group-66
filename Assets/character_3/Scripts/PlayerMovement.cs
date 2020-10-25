@@ -244,14 +244,14 @@ public class PlayerMovement : MonoBehaviour
             For PC
             */
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.Log(hit.collider.gameObject.name);
-            }
-            /*if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+            }*/
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
             {
                 if (Time.time - lastClickTime >= wait_time || Time.time == lastClickTime)
                 {
@@ -259,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
                     lastClickTime = Time.time;
                 }
 
-            }*/
+            }
 
 
 
@@ -289,11 +289,11 @@ public class PlayerMovement : MonoBehaviour
     // Below is Gun & Shooting
     private void FollowMouseRotate()
     {
-        //Vector3 mouse = Input.mousePosition;                                                      // this only for PC
-        Vector3 mouse = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
+        Vector3 mouse = Input.mousePosition;                                                      // this only for PC
+        //Vector3 mouse = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);  // For mobile
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
-        //Vector3 direction = obj - mouse;                                                          // this only for PC
-        Vector3 direction = mouse;
+        Vector3 direction = obj - mouse;                                                          // this only for PC
+        //Vector3 direction = mouse;                                                              // For mobile
         Vector3 theScale = cur_gun.localScale;
         if (facing == 1.0f)     // we have a flip
         {
@@ -306,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
             }
             cur_gun.localScale = theScale;
 
-            //direction = mouse - obj;                                                              // this only for PC
+            direction = mouse - obj;                                                              // this only for PC
             direction = mouse;
         }
         else if (facing == -1.0f)     // we have a flip
@@ -319,7 +319,7 @@ public class PlayerMovement : MonoBehaviour
                 cur_gun.Translate(diff, Space.World);
             }
             cur_gun.localScale = theScale;
-            //direction = obj - mouse;                                                              // this only for PC
+            direction = obj - mouse;                                                              // this only for PC
             direction = -mouse;
             // space world == absolute axis    Didn't change with object rotate
         }
@@ -339,14 +339,14 @@ public class PlayerMovement : MonoBehaviour
     {
         //if (Input.GetMouseButtonDown(0)) //|| Input.GetMouseButton(0))
         //{
-        /* PC code
-         * 
-         * Vector3 bulletDirection = Input.mousePosition;
+         //PC code
+          
+        Vector3 bulletDirection = Input.mousePosition;
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
         Vector3 direction = bulletDirection - obj;
-         */
+         
 
-        Vector3 direction = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
+        //Vector3 direction = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);        //For mobile
         direction.Normalize();
 
         int shooting_speed = 0;
