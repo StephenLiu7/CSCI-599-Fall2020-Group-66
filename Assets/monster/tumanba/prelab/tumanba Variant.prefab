@@ -27,6 +27,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tumanba Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3217073973651065608, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_TagString
+      value: enemy_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3217073973651065608, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3217073973651065612, guid: f5d27a0f04e8ad7f3b4862caa54ea20d,
         type: 3}
       propertyPath: m_LocalPosition.x
