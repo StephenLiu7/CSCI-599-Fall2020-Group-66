@@ -771,8 +771,8 @@ MonoBehaviour:
   m_text: 'Game Instruction:
 
     Player will shoot when right joystick drag to the
-    edge and release, movement control by left joystick, click the item on the bottom
-    to restore health, click cycle button will switch current weapon.'
+    edge, movement control by left joystick, click the item on the bottom to restore
+    health, click cycle button will switch current weapon.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 21.5
+  m_fontSize: 22.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -841,12 +841,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1192159054}
-    characterCount: 215
+    characterCount: 203
     spriteCount: 0
-    spaceCount: 34
-    wordCount: 35
+    spaceCount: 32
+    wordCount: 33
     linkCount: 0
-    lineCount: 10
+    lineCount: 9
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

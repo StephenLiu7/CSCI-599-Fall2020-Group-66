@@ -209,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
                 ui_control.switch_weapon_icon();
                 if (cur_bullet != handgun_bullet)
                 {
-                    wait_time = 0.7;
+                    wait_time = 0.5;
                     if (secondary_weapon == "sniper")
                     { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
                     else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
@@ -301,7 +301,7 @@ public class PlayerMovement : MonoBehaviour
             ui_control.switch_weapon_icon();
             if (cur_bullet != handgun_bullet)
             {
-                wait_time = 0.1;
+                wait_time = 0.5;
                 if (secondary_weapon == "sniper")
                 { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
                 else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
@@ -311,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (secondary_weapon == "sniper")
             {
-                wait_time = 1.0;
+                wait_time = 1.2;
                 handgun.gameObject.GetComponent<Renderer>().enabled = false;
                 sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
                 cur_bullet = sniper;
