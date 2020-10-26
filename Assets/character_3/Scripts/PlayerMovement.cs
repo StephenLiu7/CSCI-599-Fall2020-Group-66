@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         (float, float)[] positions = { (-100.0f, 50.0f), (-49.0f, 113.0f), (104.0f, 5.0f), (-87.3f, -94.8f) };
         (float, float) randPos = positions[Random.Range(0, positions.Length)];
         gameObject.transform.position = new Vector3(randPos.Item1, randPos.Item2, 0);
-
+        maxHealth = 100;
         currentHealth = maxHealth; // set initial health
         healthBar.SetMaxHealth(maxHealth);
         player_dead = false;
@@ -130,14 +130,14 @@ public class PlayerMovement : MonoBehaviour
         player_moves.x = player_joystick.Horizontal;
         player_moves.y = player_joystick.Vertical;
 
-
+        Debug.Log("Player Move: " + player_moves);
 
         weapon_moves.x = weapon_joystick.Horizontal;
         weapon_moves.y = weapon_joystick.Vertical;
 
 
         // *********test for health bar ********
-
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentHealth -= 20;
@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
                 hpAmount += 1;
             }
         }
-
+        */
         //****************************************
 
         // =====================================================Character & shooting script =================================================================
@@ -178,11 +178,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (movement.x > 0.001f || player_moves.x > 0.001f)
         {
+            
             facing = 1.0f;
         }
         else if (movement.x < -0.001f || player_moves.x < -0.001f)
         {
             facing = -1.0f;
+        }
+
+        if (weapon_moves.x > 0.001f)
+        {
+
+            facing = 1.0f;
+
+        }
+        if(weapon_moves.x < -0.001f){
+
+            facing = -1.0f;
+
         }
 
         animator.SetFloat("Horizontal", facing);
