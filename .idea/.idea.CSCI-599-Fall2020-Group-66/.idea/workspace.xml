@@ -20,7 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ee21651-04c8-4656-826e-5261fad67fa9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/package_potions_512x.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MagicpotionsFree.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/package_potions_512x/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/package_potions_512x/potion_icons_256x.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/package_potions_512x/potion_icons_512x.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +99,7 @@
       <workItem from="1602812203742" duration="41000" />
       <workItem from="1602812283726" duration="6657000" />
       <workItem from="1602835361286" duration="1326000" />
-      <workItem from="1603001889526" duration="4620000" />
+      <workItem from="1603001889526" duration="5760000" />
     </task>
     <servers />
   </component>

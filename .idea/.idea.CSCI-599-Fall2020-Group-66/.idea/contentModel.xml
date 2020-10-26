@@ -16,6 +16,7 @@
           </e>
         </e>
         <e p="eater.cs" t="Include" />
+        <e p="EatingBullet.cs" t="Include" />
         <e p="EndMenu.cs" t="Include" />
         <e p="FirepointRotation.cs" t="Include" />
         <e p="HealthBar.cs" t="Include" />
@@ -75,6 +76,7 @@
             <e p="Script" t="Include">
               <e p="Health.cs" t="Include" />
               <e p="Movement.cs" t="Include" />
+              <e p="TumanbaSpawn.cs" t="Include" />
             </e>
           </e>
         </e>
