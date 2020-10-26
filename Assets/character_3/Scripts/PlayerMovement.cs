@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         secondary_weapon = "";
         InvokeRepeating("circleDamage", 0.0f, 2.0f);
         survivalTimes = 0;
-       
+        lastClickTime = 0;
     }
     //==============================================items===================================================================================================\
 
