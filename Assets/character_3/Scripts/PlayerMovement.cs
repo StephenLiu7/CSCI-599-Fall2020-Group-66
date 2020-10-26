@@ -39,8 +39,9 @@ public class PlayerMovement : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
     public bool player_dead;
-
-
+    public int lostbytoxic = 0;
+    public int lostbymonster = 0;
+    public int item_used = 0;
     // =================================================================================================================================================
 
     //============================================= initial Gun & shooting part  =======================================================================
@@ -505,6 +506,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 reported = true;
                 float times = Time.fixedTime;
+                survivalTimes = Time.fixedTime;
                 Analytics.CustomEvent("char", new Dictionary<string, object>
                 {
                     //{ "total bullets", ana_bullet_counting },
@@ -512,7 +514,9 @@ public class PlayerMovement : MonoBehaviour
                     //{ "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
                     //{ "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
                     //{ "most use weapon",  most_use},
-                    { "Survival Time", survivalTimes }
+                    { "Survival Time", survivalTimes },
+                    { "Health lost by toxic gas", lostbytoxic },
+                    { "Health lost by monster", lostbymonster}
                 });
                 Analytics.CustomEvent("weapon", new Dictionary<string, object>
                 {
@@ -544,6 +548,7 @@ public class PlayerMovement : MonoBehaviour
         if (DamageCircle.IsOutsideCircle_Static(GameObject.Find("Player").transform.position))
         {
             currentHealth -= 10;
+            lostbytoxic += 10;
             healthBar.SetHealth(currentHealth);
             if (facing == 1.0f)
             {
@@ -632,6 +637,7 @@ public class PlayerMovement : MonoBehaviour
          || other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("enemy_1") || other.gameObject.CompareTag("enemy_bullet_1"))
         {
             TakeDamage(10);
+            lostbymonster += 10;
             healthBar.SetHealth(currentHealth);
         }
 
