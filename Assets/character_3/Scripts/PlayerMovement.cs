@@ -662,6 +662,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
+        if (other.gameObject.CompareTag("item_heal"))
+        {
+            Destroy(gameObject);
+           
+            currentHealth += 50;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            healthBar.SetHealth(currentHealth);
+            
+
+        }
+
+
     }
 
 

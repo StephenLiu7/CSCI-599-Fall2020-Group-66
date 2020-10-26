@@ -16,6 +16,7 @@ TagManager:
   - item_hp
   - player_sniper
   - sniper_gun
+  - item_heal
   layers:
   - Default
   - TransparentFX
