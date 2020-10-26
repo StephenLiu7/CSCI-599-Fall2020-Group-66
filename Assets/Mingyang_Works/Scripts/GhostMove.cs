@@ -44,7 +44,7 @@ public class GhostMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //print("entered collider: "+collision.gameObject.tag);
+        //print("entered collider: "+ collision.gameObject.tag);
 
         if (collision.gameObject.CompareTag("player_bullet"))
         {

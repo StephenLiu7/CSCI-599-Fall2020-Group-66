@@ -102,10 +102,6 @@ public class EnemyMove : MonoBehaviour
             {
 
                 live = false;
-
-
-
-                
                 animator.Play("dead");
                 AnalyticsAPI.BossMonsterDeadCount++;
                 Destroy(gameObject);

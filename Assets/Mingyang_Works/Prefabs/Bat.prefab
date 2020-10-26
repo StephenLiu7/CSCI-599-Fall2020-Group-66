@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2234368181494566451}
   m_Layer: 0
   m_Name: Bat
-  m_TagString: Untagged
+  m_TagString: enemy_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5da624e41203c748b267b4ed50f04b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   animator: {fileID: 3808826091049877632}
   monster_rb: {fileID: 3808826091049877634}
   player_rb: {fileID: 0}
