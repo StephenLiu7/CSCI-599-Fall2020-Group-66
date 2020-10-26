@@ -59,7 +59,7 @@ public class ZombieMove : MonoBehaviour
                 Destroy(gameObject, 1f);
                 Vector2 spawnPos = gameObject.transform.position;
 
-                if (UnityEngine.Random.Range(0, 4) > 2)
+                if (UnityEngine.Random.Range(0, 4) > 1)
                     Instantiate(drop, spawnPos, Quaternion.identity);
 
             }
@@ -82,7 +82,7 @@ public class ZombieMove : MonoBehaviour
                 Destroy(gameObject, 1f);
                 Vector2 spawnPos = gameObject.transform.position;
 
-                if (UnityEngine.Random.Range(0, 4) > 2)
+                if (UnityEngine.Random.Range(0, 4) > 1)
                     Instantiate(drop, spawnPos, Quaternion.identity);
 
             }
@@ -105,7 +105,7 @@ public class ZombieMove : MonoBehaviour
                 Destroy(gameObject, 1f);
                 Vector2 spawnPos = gameObject.transform.position;
 
-                if (UnityEngine.Random.Range(0, 4) > 2)
+                if (UnityEngine.Random.Range(0, 4) > 1)
                     Instantiate(drop, spawnPos, Quaternion.identity);
 
             }
