@@ -593,6 +593,9 @@ public class PlayerMovement : MonoBehaviour
             //if (cur_gun == sniper_gun)
             //{
             wait_time = 2.3;
+            if (cur_gun == missile_gun)
+            { bullet_array[1] += 6; }
+            else { bullet_array[1] = 6; }
             sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
             handgun.gameObject.GetComponent<Renderer>().enabled = false;
             missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
@@ -601,9 +604,7 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "missile";
             ui_control.get_new_weapon(1);
-            if (cur_gun == missile_gun)
-            { bullet_array[1] += 15; }
-            else { bullet_array[1] = 15; }
+            
             //bullet_array[1] += 6;
         }
         if (other.gameObject.CompareTag("sniper_gun"))
@@ -613,6 +614,9 @@ public class PlayerMovement : MonoBehaviour
             //if (cur_gun == missile_gun)
             //{
             wait_time = 1.2;
+            if (cur_gun == sniper_gun)
+            { bullet_array[2] += 15; }
+            else { bullet_array[2] = 15; }
             handgun.gameObject.GetComponent<Renderer>().enabled = false;
             sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
             missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
@@ -621,9 +625,7 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "sniper";
             ui_control.get_new_weapon(2);
-            if(cur_gun == sniper_gun)
-            { bullet_array[2] += 15; }
-            else { bullet_array[2] = 15; }
+            
         }
 
         if (other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("paused_bullet")
