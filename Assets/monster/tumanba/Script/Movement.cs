@@ -88,7 +88,7 @@ public class Movement : MonoBehaviour
             {
                 TakeDamage(1);
             }
-            if (currentHealth < 0)
+            if (currentHealth <= 0)
             {
                 if (revive)
                 {
@@ -100,6 +100,12 @@ public class Movement : MonoBehaviour
                     animator.Play("dead");
                     AnalyticsAPI.BossMonsterDeadCount++;
                     Destroy(gameObject, 1f);
+                    /*
+                    GameObject reward = GameObject.Find("xiaowen_pill");
+                    Transform loc = reward.transform;
+                    loc.position = monster_rb.position;
+                    Instantiate(reward, loc);
+                    */
                 }
             }
             else if(!attack)
@@ -159,7 +165,6 @@ public class Movement : MonoBehaviour
         float x_diff = player_rb.position.x-monster_rb.position.x;
         float y_diff = player_rb.position.y-monster_rb.position.y;
         float distance = (float)Math.Sqrt(x_diff * x_diff + y_diff * y_diff);
-        print("Manba: "+out_bound+", isPasued: "+monster_rb.position.x +", "+monster_rb.position.y);
         direction = new Vector2(x_diff / distance, y_diff / distance);
         movement = direction;
         
@@ -210,8 +215,7 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 next_position = monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        print("Manba predict: "+next_position.x +", "+next_position.y);
-        if(next_position.x > -44 || next_position.y > -48)
+        if(next_position.x > 0 || next_position.y > -48)
         {
             out_bound = true;
             return;
@@ -222,7 +226,6 @@ public class Movement : MonoBehaviour
             isPaused = false;
         }
         out_bound = false;
-        print("SHIIIT");
         if(live && !isPaused){
             monster_rb.MovePosition(monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         }    

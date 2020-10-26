@@ -225,7 +225,7 @@ public class knight_movement : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 next_position = monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        if(next_position.x > -44 || next_position.y > -50)
+        if(next_position.x > 0 || next_position.y > -50)
         {
             out_bound = true;
             return;
