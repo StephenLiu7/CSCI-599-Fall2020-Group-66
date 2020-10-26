@@ -269,8 +269,9 @@ public class PlayerMovement : MonoBehaviour
 
 
             detectingShooting();
-
-
+           
+            cancelShooting();
+            Debug.Log("Horizontal: " + weapon_joystick.Horizontal);
         }
 
         // =================================================================================================================================================
@@ -300,7 +301,7 @@ public class PlayerMovement : MonoBehaviour
             ui_control.switch_weapon_icon();
             if (cur_bullet != handgun_bullet)
             {
-                wait_time = 0.7;
+                wait_time = 0.1;
                 if (secondary_weapon == "sniper")
                 { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
                 else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
@@ -310,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (secondary_weapon == "sniper")
             {
-                wait_time = 1.2;
+                wait_time = 1.0;
                 handgun.gameObject.GetComponent<Renderer>().enabled = false;
                 sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
                 cur_bullet = sniper;
@@ -318,7 +319,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (secondary_weapon == "missile")
             {
-                wait_time = 2.3;
+                wait_time = 2.0;
                 missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
                 handgun.gameObject.GetComponent<Renderer>().enabled = false;
                 cur_bullet = missile;
@@ -336,13 +337,11 @@ public class PlayerMovement : MonoBehaviour
     // Detecting shooting inputs
     private void detectingShooting()
     {
-        if (weapon_joystick.Horizontal > 0.5 || weapon_joystick.Horizontal < -0.5 || weapon_joystick.Vertical > 0.5 || weapon_joystick.Vertical < -0.5)
+        if (weapon_joystick.Horizontal >= 0.8 || weapon_joystick.Horizontal <= -0.8 || weapon_joystick.Vertical >= 0.8 || weapon_joystick.Vertical <= -0.8)
         {
             weapon_fire = true;
+            
         }
-
-
-       
 
         if (weapon_moves.magnitude > 0)
         {
@@ -351,12 +350,32 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (!weapon_joystick_background.gameObject.activeSelf && weapon_fire)
+        if (weapon_joystick_background.gameObject.activeSelf && weapon_fire)
         {
-            Shooting(direction);
+            
+            if (Time.time - lastClickTime >= wait_time || Time.time == lastClickTime)
+            {
+                Shooting(direction);
+                lastClickTime = Time.time;
+            }
+
+        }
+
+
+        
+    }
+
+    private void cancelShooting()
+    {
+
+        if (weapon_joystick.Horizontal < 0.8 || weapon_joystick.Horizontal > -0.8 && weapon_joystick.Vertical < 0.8 && weapon_joystick.Vertical > -0.8)
+        {
             weapon_fire = false;
         }
+
+
     }
+
 
 
     // Below is Gun & Shooting
@@ -449,7 +468,7 @@ public class PlayerMovement : MonoBehaviour
             Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = direction * shooting_speed;
             bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-            Destroy(bullet.gameObject, 10.0f);
+            Destroy(bullet.gameObject, 1.5f);
             ana_bullet_counting += 1;
         }
         //}
