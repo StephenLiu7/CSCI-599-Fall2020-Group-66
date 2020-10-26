@@ -100,12 +100,11 @@ public class Movement : MonoBehaviour
                     animator.Play("dead");
                     AnalyticsAPI.BossMonsterDeadCount++;
                     Destroy(gameObject, 1f);
-                    /*
+                    
                     GameObject reward = GameObject.Find("xiaowen_pill");
-                    Transform loc = reward.transform;
-                    loc.position = monster_rb.position;
-                    Instantiate(reward, loc);
-                    */
+                    Vector2 rewardPos = gameObject.transform.position;
+                    Instantiate(reward, rewardPos, Quaternion.identity);
+                    
                 }
             }
             else if(!attack)
