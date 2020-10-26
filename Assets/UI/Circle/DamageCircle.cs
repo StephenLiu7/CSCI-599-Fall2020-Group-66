@@ -43,7 +43,7 @@ public class DamageCircle : MonoBehaviour
     {
         instance = this;
 
-        circleShrinkSpeed = 10f;
+        circleShrinkSpeed = 5f;
 
         circleTransform = transform.Find("circle");
         topTransform = transform.Find("top");
@@ -53,7 +53,7 @@ public class DamageCircle : MonoBehaviour
 
         SetCircleSize(new Vector3(0, 0), new Vector3(initialCircleSize, initialCircleSize));
 
-        SetTargetCircle(new Vector3(0, 0), new Vector3(initialTargetCircleSize, initialTargetCircleSize), 2f);
+        SetTargetCircle(new Vector3(0, 0), new Vector3(initialTargetCircleSize, initialTargetCircleSize), 60f);
     }
 
     private void Update()
@@ -127,7 +127,7 @@ public class DamageCircle : MonoBehaviour
 
         //circlePosition +  new Vector3(Random.Range(-shrinkSizeAmount, shrinkSizeAmount), Random.Range(-shrinkSizeAmount, shrinkSizeAmount));
 
-        float shrinkTime = 5f; //Random.Range(10f, 20f);
+        float shrinkTime = 30f; //Random.Range(10f, 20f);
 
         SetTargetCircle(generatedTargetCirclePosition, generatedTargetCircleSize, shrinkTime);
     }

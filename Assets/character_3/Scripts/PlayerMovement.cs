@@ -16,9 +16,12 @@ public class PlayerMovement : MonoBehaviour
     //public Rigidbody2D player_joy;
     Vector2 player_moves;
     Vector2 weapon_moves;
-    public Joystick player_joystick;
-    public Joystick weapon_joystick;
+    public FloatingJoystick player_joystick;
 
+    public FloatingJoystick weapon_joystick;
+    public RectTransform weapon_joystick_background;
+    private bool weapon_fire = false;
+    private Vector3 direction;
     //================================================================================================================================================
 
 
@@ -57,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
     float lastClickTime;
     public float proTime = 0.0f;
     public float NextTime = 0.0f;
+
+    public int hpAmount = 1;
     /*struct gun
     {
         int bullet;
@@ -75,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     public int[] bullet_array = new int[] { 300, 6, 15 };      // handgun , missile , sniper
     public int[] weapon_using_time = new int[] { 0, 0, 0 };
-    public string secondary_weapon = "";
+    string secondary_weapon = "";
     int ana_bullet_counting = 0;
     //bool LOR = false;       // initial facing right
     bool reported = false;
@@ -90,11 +95,9 @@ public class PlayerMovement : MonoBehaviour
         InvokeRepeating("circleDamage", 0.0f, 2.0f);
         survivalTimes = 0;
 
-
     }
-
     //==============================================items===================================================================================================\
-    public int hpAmount = 1;
+
 
 
 
@@ -154,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             movement.y = Input.GetAxisRaw("Vertical");
             movement.z = 0.0f;
         }
-       
+
         /*
         if((movement.x ==0 && movement.y == 0) && moveDirec.x != 0 || moveDirec.y !=0)
         {
@@ -182,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Magnitude", movement.magnitude);
 
         }
-        
+
         animator.SetFloat("LastHori", facing);
         // =================================================================================================================================================
 
@@ -244,24 +247,20 @@ public class PlayerMovement : MonoBehaviour
             For PC
             */
 
-            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            /*
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.Log(hit.collider.gameObject.name);
-            }*/
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
-            {
-                if (Time.time - lastClickTime >= wait_time || Time.time == lastClickTime)
-                {
-                    Shooting();
-                    lastClickTime = Time.time;
-                }
-
             }
+            */
+
+            //if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
 
 
+            detectingShooting();
 
 
         }
@@ -285,15 +284,81 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    
+    public void switch_weapon()
+    {
+        if (secondary_weapon.Length > 0)
+        {
+            ui_control.switch_weapon_icon();
+            if (cur_bullet != handgun_bullet)
+            {
+                wait_time = 0.7;
+                if (secondary_weapon == "sniper")
+                { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
+                else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
+                handgun.gameObject.GetComponent<Renderer>().enabled = true;
+                cur_bullet = handgun_bullet;
+                cur_gun = handgun;
+            }
+            else if (secondary_weapon == "sniper")
+            {
+                wait_time = 1.2;
+                handgun.gameObject.GetComponent<Renderer>().enabled = false;
+                sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
+                cur_bullet = sniper;
+                cur_gun = sniper_gun;
+            }
+            else if (secondary_weapon == "missile")
+            {
+                wait_time = 2.3;
+                missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
+                handgun.gameObject.GetComponent<Renderer>().enabled = false;
+                cur_bullet = missile;
+                cur_gun = missile_gun;
+            }
+
+        }
+    }
+
+
+
+
+
     // =============================================================== Shooting function ===================================================================
+    // Detecting shooting inputs
+    private void detectingShooting()
+    {
+        if (weapon_joystick.Horizontal > 0.5 || weapon_joystick.Horizontal < -0.5 || weapon_joystick.Vertical > 0.5 || weapon_joystick.Vertical < -0.5)
+        {
+            weapon_fire = true;
+        }
+
+
+       
+
+        if (weapon_moves.magnitude > 0)
+        {
+            direction = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
+            direction.Normalize();
+        }
+
+
+        if (!weapon_joystick_background.gameObject.activeSelf && weapon_fire)
+        {
+            Shooting(direction);
+            weapon_fire = false;
+        }
+    }
+
+
     // Below is Gun & Shooting
     private void FollowMouseRotate()
     {
-        Vector3 mouse = Input.mousePosition;                                                      // this only for PC
-        //Vector3 mouse = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);  // For mobile
+        //Vector3 mouse = Input.mousePosition;                                                      // this only for PC
+        Vector3 mouse = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
-        Vector3 direction = obj - mouse;                                                          // this only for PC
-        //Vector3 direction = mouse;                                                              // For mobile
+        //Vector3 direction = obj - mouse;                                                          // this only for PC
+        Vector3 direction = mouse;
         Vector3 theScale = cur_gun.localScale;
         if (facing == 1.0f)     // we have a flip
         {
@@ -306,7 +371,7 @@ public class PlayerMovement : MonoBehaviour
             }
             cur_gun.localScale = theScale;
 
-            direction = mouse - obj;                                                              // this only for PC
+            //direction = mouse - obj;                                                              // this only for PC
             direction = mouse;
         }
         else if (facing == -1.0f)     // we have a flip
@@ -319,7 +384,7 @@ public class PlayerMovement : MonoBehaviour
                 cur_gun.Translate(diff, Space.World);
             }
             cur_gun.localScale = theScale;
-            direction = obj - mouse;                                                              // this only for PC
+            //direction = obj - mouse;                                                              // this only for PC
             direction = -mouse;
             // space world == absolute axis    Didn't change with object rotate
         }
@@ -335,39 +400,38 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Shooting()
+    private void Shooting(Vector3 direction)
     {
         //if (Input.GetMouseButtonDown(0)) //|| Input.GetMouseButton(0))
         //{
-         //PC code
-          
-        Vector3 bulletDirection = Input.mousePosition;
+        /* PC code
+         * 
+         * Vector3 bulletDirection = Input.mousePosition;
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
         Vector3 direction = bulletDirection - obj;
-         
+         */
 
-        //Vector3 direction = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);        //For mobile
-        direction.Normalize();
+
 
         int shooting_speed = 0;
         bool Shoot_or_not = false;
         if (cur_bullet == missile && bullet_array[1] > 0)
         {
-            shooting_speed = 9;
+            shooting_speed = 60;
             Shoot_or_not = true;
             bullet_array[1] -= 1;
             weapon_using_time[1] += 1;
         }
         else if (cur_bullet == handgun_bullet && bullet_array[0] > 0)
         {
-            shooting_speed = 6;
+            shooting_speed = 80;
             bullet_array[0] -= 1;
             Shoot_or_not = true;
             weapon_using_time[0] += 1;
         }
         else if (cur_bullet == sniper && bullet_array[2] > 0)
         {
-            shooting_speed = 15;
+            shooting_speed = 100;
             bullet_array[2] -= 1;
             Shoot_or_not = true;
             weapon_using_time[2] += 1;

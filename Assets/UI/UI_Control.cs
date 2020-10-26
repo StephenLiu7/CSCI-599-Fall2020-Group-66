@@ -49,15 +49,24 @@ public class UI_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Ability_1();
+        //==============UI Health Potion Image Fill===========================================
+        if (isCooldown)
+        {
+            abilityImage1.fillAmount += 1 / cooldown1 * Time.deltaTime;
+            if (abilityImage1.fillAmount >= 1)
+            {
+                abilityImage1.fillAmount = 1;
+                isCooldown = false;
+            }
+        }
+        //=====================================================================================
         update_bullets();
 
     }
 
-    void Ability_1()
+    public void drinkPotion()
     {
-        if (Input.GetKey(ability1) && isCooldown == false && playerScript.hpAmount >= 1 && playerScript.player_dead == false)
+        if (isCooldown == false && playerScript.hpAmount >= 1 && playerScript.player_dead == false)
         {
             isCooldown = true;
             abilityImage1.fillAmount = 0;
@@ -70,18 +79,16 @@ public class UI_Control : MonoBehaviour
             playerScript.hpAmount -= 1;
             
         }
-        if (isCooldown)
-        {
-            abilityImage1.fillAmount += 1 / cooldown1 * Time.deltaTime;
-            if (abilityImage1.fillAmount >= 1)
-            {
-                abilityImage1.fillAmount = 1;
-                isCooldown = false;
-            }
-        }
+       
 
         hp_counter.text = playerScript.hpAmount.ToString();
     }
+
+
+
+
+
+
 
     public void get_new_weapon(int new_weapon)
     {
@@ -128,4 +135,8 @@ public class UI_Control : MonoBehaviour
         
         
     }
+
+
+    
+
 }
