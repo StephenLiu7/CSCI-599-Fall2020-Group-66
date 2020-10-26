@@ -61,6 +61,7 @@ public class UI_Control : MonoBehaviour
         }
         //=====================================================================================
         update_bullets();
+        hp_counter.text = playerScript.hpAmount.ToString();
 
     }
 
@@ -81,7 +82,7 @@ public class UI_Control : MonoBehaviour
         }
        
 
-        hp_counter.text = playerScript.hpAmount.ToString();
+        
     }
 
 

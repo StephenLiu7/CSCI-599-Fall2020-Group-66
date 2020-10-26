@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5230702378584844390}
   - component: {fileID: 7132776789428600817}
   - component: {fileID: 2120084444048003650}
-  - component: {fileID: 3611442131674136505}
   m_Layer: 12
   m_Name: xiaowen_pill
   m_TagString: Untagged
@@ -131,15 +130,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.45, y: 3.44}
   m_EdgeRadius: 0
---- !u!114 &3611442131674136505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859666132695134453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2483c1390191ef54ab3fc2797936f67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
