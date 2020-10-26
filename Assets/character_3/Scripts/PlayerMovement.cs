@@ -56,13 +56,15 @@ public class PlayerMovement : MonoBehaviour
     public Transform handgun_bullet;
     public Transform sniper;
 
-    float acc = 0;
+    public float acc = 0;
     double wait_time = 0.4;
     float lastClickTime;
     public float proTime = 0.0f;
     public float NextTime = 0.0f;
 
     public int hpAmount = 1;
+
+    
     /*struct gun
     {
         int bullet;
@@ -82,7 +84,8 @@ public class PlayerMovement : MonoBehaviour
     public int[] bullet_array = new int[] { 300, 0, 0 };      // handgun , missile , sniper
     public int[] weapon_using_time = new int[] { 0, 0, 0 };
     string secondary_weapon = "";
-    int ana_bullet_counting = 0;
+    public int ana_bullet_counting = 0;
+    public string most_use = "";
     //bool LOR = false;       // initial facing right
     bool reported = false;
 
@@ -100,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         secondary_weapon = "";
         InvokeRepeating("circleDamage", 0.0f, 2.0f);
         survivalTimes = 0;
-
+       
     }
     //==============================================items===================================================================================================\
 
@@ -498,7 +501,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (ana_bullet_counting > 0)
             { acc = (AnalyticsAPI.BossMonsterHitCount_static * 100) / ana_bullet_counting; }
-            string most_use = "";
+            most_use = "";
 
             if (weapon_using_time[0] >= weapon_using_time[1] && weapon_using_time[0] >= weapon_using_time[2])
             { most_use = "handgun"; }
