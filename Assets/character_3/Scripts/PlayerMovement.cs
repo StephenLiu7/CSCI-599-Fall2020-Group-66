@@ -363,7 +363,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 theScale = cur_gun.localScale;
         if (facing == 1.0f)     // we have a flip
         {
-            Debug.Log(theScale);
+            //Debug.Log(theScale);
             if (theScale.x < 0)
             {
                 theScale.x *= -1;
@@ -377,7 +377,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (facing == -1.0f)     // we have a flip
         {
-            Debug.Log(theScale);
+            //Debug.Log(theScale);
             if (theScale.x > 0)
             {
                 theScale.x *= -1;
@@ -536,10 +536,17 @@ public class PlayerMovement : MonoBehaviour
                     //{ "most use weapon",  most_use},
                     //{ "Survival Time", times }
                 });
+                string s1 = string.Format("Survival Time : {0}, Health lost by toxic gas : {1} , Health lost by monster : {2} , total bullets : {3} , shooting accuracy : {4} , most use weapon : {5} , Monster killed : {6} , Shooting on target : {7}", survivalTimes , lostbytoxic , lostbymonster , ana_bullet_counting , acc , most_use , AnalyticsAPI.BossMonsterDeadCount , AnalyticsAPI.BossMonsterHitCount_static);
+            //    string s2 = string.Format("Health lost by toxic gas{0}", lostbytoxic);
+            //    string s3 = string.Format("Health lost by monster{0}", lostbymonster);
+            //    string s4 = string.Format("total bullets{0}", ana_bullet_counting);
+            //    string s5 = string.Format("shooting accuracy{0}", acc);
+            //    string s6 = string.Format("most use weapon{0}", most_use);
+            //    string s7 = string.Format("Monster killed{0}", AnalyticsAPI.BossMonsterDeadCount);
+            //    string s8 = string.Format("Shooting on target{0}", AnalyticsAPI.BossMonsterHitCount_static);
+                print(s1);
             }
-
         }
-
     }
 
 
