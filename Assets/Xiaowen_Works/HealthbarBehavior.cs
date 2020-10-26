@@ -42,7 +42,7 @@ public class HealthbarBehavior : MonoBehaviour
         Slider.maxValue = maxHealth;
 
         Slider.fillRect.GetComponentInChildren<Image>().color = getColor(health);/*Color.Lerp(Low, High, Slider.normalizedValue);*/
-        print(health + " " + maxHealth);
+        //print(health + " " + maxHealth);
     }
     // Update is called once per frame
     void Update()
