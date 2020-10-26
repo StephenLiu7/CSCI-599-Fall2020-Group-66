@@ -33,7 +33,7 @@ public class DamageCircle : MonoBehaviour
 
     private Vector3 targetCircleSize;
     private Vector3 targetCirclePosition;
-    bool last_circle = false;
+    public static bool last_circle = false;
 
     public float initialCircleSize;
     public float initialTargetCircleSize;
