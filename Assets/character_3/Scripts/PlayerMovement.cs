@@ -417,7 +417,7 @@ public class PlayerMovement : MonoBehaviour
         bool Shoot_or_not = false;
         if (cur_bullet == missile && bullet_array[1] > 0)
         {
-            shooting_speed = 60;
+            shooting_speed = 110;
             Shoot_or_not = true;
             bullet_array[1] -= 1;
             weapon_using_time[1] += 1;
@@ -431,7 +431,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (cur_bullet == sniper && bullet_array[2] > 0)
         {
-            shooting_speed = 100;
+            shooting_speed = 150;
             bullet_array[2] -= 1;
             Shoot_or_not = true;
             weapon_using_time[2] += 1;
