@@ -601,7 +601,10 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "missile";
             ui_control.get_new_weapon(1);
-            bullet_array[1] += 6;
+            if (cur_gun == missile_gun)
+            { bullet_array[1] += 15; }
+            else { bullet_array[1] = 15; }
+            //bullet_array[1] += 6;
         }
         if (other.gameObject.CompareTag("sniper_gun"))
         {
@@ -618,7 +621,9 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "sniper";
             ui_control.get_new_weapon(2);
-            bullet_array[2] += 15;
+            if(cur_gun == sniper_gun)
+            { bullet_array[2] += 15; }
+            else { bullet_array[2] = 15; }
         }
 
         if (other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("paused_bullet")
