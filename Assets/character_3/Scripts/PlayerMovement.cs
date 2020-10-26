@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     Armory[0] = gun(100,handgun,handgun_bullet,"handgun",0.5,11);
     */
 
-    public int[] bullet_array = new int[] { 300, 6, 15 };      // handgun , missile , sniper
+    public int[] bullet_array = new int[] { 300, 0, 0 };      // handgun , missile , sniper
     public int[] weapon_using_time = new int[] { 0, 0, 0 };
     string secondary_weapon = "";
     int ana_bullet_counting = 0;
@@ -601,7 +601,7 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "missile";
             ui_control.get_new_weapon(1);
-            bullet_array[1] = 6;
+            bullet_array[1] += 6;
         }
         if (other.gameObject.CompareTag("sniper_gun"))
         {
@@ -618,7 +618,7 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "sniper";
             ui_control.get_new_weapon(2);
-            bullet_array[2] = 15;
+            bullet_array[2] += 15;
         }
 
         if (other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("paused_bullet")
