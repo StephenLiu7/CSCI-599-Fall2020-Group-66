@@ -184,7 +184,6 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat("Vertical", movement.y);
             animator.SetFloat("Magnitude", movement.magnitude);
-
         }
 
         animator.SetFloat("LastHori", facing);
