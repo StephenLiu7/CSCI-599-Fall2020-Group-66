@@ -28,6 +28,7 @@ public class knight_movement : MonoBehaviour
 
     private float attack_range = 16.73f;
     private bool out_bound = false;
+    private bool drop_weapon = false;
 
     // Layer Info
     //private readonly int DEFAULT_LAYER = 0;
@@ -57,7 +58,7 @@ public class knight_movement : MonoBehaviour
         if (currentHealth < maxHealth/5*3)
         {
             revive_amount++;
-            if (revive_amount / 10 == 1)
+            if (revive_amount / 5 == 1)
             {
                 currentHealth++;
                 revive_amount = 0;
@@ -105,6 +106,13 @@ public class knight_movement : MonoBehaviour
                     animator.Play("Death");
                     AnalyticsAPI.BossMonsterDeadCount++;
                     Destroy(gameObject, 1f);
+
+                    if(!drop_weapon){
+                        GameObject reward = GameObject.Find("sniper_gun");
+                        Vector2 rewardPos = gameObject.transform.position;
+                        Instantiate(reward, rewardPos, Quaternion.identity);
+                        drop_weapon = true;
+                    }
                 }
             }
             else if(!attack)
@@ -186,7 +194,7 @@ public class knight_movement : MonoBehaviour
             return;
         }
 
-        if(distance < 1.7 && !attacking) // distance < 1.7
+        if(distance < 1.5 && !attacking) // distance < 1.7
         {
             attacking = true;
             isPaused = true;

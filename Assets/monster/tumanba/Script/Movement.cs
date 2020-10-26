@@ -53,7 +53,7 @@ public class Movement : MonoBehaviour
         if (currentHealth < maxHealth/5*3)
         {
             revive_amount++;
-            if (revive_amount / 10 == 1)
+            if (revive_amount / 5 == 1)
             {
                 currentHealth++;
                 revive_amount = 0;
@@ -101,10 +101,15 @@ public class Movement : MonoBehaviour
                     AnalyticsAPI.BossMonsterDeadCount++;
                     Destroy(gameObject, 1f);
                     
-                    GameObject reward = GameObject.Find("xiaowen_pill");
+                    GameObject reward = GameObject.Find("ammo"); //xiaowen_pill
                     Vector2 rewardPos = gameObject.transform.position;
                     Instantiate(reward, rewardPos, Quaternion.identity);
-                    
+
+                    /*
+                    GameObject reward = GameObject.Find("ammo");
+                    Vector2 rewardPos = gameObject.transform.position;
+                    Instantiate(reward, rewardPos, Quaternion.identity);
+                    */
                 }
             }
             else if(!attack)
