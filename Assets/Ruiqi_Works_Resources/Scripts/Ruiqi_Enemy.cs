@@ -46,7 +46,9 @@ public class Ruiqi_Enemy : MonoBehaviour
         var dis = (float) Math.Sqrt(xDiff * xDiff + yDiff * yDiff);
         dir = new Vector2(xDiff/dis, yDiff/dis);
         if (Vector2.Distance(transform.position, player.position) > stoppingDistance 
-        && Vector2.Distance(transform.position, player.position) <= maxFollowDistance) {
+        && Vector2.Distance(transform.position, player.position) <= maxFollowDistance
+        && plyPosition.y >= -35 && plyPosition.y <= 48 && plyPosition.x >= -149
+        && plyPosition.x <= -60) {
 
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
             if (dir.x < 0 && !leftward)

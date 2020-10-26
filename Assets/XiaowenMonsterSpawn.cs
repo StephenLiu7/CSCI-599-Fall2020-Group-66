@@ -12,7 +12,7 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     public GameObject xiaowenBossPrefab;
     private (float, float) xRange = (50.1f, 155.7f);
     private (float, float) yRange = (-42.1f, 42.6f);
-
+    private float final_circle_timer = 2.5f;
     public int MonsterKilledCount = 0;
     public int BossMaxHealth = 10;
     void Start()
@@ -37,6 +37,18 @@ public class XiaowenMonsterSpawn : MonoBehaviour
         bool isInRange = (playerX < xRange.Item2 && playerX > xRange.Item1) && (playerY < yRange.Item2 && playerY > yRange.Item1);
         
         spawn_timer -= Time.deltaTime;
+        final_circle_timer -= Time.deltaTime;
+        if (DamageCircle.last_circle)
+        {
+            if (final_circle_timer <= 0.0f)
+            {
+                final_circle_timer = 2.5f;
+                Vector2 randomPos = player_rb.position + new Vector2(Random.value, Random.value).normalized * 3;
+                Instantiate(xiaowenMonsterPrefab, randomPos, Quaternion.identity);
+            }
+            return;
+        }
+
         if (spawn_timer < 0 && isInRange)
         {
             spawn_timer = 6.0f;

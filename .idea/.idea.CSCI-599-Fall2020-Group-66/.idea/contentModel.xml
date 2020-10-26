@@ -16,11 +16,38 @@
           </e>
         </e>
         <e p="eater.cs" t="Include" />
+        <e p="EatingBullet.cs" t="Include" />
+        <e p="EndMenu.cs" t="Include" />
         <e p="FirepointRotation.cs" t="Include" />
         <e p="HealthBar.cs" t="Include" />
+        <e p="Joystick Pack" t="Include">
+          <e p="Examples" t="Include">
+            <e p="JoystickPlayerExample.cs" t="Include" />
+            <e p="JoystickSetterExample.cs" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="Base" t="Include">
+              <e p="Joystick.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="DynamicJoystickEditor.cs" t="Include" />
+              <e p="FloatingJoystickEditor.cs" t="Include" />
+              <e p="JoystickEditor.cs" t="Include" />
+              <e p="VariableJoystickEditor.cs" t="Include" />
+            </e>
+            <e p="Joysticks" t="Include">
+              <e p="DynamicJoystick.cs" t="Include" />
+              <e p="FixedJoystick.cs" t="Include" />
+              <e p="FloatingJoystick.cs" t="Include" />
+              <e p="VariableJoystick.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="LayerCollisionSetting.cs" t="Include" />
+        <e p="mainMenu.cs" t="Include" />
         <e p="Mingyang_Works" t="Include">
           <e p="Scripts" t="Include">
+            <e p="BatMove.cs" t="Include" />
             <e p="BossMove.cs" t="Include" />
             <e p="Enemy" t="Include">
               <e p="Enemy_Robot.cs" t="Include" />
@@ -49,9 +76,11 @@
             <e p="Script" t="Include">
               <e p="Health.cs" t="Include" />
               <e p="Movement.cs" t="Include" />
+              <e p="TumanbaSpawn.cs" t="Include" />
             </e>
           </e>
         </e>
+        <e p="MonsterUtil.cs" t="Include" />
         <e p="Navigation2D" t="Include">
           <e p="Editor" t="Include">
             <e p="Navigation2D.cs" t="Include" />
@@ -85,6 +114,34 @@
             <e p="Ruiqi_Hornet.cs" t="Include" />
             <e p="Ruiqi_Hornet_Bullet.cs" t="Include" />
             <e p="Ruiqi_Hornet_Health.cs" t="Include" />
+          </e>
+        </e>
+        <e p="TextMesh Pro" t="Include">
+          <e p="Fonts" t="Include">
+            <e p="LiberationSans - OFL.txt" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
+            </e>
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
         <e p="Troll Bridge Studios" t="Include">
@@ -299,6 +356,9 @@
           </e>
         </e>
         <e p="UI" t="Include">
+          <e p="Circle" t="Include">
+            <e p="DamageCircle.cs" t="Include" />
+          </e>
           <e p="UI_Control.cs" t="Include" />
         </e>
         <e p="uMMORPG" t="Include">
@@ -315,6 +375,8 @@
         <e p="Weiyi_Works" t="Include">
           <e p="Scripts" t="Include">
             <e p="Monster_Spawer.cs" t="Include" />
+            <e p="SkeletonMove.cs" t="Include" />
+            <e p="ZombieMove.cs" t="Include" />
           </e>
           <e p="Sprites" t="Include">
             <e p="FX" t="Include">
@@ -335,6 +397,12 @@
         </e>
         <e p="XiaowenBossMovement.cs" t="Include" />
         <e p="XiaowenMonsterSpawn.cs" t="Include" />
+        <e p="Yaqi_Works" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="EnemyPinkman.cs" t="Include" />
+            <e p="WeaponSaw.cs" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="CSCI-599-Fall2020-Group-66.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

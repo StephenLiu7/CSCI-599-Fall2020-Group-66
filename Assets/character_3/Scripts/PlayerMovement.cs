@@ -16,9 +16,12 @@ public class PlayerMovement : MonoBehaviour
     //public Rigidbody2D player_joy;
     Vector2 player_moves;
     Vector2 weapon_moves;
-    public Joystick player_joystick;
-    public Joystick weapon_joystick;
+    public FloatingJoystick player_joystick;
 
+    public FloatingJoystick weapon_joystick;
+    public RectTransform weapon_joystick_background;
+    private bool weapon_fire = false;
+    private Vector3 direction;
     //================================================================================================================================================
 
 
@@ -36,8 +39,9 @@ public class PlayerMovement : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
     public bool player_dead;
-
-
+    public int lostbytoxic = 0;
+    public int lostbymonster = 0;
+    public int item_used = 0;
     // =================================================================================================================================================
 
     //============================================= initial Gun & shooting part  =======================================================================
@@ -57,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
     float lastClickTime;
     public float proTime = 0.0f;
     public float NextTime = 0.0f;
+
+    public int hpAmount = 1;
     /*struct gun
     {
         int bullet;
@@ -73,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
     Armory[0] = gun(100,handgun,handgun_bullet,"handgun",0.5,11);
     */
 
-    public int[] bullet_array = new int[] { 300, 6, 15 };      // handgun , missile , sniper
+    public int[] bullet_array = new int[] { 300, 0, 0 };      // handgun , missile , sniper
     public int[] weapon_using_time = new int[] { 0, 0, 0 };
     string secondary_weapon = "";
     int ana_bullet_counting = 0;
@@ -82,6 +88,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+
+        (float, float)[] positions = { (-100.0f, 50.0f), (-49.0f, 113.0f), (104.0f, 5.0f), (-87.3f, -94.8f) };
+        (float, float) randPos = positions[Random.Range(0, positions.Length)];
+        gameObject.transform.position = new Vector3(randPos.Item1, randPos.Item2, 0);
+
         currentHealth = maxHealth; // set initial health
         healthBar.SetMaxHealth(maxHealth);
         player_dead = false;
@@ -90,11 +101,9 @@ public class PlayerMovement : MonoBehaviour
         InvokeRepeating("circleDamage", 0.0f, 2.0f);
         survivalTimes = 0;
 
-
     }
-
     //==============================================items===================================================================================================\
-    public int hpAmount = 1;
+
 
 
 
@@ -154,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
             movement.y = Input.GetAxisRaw("Vertical");
             movement.z = 0.0f;
         }
-       
+
         /*
         if((movement.x ==0 && movement.y == 0) && moveDirec.x != 0 || moveDirec.y !=0)
         {
@@ -180,9 +189,8 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat("Vertical", movement.y);
             animator.SetFloat("Magnitude", movement.magnitude);
-
         }
-        
+
         animator.SetFloat("LastHori", facing);
         // =================================================================================================================================================
 
@@ -244,6 +252,7 @@ public class PlayerMovement : MonoBehaviour
             For PC
             */
 
+            /*
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -251,17 +260,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log(hit.collider.gameObject.name);
             }
-            /*if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
-            {
-                if (Time.time - lastClickTime >= wait_time || Time.time == lastClickTime)
-                {
-                    Shooting();
-                    lastClickTime = Time.time;
-                }
+            */
 
-            }*/
+            //if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
 
 
+            detectingShooting();
 
 
         }
@@ -285,7 +289,73 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    
+    public void switch_weapon()
+    {
+        if (secondary_weapon.Length > 0)
+        {
+            ui_control.switch_weapon_icon();
+            if (cur_bullet != handgun_bullet)
+            {
+                wait_time = 0.7;
+                if (secondary_weapon == "sniper")
+                { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
+                else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
+                handgun.gameObject.GetComponent<Renderer>().enabled = true;
+                cur_bullet = handgun_bullet;
+                cur_gun = handgun;
+            }
+            else if (secondary_weapon == "sniper")
+            {
+                wait_time = 1.2;
+                handgun.gameObject.GetComponent<Renderer>().enabled = false;
+                sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
+                cur_bullet = sniper;
+                cur_gun = sniper_gun;
+            }
+            else if (secondary_weapon == "missile")
+            {
+                wait_time = 2.3;
+                missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
+                handgun.gameObject.GetComponent<Renderer>().enabled = false;
+                cur_bullet = missile;
+                cur_gun = missile_gun;
+            }
+
+        }
+    }
+
+
+
+
+
     // =============================================================== Shooting function ===================================================================
+    // Detecting shooting inputs
+    private void detectingShooting()
+    {
+        if (weapon_joystick.Horizontal > 0.5 || weapon_joystick.Horizontal < -0.5 || weapon_joystick.Vertical > 0.5 || weapon_joystick.Vertical < -0.5)
+        {
+            weapon_fire = true;
+        }
+
+
+       
+
+        if (weapon_moves.magnitude > 0)
+        {
+            direction = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
+            direction.Normalize();
+        }
+
+
+        if (!weapon_joystick_background.gameObject.activeSelf && weapon_fire)
+        {
+            Shooting(direction);
+            weapon_fire = false;
+        }
+    }
+
+
     // Below is Gun & Shooting
     private void FollowMouseRotate()
     {
@@ -297,7 +367,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 theScale = cur_gun.localScale;
         if (facing == 1.0f)     // we have a flip
         {
-            Debug.Log(theScale);
+            //Debug.Log(theScale);
             if (theScale.x < 0)
             {
                 theScale.x *= -1;
@@ -311,7 +381,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (facing == -1.0f)     // we have a flip
         {
-            Debug.Log(theScale);
+            //Debug.Log(theScale);
             if (theScale.x > 0)
             {
                 theScale.x *= -1;
@@ -335,7 +405,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Shooting()
+    private void Shooting(Vector3 direction)
     {
         //if (Input.GetMouseButtonDown(0)) //|| Input.GetMouseButton(0))
         //{
@@ -346,28 +416,27 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = bulletDirection - obj;
          */
 
-        Vector3 direction = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
-        direction.Normalize();
+
 
         int shooting_speed = 0;
         bool Shoot_or_not = false;
         if (cur_bullet == missile && bullet_array[1] > 0)
         {
-            shooting_speed = 9;
+            shooting_speed = 110;
             Shoot_or_not = true;
             bullet_array[1] -= 1;
             weapon_using_time[1] += 1;
         }
         else if (cur_bullet == handgun_bullet && bullet_array[0] > 0)
         {
-            shooting_speed = 6;
+            shooting_speed = 80;
             bullet_array[0] -= 1;
             Shoot_or_not = true;
             weapon_using_time[0] += 1;
         }
         else if (cur_bullet == sniper && bullet_array[2] > 0)
         {
-            shooting_speed = 15;
+            shooting_speed = 150;
             bullet_array[2] -= 1;
             Shoot_or_not = true;
             weapon_using_time[2] += 1;
@@ -441,6 +510,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 reported = true;
                 float times = Time.fixedTime;
+                survivalTimes = Time.fixedTime;
                 Analytics.CustomEvent("char", new Dictionary<string, object>
                 {
                     //{ "total bullets", ana_bullet_counting },
@@ -448,7 +518,9 @@ public class PlayerMovement : MonoBehaviour
                     //{ "Monster killed" , AnalyticsAPI.BossMonsterDeadCount },
                     //{ "Shooting on target" , AnalyticsAPI.BossMonsterHitCount_static },
                     //{ "most use weapon",  most_use},
-                    { "Survival Time", survivalTimes }
+                    { "Survival Time", survivalTimes },
+                    { "Health lost by toxic gas", lostbytoxic },
+                    { "Health lost by monster", lostbymonster}
                 });
                 Analytics.CustomEvent("weapon", new Dictionary<string, object>
                 {
@@ -468,10 +540,17 @@ public class PlayerMovement : MonoBehaviour
                     //{ "most use weapon",  most_use},
                     //{ "Survival Time", times }
                 });
+                string s1 = string.Format("Survival Time : {0}, Health lost by toxic gas : {1} , Health lost by monster : {2} , total bullets : {3} , shooting accuracy : {4} , most use weapon : {5} , Monster killed : {6} , Shooting on target : {7}", survivalTimes , lostbytoxic , lostbymonster , ana_bullet_counting , acc , most_use , AnalyticsAPI.BossMonsterDeadCount , AnalyticsAPI.BossMonsterHitCount_static);
+            //    string s2 = string.Format("Health lost by toxic gas{0}", lostbytoxic);
+            //    string s3 = string.Format("Health lost by monster{0}", lostbymonster);
+            //    string s4 = string.Format("total bullets{0}", ana_bullet_counting);
+            //    string s5 = string.Format("shooting accuracy{0}", acc);
+            //    string s6 = string.Format("most use weapon{0}", most_use);
+            //    string s7 = string.Format("Monster killed{0}", AnalyticsAPI.BossMonsterDeadCount);
+            //    string s8 = string.Format("Shooting on target{0}", AnalyticsAPI.BossMonsterHitCount_static);
+                print(s1);
             }
-
         }
-
     }
 
 
@@ -480,6 +559,7 @@ public class PlayerMovement : MonoBehaviour
         if (DamageCircle.IsOutsideCircle_Static(GameObject.Find("Player").transform.position))
         {
             currentHealth -= 10;
+            lostbytoxic += 10;
             healthBar.SetHealth(currentHealth);
             if (facing == 1.0f)
             {
@@ -529,6 +609,9 @@ public class PlayerMovement : MonoBehaviour
             //if (cur_gun == sniper_gun)
             //{
             wait_time = 2.3;
+            if (cur_gun == missile_gun)
+            { bullet_array[1] += 6; }
+            else { bullet_array[1] = 6; }
             sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
             handgun.gameObject.GetComponent<Renderer>().enabled = false;
             missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
@@ -537,7 +620,8 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "missile";
             ui_control.get_new_weapon(1);
-            bullet_array[1] = 6;
+            
+            //bullet_array[1] += 6;
         }
         if (other.gameObject.CompareTag("sniper_gun"))
         {
@@ -546,6 +630,9 @@ public class PlayerMovement : MonoBehaviour
             //if (cur_gun == missile_gun)
             //{
             wait_time = 1.2;
+            if (cur_gun == sniper_gun)
+            { bullet_array[2] += 15; }
+            else { bullet_array[2] = 15; }
             handgun.gameObject.GetComponent<Renderer>().enabled = false;
             sniper_gun.gameObject.GetComponent<Renderer>().enabled = true;
             missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
@@ -554,13 +641,14 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "sniper";
             ui_control.get_new_weapon(2);
-            bullet_array[2] = 15;
+            
         }
 
         if (other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("paused_bullet")
          || other.gameObject.CompareTag("unpaused_bullet") || other.gameObject.CompareTag("enemy_1") || other.gameObject.CompareTag("enemy_bullet_1"))
         {
             TakeDamage(10);
+            lostbymonster += 10;
             healthBar.SetHealth(currentHealth);
         }
 

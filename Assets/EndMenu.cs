@@ -35,8 +35,8 @@ public class EndMenu : MonoBehaviour
     {
         endMenu.SetActive(true);
         Time.timeScale = 0f;
-        monsterkilled.text = "Monsters Killed: ";
-        survivalTime.text = "Survival Time: " ;
+        monsterkilled.text = "Monsters Killed: " + AnalyticsAPI.BossMonsterDeadCount;
+        survivalTime.text = "Survival Time: " + PlayerMovement.survivalTimes;
     }
     
 
