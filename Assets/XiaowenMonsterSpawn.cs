@@ -38,7 +38,7 @@ public class XiaowenMonsterSpawn : MonoBehaviour
         
         spawn_timer -= Time.deltaTime;
         final_circle_timer -= Time.deltaTime;
-        if (DamageCircle.last_circle)
+        if (DamageCircle.circle_stage > 1)
         {
             if (final_circle_timer <= 0.0f)
             {

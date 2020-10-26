@@ -33,11 +33,11 @@ public class DamageCircle : MonoBehaviour
 
     private Vector3 targetCircleSize;
     private Vector3 targetCirclePosition;
-    public static bool last_circle = false;
+    bool last_circle = false;
 
     public float initialCircleSize;
     public float initialTargetCircleSize;
-    private int circle_stage = 0;
+    public static int circle_stage = 0;
 
     private void Awake()
     {
@@ -111,6 +111,7 @@ public class DamageCircle : MonoBehaviour
         else if (circle_stage == 1)
         {
             generatedTargetCircleSize = new Vector3(20f, 20f);
+            circle_stage = 2;
         }
 
 
