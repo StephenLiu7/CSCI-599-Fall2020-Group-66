@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     public int lostbytoxic = 0;
     public int lostbymonster = 0;
     public int item_used = 0;
+    public Transform myplayer;
     // =================================================================================================================================================
 
     //============================================= initial Gun & shooting part  =======================================================================
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     public float NextTime = 0.0f;
 
     public int hpAmount = 1;
-
+    public Transform crosshair;
     
     /*struct gun
     {
@@ -130,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         player_moves.x = player_joystick.Horizontal;
         player_moves.y = player_joystick.Vertical;
 
-        Debug.Log("Player Move: " + player_moves);
+        //Debug.Log("Player Move: " + player_moves);
 
         weapon_moves.x = weapon_joystick.Horizontal;
         weapon_moves.y = weapon_joystick.Vertical;
@@ -284,7 +285,7 @@ public class PlayerMovement : MonoBehaviour
             detectingShooting();
            
             cancelShooting();
-            Debug.Log("Horizontal: " + weapon_joystick.Horizontal);
+            //Debug.Log("Horizontal: " + weapon_joystick.Horizontal);
         }
 
         // =================================================================================================================================================
@@ -298,14 +299,9 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = transform.position + movement * moveSpeed * Time.deltaTime;
         }
-
         rb.MovePosition(rb.position + player_moves * speed * Time.deltaTime);
-
     }
     // =================================================================================================================================================
-
-
-
     
     public void switch_weapon()
     {
@@ -338,12 +334,8 @@ public class PlayerMovement : MonoBehaviour
                 cur_bullet = missile;
                 cur_gun = missile_gun;
             }
-
         }
     }
-
-
-
 
 
     // =============================================================== Shooting function ===================================================================
@@ -355,14 +347,11 @@ public class PlayerMovement : MonoBehaviour
             weapon_fire = true;
             
         }
-
         if (weapon_moves.magnitude > 0)
         {
             direction = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
             direction.Normalize();
         }
-
-
         if (weapon_joystick_background.gameObject.activeSelf && weapon_fire)
         {
             
@@ -371,25 +360,16 @@ public class PlayerMovement : MonoBehaviour
                 Shooting(direction);
                 lastClickTime = Time.time;
             }
-
         }
-
-
-        
     }
 
     private void cancelShooting()
     {
-
         if (weapon_joystick.Horizontal < 0.8 || weapon_joystick.Horizontal > -0.8 && weapon_joystick.Vertical < 0.8 && weapon_joystick.Vertical > -0.8)
         {
             weapon_fire = false;
         }
-
-
     }
-
-
 
     // Below is Gun & Shooting
     private void FollowMouseRotate()
@@ -397,7 +377,43 @@ public class PlayerMovement : MonoBehaviour
         //Vector3 mouse = Input.mousePosition;                                                      // this only for PC
         Vector3 mouse = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
+
         //Vector3 direction = obj - mouse;                                                          // this only for PC
+        //GameobjectRotation2 = weapon_moves.x + weapon_moves.y * 90;
+        //crosshair.rotation = Quaternion.Euler(0f, 20f, weapon_moves.x + weapon_moves.y * 90);
+        //Vector3 crossrotate = (mouse - obj).normalized;
+        //Debug.Log(mouse);
+        //Debug.Log(weapon_moves);
+        //Debug.Log(crossrotate);
+
+        //Debug.Log(obj);
+        //Debug.Log(crossrotate);
+        if (weapon_moves.magnitude > 0)
+        {
+            float weapon_angle = Mathf.Atan2(weapon_moves.y, weapon_moves.x) * Mathf.Rad2Deg;
+            float crosshair_angle = Mathf.Atan2(crosshair.localPosition.y, crosshair.localPosition.x) * Mathf.Rad2Deg;      // localPosition is 0 relevent to player
+            float ang = Mathf.Abs(weapon_angle - crosshair_angle);
+            //Debug.Log(weapon_angle);
+            //Debug.Log(crosshair_angle);
+            
+            //Debug.Log(ang);
+            if (ang > 0)
+            {
+                if (weapon_angle > 0 && weapon_angle > crosshair_angle)                                 // upside, cross behind                                                                                     // if joystick in ahead of current crosshair
+                { crosshair.RotateAround(myplayer.position, Vector3.forward, ang); }
+                else if (weapon_angle > 0 && weapon_angle < crosshair_angle)                            // upside, cross in front                                                                                      // if joystick in ahead of current crosshair
+                { crosshair.RotateAround(myplayer.position, Vector3.forward, -ang); }
+                else if (weapon_angle < 0 && weapon_angle > crosshair_angle)                            // downside, cross behind                                                                                     // if joystick in ahead of current crosshair
+                { crosshair.RotateAround(myplayer.position, Vector3.forward, ang); }
+                else if (weapon_angle < 0 && weapon_angle < crosshair_angle)                            // downside, cross in front                                                                                      // if joystick in ahead of current crosshair
+                { crosshair.RotateAround(myplayer.position, Vector3.forward, -ang); }
+                //else { crosshair.RotateAround(myplayer.position, Vector3.back, -ang); }
+            }
+
+        }
+        //crosshair.RotateAround(myplayer.position, Vector3.forward, 20 * Time.deltaTime);
+        //crosshair.RotateAround(myplayer.position, new Vector3(0f,0f, Mathf.Atan2(weapon_moves.y, weapon_moves.x) * Mathf.Rad2Deg), Time.deltaTime);
+        //Debug.Log(Mathf.Atan2(weapon_moves.y, weapon_moves.x) * Mathf.Rad2Deg);
         Vector3 direction = mouse;
         Vector3 theScale = cur_gun.localScale;
         if (facing == 1.0f)     // we have a flip
@@ -438,6 +454,8 @@ public class PlayerMovement : MonoBehaviour
         direction = direction.normalized;
         cur_gun.right = direction;
 
+
+       // crosshair.rotation = Quaternion.Euler(0.0f, 0.0f, 1.0f);
     }
 
     private void Shooting(Vector3 direction)
