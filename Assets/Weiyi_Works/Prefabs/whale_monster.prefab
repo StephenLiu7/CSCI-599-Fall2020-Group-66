@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9024297097533584034}
   - component: {fileID: -8033290648453377647}
   - component: {fileID: 5510860737951622943}
+  - component: {fileID: 5944483610899012586}
   m_Layer: 0
   m_Name: whale_monster
   m_TagString: enemy_1
@@ -143,8 +144,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
-  m_LinearDrag: 0
+  m_Mass: 1
+  m_LinearDrag: 1.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -164,7 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f874962e8848c4040a85a23f9872992a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 200
+  nextWaypointDistance: 1.5
   animator: {fileID: 9024297097533584062}
   monster_rb: {fileID: -8033290648453377647}
   player_rb: {fileID: 0}
@@ -172,6 +174,34 @@ MonoBehaviour:
   currentHealth: 0
   healthControl: {fileID: 1823443238665576323}
   drop: {fileID: 8437343980750381085, guid: 68f09c381697ddf4ab9f685bb625ed7e, type: 3}
+--- !u!114 &5944483610899012586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024297097533584063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1001 &2344644885194695259
 PrefabInstance:
   m_ObjectHideFlags: 0

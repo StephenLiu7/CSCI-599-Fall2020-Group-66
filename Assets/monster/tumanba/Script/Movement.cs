@@ -2,10 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Pathfinding;
 
 public class Movement : MonoBehaviour
 {
-    public float moveSpeed = 2f;
+    public float moveSpeed = 200f;
+
+    // A* path finding
+    public float nextWaypointDistance = 1.5f;
+    Path path;
+    int currentWaypoint = 0;
+    bool reachedEndOfPath = false;
+    Seeker seeker;
 
     public Animator animator;
     private bool live;
@@ -135,6 +143,13 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         player_rb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+
+        // A* component
+        seeker = GetComponent<Seeker>();
+        monster_rb = GetComponent<Rigidbody2D>();
+        InvokeRepeating("UpdatePath", 0f, .5f);
+
+
         live = true;
         animator = gameObject.GetComponent<Animator>();
 
@@ -151,7 +166,27 @@ public class Movement : MonoBehaviour
         }
         movement = direction;
         if (distance < attack_range) {
-            isPaused = true;
+            isPaused = false;
+        }
+    }
+
+    void UpdatePath()
+    {
+        float x_diff = player_rb.position.x-monster_rb.position.x;
+        float y_diff = player_rb.position.y-monster_rb.position.y;
+        float distance = (float)Math.Sqrt(x_diff * x_diff + y_diff * y_diff);
+        if(distance > attack_range)
+            return;
+        if(seeker.IsDone())
+            seeker.StartPath(monster_rb.position, player_rb.position, OnPathComplete);
+    }
+
+    void OnPathComplete(Path p)
+    {
+        if(!p.error)
+        {
+            path = p;
+            currentWaypoint = 0;
         }
     }
 
@@ -180,7 +215,7 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        if(distance < 1.2 && !attacking)
+        if(distance < 1 && !attacking) // 1.2
         {
             attacking = true;
             isPaused = true;
@@ -218,8 +253,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 next_position = monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        if(next_position.x > 0 || next_position.y > -48)
+        if(monster_rb.position.x > 0 || monster_rb.position.y > -48)
         {
             out_bound = true;
             return;
@@ -230,9 +264,30 @@ public class Movement : MonoBehaviour
             isPaused = false;
         }
         out_bound = false;
-        if(live && !isPaused){
-            monster_rb.MovePosition(monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        }    
+
+        if(!live || isPaused)
+            return;
+
+        // A* path finding
+        if(path == null)
+            return;
+        if(currentWaypoint > path.vectorPath.Count)
+        {
+            reachedEndOfPath = true;
+            return;
+        }
+        else
+        {
+            reachedEndOfPath = false;
+        }
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - monster_rb.position).normalized;
+        Vector2 force = direction * moveSpeed * Time.deltaTime;
+        monster_rb.AddForce(force);
+        float distance = Vector2.Distance(monster_rb.position, path.vectorPath[currentWaypoint]);
+        if(distance < nextWaypointDistance)
+        {
+            currentWaypoint++;
+        }
     }
 
     // direction fixed

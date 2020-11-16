@@ -2,10 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Pathfinding;
 
 public class knight_movement : MonoBehaviour
 {
-    public float moveSpeed = 1.8f;
+    // A* path finding
+    public float nextWaypointDistance = 1.5f;
+    Path path;
+    int currentWaypoint = 0;
+    bool reachedEndOfPath = false;
+    Seeker seeker;
+
+    public float moveSpeed = 200f;
     private bool slide = false;
     private float slideSpeed = 3f;
     private bool jump = false;
@@ -139,6 +147,12 @@ public class knight_movement : MonoBehaviour
     private void Start()
     {
         player_rb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+
+        // A* component
+        seeker = GetComponent<Seeker>();
+        monster_rb = GetComponent<Rigidbody2D>();
+        InvokeRepeating("UpdatePath", 0f, .5f);
+
         live = true;
         animator = gameObject.GetComponent<Animator>();
 
@@ -155,7 +169,27 @@ public class knight_movement : MonoBehaviour
         }
         movement = direction;
         if (distance < attack_range) {
-            isPaused = true;
+            isPaused = false;
+        }
+    }
+
+    void UpdatePath()
+    {
+        float x_diff = player_rb.position.x-monster_rb.position.x;
+        float y_diff = player_rb.position.y-monster_rb.position.y;
+        float distance = (float)Math.Sqrt(x_diff * x_diff + y_diff * y_diff);
+        if(distance > attack_range)
+            return;
+        if(seeker.IsDone())
+            seeker.StartPath(monster_rb.position, player_rb.position, OnPathComplete);
+    }
+
+    void OnPathComplete(Path p)
+    {
+        if(!p.error)
+        {
+            path = p;
+            currentWaypoint = 0;
         }
     }
 
@@ -232,22 +266,35 @@ public class knight_movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 next_position = monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        if(next_position.x > 0 || next_position.y > -50)
+        if(monster_rb.position.x > 0 || monster_rb.position.y > -50)
         {
             out_bound = true;
             return;
         }
         out_bound = false;
-        // Movement of Player
-        if(slide && live){
-            monster_rb.MovePosition(monster_rb.position + movement * slideSpeed * Time.fixedDeltaTime);
+
+        if(!live || isPaused)
+            return;
+
+        // A* path finding
+        if(path == null)
+            return;
+        if(currentWaypoint > path.vectorPath.Count)
+        {
+            reachedEndOfPath = true;
+            return;
         }
-        else if(jump && live){
-            monster_rb.MovePosition(monster_rb.position + movement * jumpSpeed * Time.fixedDeltaTime);
+        else
+        {
+            reachedEndOfPath = false;
         }
-        else if(live && !isPaused){
-            monster_rb.MovePosition(monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - monster_rb.position).normalized;
+        Vector2 force = direction * moveSpeed * Time.deltaTime;
+        monster_rb.AddForce(force);
+        float distance = Vector2.Distance(monster_rb.position, path.vectorPath[currentWaypoint]);
+        if(distance < nextWaypointDistance)
+        {
+            currentWaypoint++;
         }
     }
 

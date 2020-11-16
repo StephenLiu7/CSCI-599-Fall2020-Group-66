@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Pathfinding;
 
 public class GhostMove : MonoBehaviour
 {
-    public float moveSpeed = .2f;
+    public float moveSpeed = 200f;
+
+    // A* path finding
+    public float nextWaypointDistance = 1.5f;
+    Path path;
+    int currentWaypoint = 0;
+    bool reachedEndOfPath = false;
+    Seeker seeker;
 
     public Animator animator;
     private bool live;
@@ -137,6 +145,13 @@ public class GhostMove : MonoBehaviour
     // initialization
     private void Start()
     {
+        player_rb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+
+        // A* component
+        seeker = GetComponent<Seeker>();
+        monster_rb = GetComponent<Rigidbody2D>();
+        InvokeRepeating("UpdatePath", 0f, .5f);
+
         live = true;
         animator = gameObject.GetComponent<Animator>();
 
@@ -156,6 +171,26 @@ public class GhostMove : MonoBehaviour
         if (distance < attack_range)
         {
             isPaused = true;
+        }
+    }
+
+    void UpdatePath()
+    {
+        float x_diff = player_rb.position.x-monster_rb.position.x;
+        float y_diff = player_rb.position.y-monster_rb.position.y;
+        float distance = (float)Math.Sqrt(x_diff * x_diff + y_diff * y_diff);
+        if(distance > attack_range)
+            return;
+        if(seeker.IsDone())
+            seeker.StartPath(monster_rb.position, player_rb.position, OnPathComplete);
+    }
+
+    void OnPathComplete(Path p)
+    {
+        if(!p.error)
+        {
+            path = p;
+            currentWaypoint = 0;
         }
     }
 
@@ -206,10 +241,28 @@ public class GhostMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Movement of Player
-        if (live && !isPaused)
+        if(!live || isPaused)
+            return;
+        
+        // A* path finding
+        if(path == null)
+            return;
+        if(currentWaypoint > path.vectorPath.Count)
         {
-            monster_rb.MovePosition(monster_rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            reachedEndOfPath = true;
+            return;
+        }
+        else
+        {
+            reachedEndOfPath = false;
+        }
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - monster_rb.position).normalized;
+        Vector2 force = direction * moveSpeed * Time.deltaTime;
+        monster_rb.AddForce(force);
+        float distance = Vector2.Distance(monster_rb.position, path.vectorPath[currentWaypoint]);
+        if(distance < nextWaypointDistance)
+        {
+            currentWaypoint++;
         }
     }
 
