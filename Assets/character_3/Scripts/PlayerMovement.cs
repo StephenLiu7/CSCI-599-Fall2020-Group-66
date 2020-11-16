@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     public int lostbytoxic = 0;
     public int lostbymonster = 0;
     public int item_used = 0;
+    public Transform myplayer;
     // =================================================================================================================================================
 
     //============================================= initial Gun & shooting part  =======================================================================
@@ -56,13 +57,15 @@ public class PlayerMovement : MonoBehaviour
     public Transform handgun_bullet;
     public Transform sniper;
 
-    float acc = 0;
+    public float acc = 0;
     double wait_time = 0.4;
     float lastClickTime;
     public float proTime = 0.0f;
     public float NextTime = 0.0f;
 
     public int hpAmount = 1;
+    public Transform crosshair;
+    
     /*struct gun
     {
         int bullet;
@@ -82,7 +85,8 @@ public class PlayerMovement : MonoBehaviour
     public int[] bullet_array = new int[] { 300, 0, 0 };      // handgun , missile , sniper
     public int[] weapon_using_time = new int[] { 0, 0, 0 };
     string secondary_weapon = "";
-    int ana_bullet_counting = 0;
+    public int ana_bullet_counting = 0;
+    public string most_use = "";
     //bool LOR = false;       // initial facing right
     bool reported = false;
 
@@ -92,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         (float, float)[] positions = { (-100.0f, 50.0f), (-49.0f, 113.0f), (104.0f, 5.0f), (-87.3f, -94.8f) };
         (float, float) randPos = positions[Random.Range(0, positions.Length)];
         gameObject.transform.position = new Vector3(randPos.Item1, randPos.Item2, 0);
-
+        maxHealth = 100;
         currentHealth = maxHealth; // set initial health
         healthBar.SetMaxHealth(maxHealth);
         player_dead = false;
@@ -100,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         secondary_weapon = "";
         InvokeRepeating("circleDamage", 0.0f, 2.0f);
         survivalTimes = 0;
-
+        lastClickTime = 0;
     }
     //==============================================items===================================================================================================\
 
@@ -127,14 +131,14 @@ public class PlayerMovement : MonoBehaviour
         player_moves.x = player_joystick.Horizontal;
         player_moves.y = player_joystick.Vertical;
 
-
+        //Debug.Log("Player Move: " + player_moves);
 
         weapon_moves.x = weapon_joystick.Horizontal;
         weapon_moves.y = weapon_joystick.Vertical;
 
 
         // *********test for health bar ********
-
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentHealth -= 20;
@@ -152,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
                 hpAmount += 1;
             }
         }
-
+        */
         //****************************************
 
         // =====================================================Character & shooting script =================================================================
@@ -175,11 +179,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (movement.x > 0.001f || player_moves.x > 0.001f)
         {
+            
             facing = 1.0f;
         }
         else if (movement.x < -0.001f || player_moves.x < -0.001f)
         {
             facing = -1.0f;
+        }
+
+        if (weapon_moves.x > 0.001f)
+        {
+
+            facing = 1.0f;
+
+        }
+        if(weapon_moves.x < -0.001f){
+
+            facing = -1.0f;
+
         }
 
         animator.SetFloat("Horizontal", facing);
@@ -206,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
                 ui_control.switch_weapon_icon();
                 if (cur_bullet != handgun_bullet)
                 {
-                    wait_time = 0.7;
+                    wait_time = 0.5;
                     if (secondary_weapon == "sniper")
                     { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
                     else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
@@ -266,8 +283,9 @@ public class PlayerMovement : MonoBehaviour
 
 
             detectingShooting();
-
-
+           
+            cancelShooting();
+            //Debug.Log("Horizontal: " + weapon_joystick.Horizontal);
         }
 
         // =================================================================================================================================================
@@ -281,14 +299,9 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = transform.position + movement * moveSpeed * Time.deltaTime;
         }
-
         rb.MovePosition(rb.position + player_moves * speed * Time.deltaTime);
-
     }
     // =================================================================================================================================================
-
-
-
     
     public void switch_weapon()
     {
@@ -297,7 +310,7 @@ public class PlayerMovement : MonoBehaviour
             ui_control.switch_weapon_icon();
             if (cur_bullet != handgun_bullet)
             {
-                wait_time = 0.7;
+                wait_time = 0.5;
                 if (secondary_weapon == "sniper")
                 { sniper_gun.gameObject.GetComponent<Renderer>().enabled = false; }
                 else { missile_gun.gameObject.GetComponent<Renderer>().enabled = false; }
@@ -315,46 +328,48 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (secondary_weapon == "missile")
             {
-                wait_time = 2.3;
+                wait_time = 2.0;
                 missile_gun.gameObject.GetComponent<Renderer>().enabled = true;
                 handgun.gameObject.GetComponent<Renderer>().enabled = false;
                 cur_bullet = missile;
                 cur_gun = missile_gun;
             }
-
         }
     }
-
-
-
 
 
     // =============================================================== Shooting function ===================================================================
     // Detecting shooting inputs
     private void detectingShooting()
     {
-        if (weapon_joystick.Horizontal > 0.5 || weapon_joystick.Horizontal < -0.5 || weapon_joystick.Vertical > 0.5 || weapon_joystick.Vertical < -0.5)
+        if (weapon_joystick.Horizontal >= 0.8 || weapon_joystick.Horizontal <= -0.8 || weapon_joystick.Vertical >= 0.8 || weapon_joystick.Vertical <= -0.8)
         {
             weapon_fire = true;
+            
         }
-
-
-       
-
         if (weapon_moves.magnitude > 0)
         {
             direction = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
             direction.Normalize();
         }
-
-
-        if (!weapon_joystick_background.gameObject.activeSelf && weapon_fire)
+        if (weapon_joystick_background.gameObject.activeSelf && weapon_fire)
         {
-            Shooting(direction);
-            weapon_fire = false;
+            
+            if (Time.time - lastClickTime >= wait_time || Time.time == lastClickTime)
+            {
+                Shooting(direction);
+                lastClickTime = Time.time;
+            }
         }
     }
 
+    private void cancelShooting()
+    {
+        if (weapon_joystick.Horizontal < 0.8 || weapon_joystick.Horizontal > -0.8 && weapon_joystick.Vertical < 0.8 && weapon_joystick.Vertical > -0.8)
+        {
+            weapon_fire = false;
+        }
+    }
 
     // Below is Gun & Shooting
     private void FollowMouseRotate()
@@ -362,7 +377,43 @@ public class PlayerMovement : MonoBehaviour
         //Vector3 mouse = Input.mousePosition;                                                      // this only for PC
         Vector3 mouse = new Vector3(weapon_moves.x, weapon_moves.y, Camera.main.transform.position.z);
         Vector3 obj = Camera.main.WorldToScreenPoint(cur_gun.position);
+
         //Vector3 direction = obj - mouse;                                                          // this only for PC
+        //GameobjectRotation2 = weapon_moves.x + weapon_moves.y * 90;
+        //crosshair.rotation = Quaternion.Euler(0f, 20f, weapon_moves.x + weapon_moves.y * 90);
+        //Vector3 crossrotate = (mouse - obj).normalized;
+        //Debug.Log(mouse);
+        //Debug.Log(weapon_moves);
+        //Debug.Log(crossrotate);
+
+        //Debug.Log(obj);
+        //Debug.Log(crossrotate);
+        if (weapon_moves.magnitude > 0)
+        {
+            float weapon_angle = Mathf.Atan2(weapon_moves.y, weapon_moves.x) * Mathf.Rad2Deg;
+            float crosshair_angle = Mathf.Atan2(crosshair.localPosition.y, crosshair.localPosition.x) * Mathf.Rad2Deg;      // localPosition is 0 relevent to player
+            float ang = Mathf.Abs(weapon_angle - crosshair_angle);
+            //Debug.Log(weapon_angle);
+            //Debug.Log(crosshair_angle);
+            
+            //Debug.Log(ang);
+            if (ang > 0)
+            {
+                if (weapon_angle > 0 && weapon_angle > crosshair_angle)                                 // upside, cross behind                                                                                     // if joystick in ahead of current crosshair
+                { crosshair.RotateAround(myplayer.position, Vector3.forward, ang); }
+                else if (weapon_angle > 0 && weapon_angle < crosshair_angle)                            // upside, cross in front                                                                                      // if joystick in ahead of current crosshair
+                { crosshair.RotateAround(myplayer.position, Vector3.forward, -ang); }
+                else if (weapon_angle < 0 && weapon_angle > crosshair_angle)                            // downside, cross behind                                                                                     // if joystick in ahead of current crosshair
+                { crosshair.RotateAround(myplayer.position, Vector3.forward, ang); }
+                else if (weapon_angle < 0 && weapon_angle < crosshair_angle)                            // downside, cross in front                                                                                      // if joystick in ahead of current crosshair
+                { crosshair.RotateAround(myplayer.position, Vector3.forward, -ang); }
+                //else { crosshair.RotateAround(myplayer.position, Vector3.back, -ang); }
+            }
+
+        }
+        //crosshair.RotateAround(myplayer.position, Vector3.forward, 20 * Time.deltaTime);
+        //crosshair.RotateAround(myplayer.position, new Vector3(0f,0f, Mathf.Atan2(weapon_moves.y, weapon_moves.x) * Mathf.Rad2Deg), Time.deltaTime);
+        //Debug.Log(Mathf.Atan2(weapon_moves.y, weapon_moves.x) * Mathf.Rad2Deg);
         Vector3 direction = mouse;
         Vector3 theScale = cur_gun.localScale;
         if (facing == 1.0f)     // we have a flip
@@ -403,6 +454,8 @@ public class PlayerMovement : MonoBehaviour
         direction = direction.normalized;
         cur_gun.right = direction;
 
+
+       // crosshair.rotation = Quaternion.Euler(0.0f, 0.0f, 1.0f);
     }
 
     private void Shooting(Vector3 direction)
@@ -446,7 +499,7 @@ public class PlayerMovement : MonoBehaviour
             Transform bullet = Instantiate(cur_bullet, transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = direction * shooting_speed;
             bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-            Destroy(bullet.gameObject, 10.0f);
+            Destroy(bullet.gameObject, 1.5f);
             ana_bullet_counting += 1;
         }
         //}
@@ -498,7 +551,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (ana_bullet_counting > 0)
             { acc = (AnalyticsAPI.BossMonsterHitCount_static * 100) / ana_bullet_counting; }
-            string most_use = "";
+            most_use = "";
 
             if (weapon_using_time[0] >= weapon_using_time[1] && weapon_using_time[0] >= weapon_using_time[2])
             { most_use = "handgun"; }
@@ -664,7 +717,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("item_heal"))
         {
-            Destroy(gameObject);
+            
            
             currentHealth += 50;
             if (currentHealth > maxHealth)
@@ -672,7 +725,7 @@ public class PlayerMovement : MonoBehaviour
                 currentHealth = maxHealth;
             }
             healthBar.SetHealth(currentHealth);
-            
+            Destroy(other.gameObject);
 
         }
 

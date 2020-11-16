@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2120084444048003650}
   m_Layer: 12
   m_Name: xiaowen_pill
-  m_TagString: Untagged
+  m_TagString: item_heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -164,7 +164,7 @@ MonoBehaviour:
   animator: {fileID: 4515833088343642079}
   monster_rb: {fileID: 4515833088343642077}
   player_rb: {fileID: 0}
-  maxHealth: 20
+  maxHealth: 8
   currentHealth: 0
   healthControl: {fileID: 534951626520909632}
   drop: {fileID: 8437343980750381085, guid: 68f09c381697ddf4ab9f685bb625ed7e, type: 3}

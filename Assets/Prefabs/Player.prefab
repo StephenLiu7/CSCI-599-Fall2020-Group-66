@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7366407593760890121}
   - component: {fileID: 7366407593760890125}
   - component: {fileID: 7366407593760890124}
+  - component: {fileID: 3111355504066986150}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -35,6 +36,7 @@ Transform:
   - {fileID: 8657366090471294273}
   - {fileID: 2260982250270096981}
   - {fileID: 1325366532217982488}
+  - {fileID: 577792725321008364}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -104,6 +106,7 @@ MonoBehaviour:
   speed: 3
   player_joystick: {fileID: 0}
   weapon_joystick: {fileID: 0}
+  weapon_joystick_background: {fileID: 0}
   moveSpeed: 5
   rb: {fileID: 7366407593760890121}
   animator: {fileID: 7366407593760890125}
@@ -111,6 +114,9 @@ MonoBehaviour:
   currentHealth: 0
   healthBar: {fileID: 0}
   player_dead: 0
+  lostbytoxic: 0
+  lostbymonster: 0
+  item_used: 0
   handgun: {fileID: 2260982250270096981}
   missile_gun: {fileID: 8657366090471294273}
   sniper_gun: {fileID: 1325366532217982488}
@@ -121,11 +127,15 @@ MonoBehaviour:
   handgun_bullet: {fileID: 8317561267064323795, guid: f24f276a2c8614748a33649365dbe108,
     type: 3}
   sniper: {fileID: 7570837615611192938, guid: 6e305cec0743ed54ca77a7af89b80681, type: 3}
+  acc: 0
   proTime: 0
   NextTime: 0
+  hpAmount: 1
+  crosshair: {fileID: 577792725321008364}
   bullet_array: 2c010000060000000f000000
   weapon_using_time: 000000000000000000000000
-  hpAmount: 1
+  ana_bullet_counting: 0
+  most_use: 
 --- !u!50 &7366407593760890121
 Rigidbody2D:
   serializedVersion: 4
@@ -192,6 +202,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.58, y: 0.58}
   m_EdgeRadius: 0
+--- !u!114 &3111355504066986150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366407593760890122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701a0f6990a862f47bda37dd2c0423bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
+  Object: {fileID: 0}
+  FacingRight: 1
 --- !u!1001 &338604124393690713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -371,6 +396,101 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 205426665847467522, guid: a4e3a1e88602c304994c62188fef1423,
     type: 3}
   m_PrefabInstance: {fileID: 1206251804605571098}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7254072245608417891
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7366407593760890126}
+    m_Modifications:
+    - target: {fileID: 1141010537757090500, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525770688898571205, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_Name
+      value: CrossHair
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 44445aff82a29ee40b510665f068a568, type: 3}
+--- !u!4 &577792725321008364 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7831512543009099407, guid: 44445aff82a29ee40b510665f068a568,
+    type: 3}
+  m_PrefabInstance: {fileID: 7254072245608417891}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7775578375332906559
 PrefabInstance:
