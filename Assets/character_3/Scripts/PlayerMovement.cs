@@ -90,12 +90,16 @@ public class PlayerMovement : MonoBehaviour
     //bool LOR = false;       // initial facing right
     bool reported = false;
 
+    // temporary spaceShip
+    public GameObject temp_spaceShipPrefab;
     void Start()
     {
 
         (float, float)[] positions = { (-100.0f, 50.0f), (-49.0f, 113.0f), (104.0f, 5.0f), (-87.3f, -94.8f) };
         (float, float) randPos = positions[Random.Range(0, positions.Length)];
         gameObject.transform.position = new Vector3(randPos.Item1, randPos.Item2, 0);
+        Instantiate(temp_spaceShipPrefab, new Vector3(randPos.Item1+2, randPos.Item2+2, 0), Quaternion.identity);
+
         maxHealth = 100;
         currentHealth = maxHealth; // set initial health
         healthBar.SetMaxHealth(maxHealth);
