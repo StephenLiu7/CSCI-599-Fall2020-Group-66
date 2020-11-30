@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: e9babf7bd5ccd1344991ac9d3e75b9f9
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/gameModeMenu.unity
+    guid: c68d7bedb205f644bb006645ff6d84e3
+  - enabled: 1
+    path: Assets/Scenes/EasyGame.unity
+    guid: ba5ece8274fa7494cab330319825ba0e
+  - enabled: 1
+    path: Assets/Scenes/MediumGame.unity
+    guid: 0c8930a2b26c84941b46d501f22f9580
+  - enabled: 1
+    path: Assets/Scenes/HardGame.unity
+    guid: 76e4fef650015e449baa697c8baa4cfa
   m_configObjects: {}
