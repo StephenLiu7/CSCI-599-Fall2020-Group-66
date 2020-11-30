@@ -45,7 +45,13 @@ public class PlayerMovement : MonoBehaviour
     public Transform myplayer;
     // =================================================================================================================================================
 
-    //============================================= initial Gun & shooting part  =======================================================================
+    // ============================================= initial Gun & shooting part  =======================================================================
+    public AudioSource BGM;
+    public AudioClip sniper_BGM;
+    public AudioClip handgun_BGM;
+    public AudioClip missile_BGM;
+
+
     public Transform handgun;
     public Transform missile_gun;
     public Transform sniper_gun;
@@ -94,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject temp_spaceShipPrefab;
     void Start()
     {
-
+        
         (float, float)[] positions = { (-100.0f, 50.0f), (-49.0f, 113.0f), (104.0f, 5.0f), (-87.3f, -94.8f) };
         (float, float) randPos = positions[Random.Range(0, positions.Length)];
         gameObject.transform.position = new Vector3(randPos.Item1, randPos.Item2, 0);
@@ -125,6 +131,11 @@ public class PlayerMovement : MonoBehaviour
     {
         missile_gun.gameObject.GetComponent<Renderer>().enabled = false;
         sniper_gun.gameObject.GetComponent<Renderer>().enabled = false;
+        BGM = gameObject.AddComponent<AudioSource>();
+        BGM.playOnAwake = false;
+        sniper_BGM = Resources.Load<AudioClip>("Sounds/M24");
+        missile_BGM = Resources.Load<AudioClip>("Sounds/missile");
+        handgun_BGM = Resources.Load<AudioClip>("Sounds/handgun");
     }
 
     void Update()
@@ -483,6 +494,8 @@ public class PlayerMovement : MonoBehaviour
             Shoot_or_not = true;
             bullet_array[1] -= 1;
             weapon_using_time[1] += 1;
+            BGM.clip = missile_BGM;
+            BGM.volume = 0.2f;
         }
         else if (cur_bullet == handgun_bullet && bullet_array[0] > 0)
         {
@@ -490,6 +503,8 @@ public class PlayerMovement : MonoBehaviour
             bullet_array[0] -= 1;
             Shoot_or_not = true;
             weapon_using_time[0] += 1;
+            BGM.clip = handgun_BGM;
+            BGM.volume = 0.2f;
         }
         else if (cur_bullet == sniper && bullet_array[2] > 0)
         {
@@ -497,6 +512,8 @@ public class PlayerMovement : MonoBehaviour
             bullet_array[2] -= 1;
             Shoot_or_not = true;
             weapon_using_time[2] += 1;
+            BGM.clip = sniper_BGM;
+            BGM.volume = 0.1f;
         }
         if (Shoot_or_not == true)
         {
@@ -505,6 +522,7 @@ public class PlayerMovement : MonoBehaviour
             bullet.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             Destroy(bullet.gameObject, 1.5f);
             ana_bullet_counting += 1;
+            BGM.Play();
         }
         //}
     }
