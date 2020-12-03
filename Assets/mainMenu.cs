@@ -7,6 +7,7 @@ public class mainMenu : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
     /*
     public void SettingGame()
@@ -22,17 +23,20 @@ public class mainMenu : MonoBehaviour
 
     public void easyMode()
     {
+        GameMode.Difficulty = "easy";
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void mediumMode()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        GameMode.Difficulty = "medium";
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void hardMode()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+        GameMode.Difficulty = "hard";
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void backToMainMenu()

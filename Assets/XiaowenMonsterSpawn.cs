@@ -17,6 +17,7 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     public int BossMaxHealth = 10;
     void Start()
     {
+        print("CURRENT GAME MODE: " + GameMode.Difficulty);
         spawn_timer = 0.0f;
         player_rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
         float playerX = player_rb.position.x;
@@ -25,6 +26,8 @@ public class XiaowenMonsterSpawn : MonoBehaviour
         if(isInRange){
             spawnBoss();
         }
+
+
     }
 
     // Update is called once per frame
