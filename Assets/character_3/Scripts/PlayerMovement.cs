@@ -740,8 +740,18 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("item_heal"))
         {
             
-           
-            currentHealth += 50;
+            if (GameMode.Difficulty == "easy")
+            {
+                currentHealth += 60;
+            }else if (GameMode.Difficulty == "medium")
+            {
+                currentHealth += 40;
+            }
+            else
+            {
+                currentHealth += 10;
+            }
+            
             if (currentHealth > maxHealth)
             {
                 currentHealth = maxHealth;

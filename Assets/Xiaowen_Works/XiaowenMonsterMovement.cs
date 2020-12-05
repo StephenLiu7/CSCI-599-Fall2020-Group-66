@@ -24,6 +24,7 @@ public class XiaowenMonsterMovement : MonoBehaviour
     // Rewards
     public GameObject healthPotionPrefab;
     public GameObject ammo_prefab;
+    public GameObject pillPrefab;
 
     public Rigidbody2D monster_rb;
     private Rigidbody2D player_rb;
@@ -89,8 +90,18 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
             bool spawnPill = true;
             bool spawnAmmo = true;
-
-            if (difficulty == "medium")
+            bool spawnDirectPill = false;
+            if (difficulty == "easy")
+            {
+                if (RandomInt > 50)
+                {
+                    spawnDirectPill = true;
+                }else if (RandomInt > 86)
+                {
+                    spawnDirectPill = true;
+                }
+            }
+            else if (difficulty == "medium")
             {
                 if (RandomInt > 50)
                 {
@@ -120,6 +131,10 @@ public class XiaowenMonsterMovement : MonoBehaviour
             {
                 
                 Instantiate(ammo_prefab, spawnPos, Quaternion.identity);
+            }
+            if (spawnDirectPill)
+            {
+                Instantiate(pillPrefab, spawnPos, Quaternion.identity);
             }
         }
         Healthbar.SetHealth(attack_remain, MAX_HITS);

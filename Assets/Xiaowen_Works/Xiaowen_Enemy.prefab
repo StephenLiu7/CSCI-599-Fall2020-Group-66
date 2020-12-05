@@ -532,6 +532,8 @@ MonoBehaviour:
     type: 3}
   ammo_prefab: {fileID: 2677423866203958561, guid: 3f779253bcaf7434eb4d9d428d0f80ae,
     type: 3}
+  pillPrefab: {fileID: 1859666132695134453, guid: 0840971648e0e814686681e35f0e4546,
+    type: 3}
   monster_rb: {fileID: 7059568343352970973}
   Healthbar: {fileID: 1445524457715548458}
 --- !u!61 &4366275950749299940
