@@ -528,7 +528,7 @@ MonoBehaviour:
     type: 3}
   pausedBulletPrefab: {fileID: 8737085564355957139, guid: 8025a3a70fca03d499efbf223a451f85,
     type: 3}
-  healthPotionPrefab: {fileID: 6460792984797975446, guid: 5efbbfbae4c2bd9428462f5890b2bc2e,
+  healthPotionPrefab: {fileID: 8437343980750381085, guid: 68f09c381697ddf4ab9f685bb625ed7e,
     type: 3}
   ammo_prefab: {fileID: 2677423866203958561, guid: 3f779253bcaf7434eb4d9d428d0f80ae,
     type: 3}
