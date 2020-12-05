@@ -15,7 +15,7 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     private float final_circle_timer = 2.5f;
     public int MonsterKilledCount = 0;
     public int BossMaxHealth = 10;
-
+    private bool addedSpaceShip = false;
     public GameObject temp_spaceShipPrefab;
     void Start()
     {
@@ -29,11 +29,6 @@ public class XiaowenMonsterSpawn : MonoBehaviour
         }
 
         // one time spawn of spaceship 
-
-        if (GameMode.Difficulty != "easy")
-        {
-            Instantiate(temp_spaceShipPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        }
 
 
     }
@@ -51,6 +46,18 @@ public class XiaowenMonsterSpawn : MonoBehaviour
         final_circle_timer -= Time.deltaTime;
         if (DamageCircle.circle_stage > 1)
         {
+            if (!addedSpaceShip)
+            {
+                addedSpaceShip = true;
+                if (GameMode.Difficulty == "medium")
+                {
+                    Instantiate(temp_spaceShipPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                }else if (GameMode.Difficulty == "hard")
+                {
+                    Instantiate(temp_spaceShipPrefab, new Vector3(-6.29f, 5.31f, 0), Quaternion.identity);
+                    Instantiate(temp_spaceShipPrefab, new Vector3(6.67f, 5.36f, 0), Quaternion.identity);
+                }
+            }
             if (final_circle_timer <= 0.0f)
             {
                 final_circle_timer = 2.5f;

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8977690940702358226}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: RightFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1207303167022683955}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: LeftFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
