@@ -17,6 +17,7 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     public int BossMaxHealth = 10;
     private bool addedSpaceShip = false;
     public GameObject temp_spaceShipPrefab;
+    
     void Start()
     {
         spawn_timer = 0.0f;

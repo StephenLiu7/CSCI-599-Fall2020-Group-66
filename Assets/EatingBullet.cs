@@ -23,9 +23,24 @@ public class EatingBullet : MonoBehaviour
             Destroy(gameObject);
             PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
 
-            pm.bullet_array[0] += 10;
-            pm.bullet_array[1] += 5;
-            pm.bullet_array[2] += 3;
+            if (GameMode.Difficulty == "easy")
+            {
+                pm.bullet_array[0] += 30;
+                pm.bullet_array[1] += 15;
+                pm.bullet_array[2] += 9;
+            }
+            else if (GameMode.Difficulty == "medium")
+            {
+                pm.bullet_array[0] += 10;
+                pm.bullet_array[1] += 5;
+                pm.bullet_array[2] += 3;
+            }
+            else
+            {
+                pm.bullet_array[0] += 5;
+                pm.bullet_array[1] += 3;
+                pm.bullet_array[2] += 2;
+            }
         }
     }
 

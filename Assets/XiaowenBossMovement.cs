@@ -23,6 +23,7 @@ public class XiaowenBossMovement : MonoBehaviour
 
     public GameObject xiaowen_pill;
     public GameObject bulletadder;
+    
     void Start()
     {
         GameObject cam = GameObject.Find("Main Camera");

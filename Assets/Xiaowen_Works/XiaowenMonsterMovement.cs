@@ -21,6 +21,10 @@ public class XiaowenMonsterMovement : MonoBehaviour
     public GameObject unpausedBulletPrefab;
     public GameObject pausedBulletPrefab;
 
+    // Rewards
+    public GameObject healthPotionPrefab;
+    public GameObject ammo_prefab;
+
     public Rigidbody2D monster_rb;
     private Rigidbody2D player_rb;
 
@@ -74,9 +78,49 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
         if (attack_remain <= 0)
         {
+            Vector2 spawnPos = gameObject.transform.position;
             Destroy(gameObject);
             AnalyticsAPI.BossMonsterDeadCount++;
             potentialBoss();
+
+            int RandomInt = Random.Range(0, 100);
+
+            string difficulty = GameMode.Difficulty;
+
+            bool spawnPill = true;
+            bool spawnAmmo = true;
+
+            if (difficulty == "medium")
+            {
+                if (RandomInt > 50)
+                {
+                    spawnPill = false;
+                }
+                if (RandomInt > 70)
+                {
+                    spawnAmmo = false;
+                }
+            }else if (difficulty == "hard")
+            {
+                if (RandomInt > 10)
+                {
+                    spawnPill = false;
+                }else if (RandomInt > 15)
+                {
+                    spawnAmmo = false;
+                }
+            }
+
+            if (spawnPill)
+            {
+                Instantiate(healthPotionPrefab, spawnPos, Quaternion.identity);
+            }
+
+            if (spawnAmmo)
+            {
+                
+                Instantiate(ammo_prefab, spawnPos, Quaternion.identity);
+            }
         }
         Healthbar.SetHealth(attack_remain, MAX_HITS);
     }
