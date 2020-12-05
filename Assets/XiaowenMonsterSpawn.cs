@@ -15,9 +15,10 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     private float final_circle_timer = 2.5f;
     public int MonsterKilledCount = 0;
     public int BossMaxHealth = 10;
+
+    public GameObject temp_spaceShipPrefab;
     void Start()
     {
-        print("CURRENT GAME MODE: " + GameMode.Difficulty);
         spawn_timer = 0.0f;
         player_rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
         float playerX = player_rb.position.x;
@@ -25,6 +26,13 @@ public class XiaowenMonsterSpawn : MonoBehaviour
         bool isInRange = (playerX < xRange.Item2 && playerX > xRange.Item1) && (playerY < yRange.Item2 && playerY > yRange.Item1);
         if(isInRange){
             spawnBoss();
+        }
+
+        // one time spawn of spaceship 
+
+        if (GameMode.Difficulty != "easy")
+        {
+            Instantiate(temp_spaceShipPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         }
 
 
