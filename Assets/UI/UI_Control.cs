@@ -27,7 +27,7 @@ public class UI_Control : MonoBehaviour
     int cur_weapon;
     //======================================================
     // Start is called before the first frame update
-
+    public GameObject bigMapBoarder;
     
     void Start()
     {
@@ -39,7 +39,8 @@ public class UI_Control : MonoBehaviour
         playerScript = player.GetComponent<PlayerMovement>();
         got_weapons = new bool[weapons.Length];
         got_weapons[0] = true;
-        for(int i = 1; i < weapons.Length; i++)
+        bigMapBoarder.SetActive(false);
+        for (int i = 1; i < weapons.Length; i++)
         {
             got_weapons[i] = false;
             weapons[i].enabled = false;
@@ -138,6 +139,20 @@ public class UI_Control : MonoBehaviour
     }
 
 
-    
+    public void open_big_map()
+    {
+
+        bigMapBoarder.SetActive(true);
+
+    }
+
+    public void close_big_map()
+    {
+
+        bigMapBoarder.SetActive(false);
+
+    }
+
+
 
 }
