@@ -48,6 +48,7 @@ public class XiaowenMonsterMovement : MonoBehaviour
     public HealthbarBehavior Healthbar;
     private int MAX_HITS;
 
+    private PlayerMovement pm;
     private void potentialBoss()
     {
         GameObject cam = GameObject.Find("Main Camera");
@@ -145,7 +146,7 @@ public class XiaowenMonsterMovement : MonoBehaviour
 
         // movement updates
         movementTimer = 0.0f;
-        
+        pm = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         staticTimer = 0.0f;
         direction = new Vector2(1.0f, 0.0f);
         movement = direction;
@@ -165,7 +166,11 @@ public class XiaowenMonsterMovement : MonoBehaviour
     void Update()
     {
         
+        if (pm.player_dead)
+        {
+            Destroy(gameObject);
 
+        }
         // there are two stages for this monster: moving, and standing still. Paused means standing still.
         if (! isPaused)
         {
