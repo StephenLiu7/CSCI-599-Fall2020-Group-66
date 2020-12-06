@@ -99,9 +99,11 @@ public class PlayerMovement : MonoBehaviour
     // temporary spaceShip
     public GameObject temp_spaceShipPrefab;
 
-    // others (utility)
+    // others (FOR TUTORIAL PURPOSES!! Please do not touch)
     public bool initialized = false;
     public bool hasShooted = false;
+    public bool hasEatenPill = false;
+    public bool hasEatenGun = false;
 
     void Start()
     {
@@ -703,8 +705,9 @@ public class PlayerMovement : MonoBehaviour
             //}
             secondary_weapon = "missile";
             ui_control.get_new_weapon(1);
-            
+
             //bullet_array[1] += 6;
+            hasEatenGun = true;
         }
         if (other.gameObject.CompareTag("sniper_gun"))
         {
@@ -747,7 +750,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("item_heal"))
         {
-            
+            hasEatenPill = true;
             if (GameMode.Difficulty == "easy")
             {
                 currentHealth += 60;

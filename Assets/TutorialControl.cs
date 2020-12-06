@@ -9,6 +9,8 @@ public class TutorialControl : MonoBehaviour
     // Start is called before the first frame update
     private XiaowenMonsterSpawn xms;
     private GameObject mPlayer;
+    public GameObject pill;
+    public GameObject optional_gun;
     private FixHealth fh;
     private int index = 0;
 
@@ -20,6 +22,8 @@ public class TutorialControl : MonoBehaviour
         "Lecture 1",
         "Lecture 2: Shooting \n Now, explore on the lower right corner, where you will find another" +
         " joystick. Follow the same procedure to shoot as the previous step!",
+        "Lecture 3: Items. \n Now find a pill on the map and Eat it. Remember this is only one of many items you will see throughout the game",
+        "Lecture 4: other weapons. \n now find an different weapon on the map and pick it. Except for this one, there is one more in the game!",
         "Your tutorial has completed. You can now try the easy mode of our game to get more familiar!"
     };
 
@@ -77,6 +81,20 @@ public class TutorialControl : MonoBehaviour
                     mPlayer.GetComponent<PlayerMovement>().hasShooted = false;
                     
                 }
+                else if (index == 2)
+                {
+                    mPlayer.GetComponent<PlayerMovement>().hasEatenPill = false;
+                    Vector2 spawnPos = new Vector2(0.0f, 0.0f);
+                    Instantiate(pill, spawnPos, Quaternion.identity);
+                    GameObject.FindWithTag("Player").transform.position = new Vector3(6.15f, -4.7f, 0);
+                }else if (index == 3)
+                {
+                    mPlayer.GetComponent<PlayerMovement>().hasEatenGun = false;
+                    Vector2 spawnPos = new Vector2(0.0f, 0.0f);
+                    Instantiate(optional_gun, spawnPos, Quaternion.identity);
+                    GameObject.FindWithTag("Player").transform.position = new Vector3(6.15f, -4.7f, 0);
+                    print("I am spawning weappon..................");
+                }
             }
         }
         else
@@ -86,7 +104,7 @@ public class TutorialControl : MonoBehaviour
                 if (haveMoved())
                 {
                     inTransition = true;
-                    transitionTimer = 2.5f;
+                    transitionTimer = 3.0f;
                     changeText(transitionString);
                 }
             }else if (index == 1)
@@ -94,7 +112,23 @@ public class TutorialControl : MonoBehaviour
                 if (mPlayer.GetComponent<PlayerMovement>().hasShooted)
                 {
                     inTransition = true;
-                    transitionTimer = 2.5f;
+                    transitionTimer = 3.0f;
+                    changeText(transitionString);
+                }
+            }else if (index == 2)
+            {
+                if (mPlayer.GetComponent<PlayerMovement>().hasEatenPill)
+                {
+                    inTransition = true;
+                    transitionTimer = 3.0f;
+                    changeText(transitionString);
+                }
+            }else if (index == 3)
+            {
+                if (mPlayer.GetComponent<PlayerMovement>().hasEatenGun)
+                {
+                    inTransition = true;
+                    transitionTimer = 3.0f;
                     changeText(transitionString);
                 }
             }
