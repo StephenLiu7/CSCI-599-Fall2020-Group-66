@@ -18,6 +18,7 @@ public class XiaowenMonsterSpawn : MonoBehaviour
     private bool addedSpaceShip = false;
     public GameObject temp_spaceShipPrefab;
     public bool controlled = false;
+    public bool hasShooted = false;
     void Start()
     {
         spawn_timer = 0.0f;
