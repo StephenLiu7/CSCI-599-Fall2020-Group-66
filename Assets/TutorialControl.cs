@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TutorialControl : MonoBehaviour
 {
@@ -38,6 +39,12 @@ public class TutorialControl : MonoBehaviour
         TextPro.fontSize = inTransition ? 32 : 18;
         TextPro.text = newText;
     }
+
+    public void backToMainMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 3);
+    }
+
     public bool haveMoved()
     {
         if (!fh.initialized)
