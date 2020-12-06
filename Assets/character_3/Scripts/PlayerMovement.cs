@@ -98,6 +98,9 @@ public class PlayerMovement : MonoBehaviour
 
     // temporary spaceShip
     public GameObject temp_spaceShipPrefab;
+
+    // others (utility)
+    public bool initialized = false;
     void Start()
     {
         
@@ -115,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
         InvokeRepeating("circleDamage", 0.0f, 2.0f);
         survivalTimes = 0;
         lastClickTime = 0;
+        initialized = true;
     }
     //==============================================items===================================================================================================\
 
