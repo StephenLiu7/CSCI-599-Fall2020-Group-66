@@ -6,7 +6,7 @@ public class FixHealth : MonoBehaviour
 {
     // Start is called before the first frame update
     private PlayerMovement pm;
-    private bool initialized = false;
+    public bool initialized = false;
     void Start()
     {
         pm = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();

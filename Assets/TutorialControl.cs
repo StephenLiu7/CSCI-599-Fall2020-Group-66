@@ -8,6 +8,7 @@ public class TutorialControl : MonoBehaviour
     // Start is called before the first frame update
     private XiaowenMonsterSpawn xms;
     private GameObject mPlayer;
+    private FixHealth fh;
     private int index = 0;
 
     private bool inTransition = false;
@@ -27,20 +28,26 @@ public class TutorialControl : MonoBehaviour
     {
         xms = GameObject.FindWithTag("MainCamera").GetComponent<XiaowenMonsterSpawn>();
         mPlayer = GameObject.FindWithTag("Player");
+        fh = GameObject.FindWithTag("MainCamera").GetComponent<FixHealth>();
         transitionString = "Congratulations, you managed to finish the previous step!";
     }
 
     private void changeText(string newText)
     {
-        TextPro.color = inTransition ? new Color32(0, 255, 0, 200) : new Color32(255, 0, 0, 200);
+        TextPro.color = inTransition ? new Color32(0, 0, 128, 255) : new Color32(255, 0, 0, 255);
+        TextPro.fontSize = inTransition ? 32 : 18;
         TextPro.text = newText;
     }
     public bool haveMoved()
     {
-        if (Mathf.Abs(mPlayer.transform.position.x - 2.0f) > 0.1f)
+        if (!fh.initialized)
+        {
+            return false;
+        }
+        if (Mathf.Abs(mPlayer.transform.position.x - 2.0f) > 0.7f)
         {
             return true;
-        }else if (Mathf.Abs(mPlayer.transform.position.y - 2.0f) > 0.1f)
+        }else if (Mathf.Abs(mPlayer.transform.position.y - 2.0f) > 0.7f)
         {
             return true;
         }
@@ -57,6 +64,12 @@ public class TutorialControl : MonoBehaviour
                 index += 1;
                 inTransition = false;
                 changeText(popUps[index]);
+
+                if (index == 1)
+                {
+                    mPlayer.GetComponent<PlayerMovement>().hasShooted = false;
+                    
+                }
             }
         }
         else
@@ -71,7 +84,12 @@ public class TutorialControl : MonoBehaviour
                 }
             }else if (index == 1)
             {
-                
+                if (mPlayer.GetComponent<PlayerMovement>().hasShooted)
+                {
+                    inTransition = true;
+                    transitionTimer = 2.5f;
+                    changeText(transitionString);
+                }
             }
         }
     }

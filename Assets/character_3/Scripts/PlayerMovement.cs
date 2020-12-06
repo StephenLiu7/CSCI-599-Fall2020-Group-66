@@ -101,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
 
     // others (utility)
     public bool initialized = false;
+    public bool hasShooted = false;
+
     void Start()
     {
         
@@ -528,6 +530,8 @@ public class PlayerMovement : MonoBehaviour
             ana_bullet_counting += 1;
             BGM.Play();
         }
+
+        hasShooted = true;
         //}
     }
     // =================================================================================================================================================
