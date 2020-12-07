@@ -66,6 +66,14 @@ public class XiaowenMonsterSpawn : MonoBehaviour
             if (final_circle_timer <= 0.0f)
             {
                 final_circle_timer = 2.5f;
+                if (GameMode.Difficulty == "medium")
+                {
+                    final_circle_timer = 2.8f;
+                }else if (GameMode.Difficulty == "easy")
+                {
+                    final_circle_timer = 3.2f;
+                }
+
                 Vector2 randomPos = player_rb.position + new Vector2(Random.value, Random.value).normalized * 3;
                 Instantiate(xiaowenMonsterPrefab, randomPos, Quaternion.identity);
             }
