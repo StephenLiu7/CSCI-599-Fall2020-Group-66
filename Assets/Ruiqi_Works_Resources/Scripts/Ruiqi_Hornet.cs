@@ -26,6 +26,8 @@ public class Ruiqi_Hornet : MonoBehaviour
     private int lifeRemain = 20;
     public Ruiqi_Hornet_Health Healthbar;
     
+    // Drop Related Variables
+    public GameObject drop;
     
     // Start is called before the first frame update
     void Start()
@@ -94,8 +96,13 @@ public class Ruiqi_Hornet : MonoBehaviour
             AnalyticsAPI.BossMonsterHitCount_static++;
             if (lifeRemain == 0)
             {
+                Vector2 spawnPosition = gameObject.transform.position;
                 Destroy(gameObject);
                 AnalyticsAPI.BossMonsterDeadCount++;
+                if (UnityEngine.Random.Range(0, 100) > 49)
+                {
+                    Instantiate(drop, spawnPosition, Quaternion.identity);
+                }
             }
         }
         else if (collision.gameObject.CompareTag("player_missile"))
@@ -106,8 +113,13 @@ public class Ruiqi_Hornet : MonoBehaviour
             AnalyticsAPI.BossMonsterHitCount_static++;
             if (lifeRemain == 0)
             {
+                Vector2 spawnPosition = gameObject.transform.position;
                 Destroy(gameObject);
                 AnalyticsAPI.BossMonsterDeadCount++;
+                if (UnityEngine.Random.Range(0, 100) > 49)
+                {
+                    Instantiate(drop, spawnPosition, Quaternion.identity);
+                }
             }
         }
         else if (collision.gameObject.CompareTag("player_sniper"))
@@ -118,8 +130,13 @@ public class Ruiqi_Hornet : MonoBehaviour
             AnalyticsAPI.BossMonsterHitCount_static++;
             if (lifeRemain == 0)
             {
+                Vector2 spawnPosition = gameObject.transform.position;
                 Destroy(gameObject);
                 AnalyticsAPI.BossMonsterDeadCount++;
+                if (UnityEngine.Random.Range(0, 100) > 49)
+                {
+                    Instantiate(drop, spawnPosition, Quaternion.identity);
+                }
             }
         }
     }

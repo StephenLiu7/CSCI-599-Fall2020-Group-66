@@ -154,6 +154,7 @@ MonoBehaviour:
   attackRange: 7
   maxLife: 20
   Healthbar: {fileID: 422200339413423694}
+  drop: {fileID: 6340528150555889448, guid: f1ff0893146fc449385fbddd0ffc2b7d, type: 3}
 --- !u!95 &5576270806036702578
 Animator:
   serializedVersion: 3

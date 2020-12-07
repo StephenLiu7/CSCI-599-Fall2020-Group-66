@@ -23,7 +23,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSCI-599-Fall2020-Group-66/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MagicpotionsFree.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Hornet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Prefabs/Ruiqi_Hornet.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Hornet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Hornet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/package_potions_512x/Scenes.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/package_potions_512x/potion_icons_256x.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/package_potions_512x/potion_icons_512x.meta" beforeDir="false" />
@@ -48,8 +52,8 @@
         <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy_Shot.cs" />
         <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Hornet_Health.cs" />
         <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Hornet_Bullet.cs" />
-        <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Hornet.cs" />
         <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Enemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Ruiqi_Works_Resources/Scripts/Ruiqi_Hornet.cs" />
       </list>
     </option>
   </component>
@@ -99,7 +103,8 @@
       <workItem from="1602812203742" duration="41000" />
       <workItem from="1602812283726" duration="6657000" />
       <workItem from="1602835361286" duration="1326000" />
-      <workItem from="1603001889526" duration="5760000" />
+      <workItem from="1603001889526" duration="7778000" />
+      <workItem from="1607305888663" duration="1127000" />
     </task>
     <servers />
   </component>
@@ -124,9 +129,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="0" y="23" width="754" height="977" key="dock-window-1" timestamp="1603005667869">
-      <screen x="0" y="23" width="1920" height="977" />
+    <state x="20" y="25" width="1824" height="970" maximized="true" key="dock-window-1" timestamp="1607306393412">
+      <screen x="0" y="25" width="1920" height="970" />
     </state>
+    <state x="20" y="25" width="1824" height="970" maximized="true" key="dock-window-1/-1080.-473.1080.1895/0.25.1920.970@-1080.-473.1080.1895" timestamp="1607306393412" />
     <state x="0" y="23" width="754" height="977" key="dock-window-1/-1080.-475.1080.1897/0.23.1920.977@-1080.-475.1080.1897" timestamp="1603005667869" />
     <state x="53" y="23" width="754" height="977" key="dock-window-2" timestamp="1601187030768">
       <screen x="0" y="23" width="1920" height="977" />

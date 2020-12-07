@@ -112,6 +112,7 @@ MonoBehaviour:
   attackRange: 7
   maxLife: 5
   Healthbar: {fileID: 2458946692863573907}
+  drop: {fileID: 6340528150555889448, guid: f1ff0893146fc449385fbddd0ffc2b7d, type: 3}
 --- !u!58 &6245537783174918880
 CircleCollider2D:
   m_ObjectHideFlags: 0
